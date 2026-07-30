@@ -327,10 +327,12 @@ body[data-view="pc"] .sheet .phead{border-radius:14px 14px 0 0}
         <div class="filgrp">
           <h3>인축독성 <small>(사람·가축 독성)</small></h3>
           <div class="g2" id="fTox"></div>
+          <p class="hint" id="toxNote" hidden>현재 자료에 독성 등급이 들어 있지 않습니다. 방제력에서 직접 적어 주십시오.</p>
         </div>
         <div class="filgrp">
           <h3>어독성 <small>(물고기 독성)</small></h3>
           <div class="g2" id="fFish"></div>
+          <p class="hint" id="fishNote" hidden>현재 자료에 어독성 등급이 들어 있지 않습니다. 방제력에서 직접 적어 주십시오.</p>
           <p class="hint" id="fishWarn" hidden>어독성이 높은 약제입니다. 논·저수지·하천에 가까운 과원에서는 살포에 특히 주의하십시오.</p>
         </div>
         <div class="filgrp">
@@ -487,9 +489,14 @@ function drawFilters(){
   $("#pestNote").textContent=`(${pests.length}가지 · 등록 많은 순)`;
   $("#fPest").innerHTML=pests.map(([n,c])=>chk("pest|"+n,n,S.f.pest.has(n),false,
     `<span class="cnt num">${c}</span>`)).join("")||`<p class="hint">해당 없음</p>`;
-  $("#fTox").innerHTML=TOX.map(([g,live])=>chk("tox|"+g,g+"급",S.f.tox.has(g),!live,
+  const noTox=!allRows().some(r=>r.인축독성), noFish=!allRows().some(r=>r.어독성);
+  if(noTox) S.f.tox.clear();
+  if(noFish) S.f.fish.clear();
+  $("#fTox").innerHTML=TOX.map(([g,live])=>chk("tox|"+g,g+"급",S.f.tox.has(g),!live||noTox,
     live?"":`<span class="why">가농 금지</span>`)).join("");
-  $("#fFish").innerHTML=FISH.map(g=>chk("fish|"+g,g+"급",S.f.fish.has(g),false,"")).join("");
+  $("#toxNote").hidden=!noTox;
+  $("#fFish").innerHTML=FISH.map(g=>chk("fish|"+g,g+"급",S.f.fish.has(g),noFish,"")).join("");
+  $("#fishNote").hidden=!noFish;
   const times=countBy("사용적기");
   $("#fTime").innerHTML=times.map(([n,c])=>chk("time|"+n,n,S.f.time.has(n),false,
     `<span class="cnt num">${c}</span>`)).join("")||`<p class="hint">해당 없음</p>`;
@@ -521,8 +528,8 @@ function drawResults(){
       <div class="body">
         <p class="nm">${esc(nm)}</p>
         <div class="pills"><span class="pill g">${esc(rs[0].용도)}</span>
-          <span class="pill n">인축 ${esc(rs[0].인축독성)}급</span>
-          <span class="pill n">어독 ${esc(rs[0].어독성)}급</span>
+          ${rs[0].인축독성?`<span class="pill n">인축 ${esc(rs[0].인축독성)}급</span>`:""}
+          ${rs[0].어독성?`<span class="pill n">어독 ${esc(rs[0].어독성)}급</span>`:""}
           ${rs[0].작용기작&&rs[0].작용기작!=="-"?`<span class="pill w">작용기작 ${esc(rs[0].작용기작)}</span>`:""}</div>
         <p class="tgt">${esc(tgt.slice(0,3).join(", "))}${tgt.length>3?` 외 ${tgt.length-3}종`:""}</p>
         <p class="more">등록 약제 ${rs.length}개 · 눌러서 자세히 보기</p>
@@ -544,12 +551,13 @@ function openIng(nm){
       </div>
       <dl>
         <dt>대상</dt><dd>${esc(r.대상)}</dd>
-        <dt>제형·회사</dt><dd>${esc(r.제형)} · ${esc(r.회사||"")}</dd>
+        <dt>제형·함량</dt><dd>${[r.제형,r.함량,r.회사].filter(Boolean).map(esc).join(" · ")||"-"}</dd>
         <dt>희석배수</dt><dd>${esc(r.희석배수)}</dd>
         <dt>사용 적기</dt><dd>${esc(r.사용적기)}</dd>
         <dt>안전사용기준</dt><dd>수확 <b class="num">${r.잔류기간}</b>일 전까지 · <b class="num">${esc(r.사용횟수)}</b>회 이내</dd>
         <dt>가농 기준</dt><dd style="color:var(--gold);font-weight:700">수확 <b class="num">${r.잔류기간*2}</b>일 전까지 (잔류기간 2배)</dd>
-        <dt>독성</dt><dd>인축 ${esc(r.인축독성)}급 · 어독 ${esc(r.어독성)}급</dd>
+        <dt>독성</dt><dd>${(r.인축독성||r.어독성)?`인축 ${esc(r.인축독성||"-")}급 · 어독 ${esc(r.어독성||"-")}급`
+          :`<span style="color:var(--stop)">자료에 없음 — 방제력에 직접 적으십시오</span>`}</dd>
       </dl>
       <button type="button" class="big" data-add="${i}">이 약제를 방제력에 담기</button>
     </div>`).join("");
@@ -676,8 +684,8 @@ function drawPlan(){
             </div></div>
         </div>
         <div class="fgrid">
-          <label class="f"><span>인축독성</span><input data-ef="인축독성" value="${esc(e.인축독성)}"></label>
-          <label class="f"><span>어독성</span><input data-ef="어독성" value="${esc(e.어독성)}"></label>
+          <label class="f"><span>인축독성</span><input data-ef="인축독성" value="${esc(e.인축독성)}" placeholder="직접 입력"></label>
+          <label class="f"><span>어독성</span><input data-ef="어독성" value="${esc(e.어독성)}" placeholder="직접 입력"></label>
         </div>
         ${e.직접?`<div class="f"><span>자재 구분 — 방제력에 그대로 표시됩니다</span>
           <div class="radios">
