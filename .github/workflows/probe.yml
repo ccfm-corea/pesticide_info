@@ -1,0 +1,31 @@
+name: API 응답 확인 (probe)
+
+# 인증키로 농약정보 API를 한 번 불러, 어떤 서비스코드가 응답하는지와
+# 응답에 들어 있는 칸 이름을 뽑아냅니다. 저장소를 바꾸지 않고 확인만 합니다.
+# 저장소 Actions 탭 → 왼쪽에서 이 항목 선택 → 오른쪽 'Run workflow' 를 누르면 됩니다.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 응답 확인
+        env:
+          PSIS_API_KEY: ${{ secrets.PSIS_API_KEY }}
+        run: python3 scripts/build_data.py probe
+
+      - name: 결과 파일 올리기
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: probe-결과
+          path: probe.txt
+          if-no-files-found: warn
