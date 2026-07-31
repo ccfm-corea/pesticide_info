@@ -22,14 +22,20 @@ import xml.etree.ElementTree as ET
 #   · SVC02 = 존재하나 요청 변수가 다름 (등록취소로 추정) → probe 2부에서 탐색
 #   · SVC03~ = 없는 코드
 # ══════════════════════════════════════════════════════════════════
-BASE       = os.environ.get("PSIS_BASE", "http://psis.rda.go.kr/openApi/service.do")
-SVC_REG    = os.environ.get("PSIS_SVC_REGISTER",  "SVC01")
-SVC_CANCEL = os.environ.get("PSIS_SVC_CANCELLED", "")   # 확정되면 "SVC02"
-CANCEL_ARG = os.environ.get("PSIS_CANCEL_ARGS",   "")   # 예: "searchYear=2026"
-SVC_TYPE   = os.environ.get("PSIS_SERVICE_TYPE",  "AA001")
-ROWS       = int(os.environ.get("PSIS_ROWS", "100"))
-SLEEP      = float(os.environ.get("PSIS_SLEEP", "0.3"))
-MAX_PAGES  = int(os.environ.get("PSIS_MAX_PAGES", "800"))
+def env(name, default=""):
+    """빈 문자열은 '없는 것'으로 본다.
+    GitHub Actions 는 만들지 않은 Variable 도 빈 값으로 넘겨주기 때문에,
+    os.environ.get(name, 기본값) 을 쓰면 기본값이 무시된다."""
+    return (os.environ.get(name) or "").strip() or default
+
+BASE       = env("PSIS_BASE", "http://psis.rda.go.kr/openApi/service.do")
+SVC_REG    = env("PSIS_SVC_REGISTER",  "SVC01")
+SVC_CANCEL = env("PSIS_SVC_CANCELLED", "")   # 확정되면 "SVC02"
+CANCEL_ARG = env("PSIS_CANCEL_ARGS",   "")   # 예: "searchYear=2026"
+SVC_TYPE   = env("PSIS_SERVICE_TYPE",  "AA001")
+ROWS       = int(env("PSIS_ROWS", "100"))
+SLEEP      = float(env("PSIS_SLEEP", "0.3"))
+MAX_PAGES  = int(env("PSIS_MAX_PAGES", "800"))
 
 # 응답 필드 이름 — SVC01 실측 기준
 FIELD = {
@@ -51,8 +57,12 @@ FIELD = {
     "어독성":     ["fishToxicCode", "어독성"],
 }
 
-CROPS = [("apple", "사과"), ("pear", "배"), ("peach", "복숭아"),
-         ("plum", "자두"), ("persimmon", "단감")]
+# (파일이름, 표시이름, 검색어 후보) — 앞에서부터 넣어 보고 자료가 나오는 것을 씁니다
+CROPS = [("apple",     "사과",   ["사과"]),
+         ("pear",      "배",     ["배"]),
+         ("peach",     "복숭아", ["복숭아"]),
+         ("plum",      "자두",   ["자두"]),
+         ("persimmon", "단감",   ["단감", "감"])]
 
 # ══════════════════════════════════════════════════════════════════
 # [2] 가농 생산규정 필터 (생산규정 3-2 과수 가농인증 방제 규정)
@@ -201,11 +211,17 @@ def toxicity_table():
         return {}
 
 
-def paginate(service, **search):
+def paginate(service, rows=None, **search):
+    rows = rows or ROWS
     out, start, seen = [], 1, set()
     for _ in range(MAX_PAGES):
-        recs = records(call(service, start=start, **search))
+        recs = records(call(service, start=start, rows=rows, **search))
         e = err_of(recs)
+        if e and start == 1 and rows > 20:      # 한 번에 너무 많이 달라고 했을 수 있음
+            print(f"  displayCount={rows} 실패({e[0]}) → 20으로 다시 시도")
+            rows = 20
+            recs = records(call(service, start=start, rows=rows, **search))
+            e = err_of(recs)
         if e:
             raise RuntimeError(f"{service} 응답 오류 {e[0]} {e[1]}")
         if not recs:
@@ -215,9 +231,9 @@ def paginate(service, **search):
             break
         seen.add(sig)
         out += recs
-        if len(recs) < ROWS:
+        if len(recs) < rows:
             break
-        start += ROWS
+        start += rows
         time.sleep(SLEEP)
     return out
 
@@ -238,8 +254,17 @@ def cancelled():
     return brands, kors
 
 
+def settings():
+    print(f"설정 — 등록정보 {SVC_REG or '(비어 있음!)'} / "
+          f"등록취소 {SVC_CANCEL or '(건너뜀)'} / serviceType {SVC_TYPE} / "
+          f"displayCount {ROWS}")
+    if not SVC_REG:
+        sys.exit("등록정보 서비스코드가 비어 있습니다. PSIS_SVC_REGISTER 를 지우거나 SVC01 로 넣으십시오.")
+
+
 def build():
     OUT.mkdir(parents=True, exist_ok=True)
+    settings()
     today = time.strftime("%Y-%m-%d")
     print("등록취소 목록 …")
     dead_brand, dead_kor = cancelled()
@@ -248,21 +273,31 @@ def build():
         print(f"  독성 보완표 {len(tox_tbl)}건 적용")
     results, problems, notes = {}, [], []
 
-    for slug, crop in CROPS:
-        try:
-            raw = paginate(SVC_REG, cropName=crop)
-        except Exception as e:
-            problems.append(f"{crop}: {safe(e)}")
-            continue
-        print(f"{crop}: 원본 {len(raw)}건")
+    first = True
+    for slug, crop, names in CROPS:
+        raw, used = [], ""
+        for nm in names:                       # 검색어 후보를 차례로
+            try:
+                raw = paginate(SVC_REG, cropName=nm)
+            except Exception as e:
+                problems.append(f"{crop}(검색어 {nm}): {safe(e)}")
+                continue
+            if raw:
+                used = nm
+                break
+        print(f"{crop}: 검색어 '{used or names[0]}' · 원본 {len(raw)}건")
+        if first and raw:                      # 진단용 — 첫 레코드의 칸 이름
+            print("  응답 칸:", ", ".join(raw[0].keys()))
+            first = False
         if not raw:
-            problems.append(f"{crop}: 응답 0건")
+            problems.append(f"{crop}: 응답 0건 (검색어 {', '.join(names)} 모두 실패)")
             continue
+        ok_names = set(names)
 
         ings, kept, drop = {}, 0, {"용도": 0, "독성": 0, "취소": 0}
         for r in raw:
             c = pick(r, "작물명")
-            if c and crop not in c:
+            if c and c not in ok_names:
                 continue
             u = use_norm(pick(r, "용도"))
             if u not in USE_OK:
@@ -327,13 +362,16 @@ def build():
         print("\n── 확인 필요 ──")
         for p in problems:
             print("  ·", p)
-    if len(results) < len(CROPS):
-        sys.exit("\n작물 일부를 만들지 못했습니다. 기존 data/*.json 을 그대로 둡니다.")
+    if not results:
+        sys.exit("\n어느 작물도 만들지 못했습니다. 기존 data/*.json 을 그대로 둡니다.")
 
     for slug, doc in results.items():
         (OUT / f"{slug}.json").write_text(json.dumps(doc, ensure_ascii=False, indent=1),
                                           encoding="utf-8")
-    print(f"\n완료 — data/ 5개 파일 갱신 ({today})")
+    done = ", ".join(doc["meta"]["작물"] for doc in results.values())
+    print(f"\n완료 — {len(results)}개 작물 갱신 ({today}): {done}")
+    if len(results) < len(CROPS):
+        print("나머지 작물은 기존 파일(또는 내장 샘플)을 그대로 씁니다. 위 ‘확인 필요’를 보십시오.")
 
 
 # ── 확인용 ────────────────────────────────────────────────────────
@@ -350,6 +388,7 @@ GUESS = [
 ]
 
 def probe():
+    settings()
     lines = []
     def out(s=""):
         print(s); lines.append(s)
