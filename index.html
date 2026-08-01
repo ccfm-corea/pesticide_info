@@ -7,216 +7,227 @@
 <meta name="theme-color" content="#1D5A3C">
 <style>
 :root{
-  --paper:#FCFCFA; --card:#FFFFFF; --ink:#151E19; --ink2:#4A5A52; --line:#D7DCD6;
-  --green:#1D5A3C; --green-d:#123B27; --green-l:#E7EFE9;
-  --gold:#8A6612; --gold-l:#FAF2DC; --gold-line:#C9A94E;
-  --stop:#98201F; --stop-l:#FBEAEA;
-  --r:10px; --tab-h:78px;
-  --kfont:"맑은 고딕","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR","나눔고딕",NanumGothic,"돋움",Dotum,sans-serif;
-  --f-base:17px;
+  --bg:#F3F5F1; --card:#FFFFFF; --ink:#1C2420; --ink2:#5A6660; --line:#DFE4DC; --line2:#EDF0EA;
+  --green:#2E6B4A; --green-d:#1C4A32; --green-l:#EAF2EC;
+  --gold:#96731B; --gold-l:#FBF4E0; --gold-line:#D3B45C;
+  --amber:#B07A18; --amber-l:#FCF3DF;
+  --stop:#A03230; --stop-l:#F9ECEB;
+  --r:10px; --tab-h:64px;
 }
 *{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0}
 body{
-  background:var(--paper); color:var(--ink);
-  font-family:var(--kfont);
-  font-size:var(--f-base); line-height:1.55;
-  padding-bottom:calc(var(--tab-h) + env(safe-area-inset-bottom));
-  -webkit-text-size-adjust:100%;
+  background:var(--bg); color:var(--ink);
+  font-family:"맑은 고딕","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  font-size:15.5px; line-height:1.5; -webkit-text-size-adjust:100%;
 }
 .num{font-variant-numeric:tabular-nums}
 button,input,select,textarea{font:inherit; color:inherit}
 button{cursor:pointer; border:none; background:none}
-:focus-visible{outline:3px solid var(--gold); outline-offset:2px}
-.wrap{max-width:760px; margin:0 auto; padding:0 14px}
+:focus-visible{outline:2px solid var(--gold-line); outline-offset:1px}
+.wrap2{max-width:1480px; margin:0 auto; padding:0 18px}
 
-/* ── 머리글 ───────────────────────────── */
-.app-head{background:var(--green-d); color:#fff; padding:14px 0 0}
-.app-head h1{margin:0; font-size:21px; font-weight:700; line-height:1.4}
-.app-head h1 em{
-  font-style:normal; background:var(--gold-l); color:var(--green-d);
-  padding:1px 7px; border-radius:4px; font-weight:700; box-decoration-break:clone;
-}
-.app-head p{margin:5px 0 0; font-size:14px; color:#BFD4C6}
-.datestrip{
-  margin-top:11px; background:rgba(0,0,0,.22); font-size:13px; color:#D5E4DA;
-  padding:7px 0; border-top:1px solid rgba(255,255,255,.12);
-}
-.datestrip .wrap{display:flex; gap:10px; flex-wrap:wrap; justify-content:space-between}
-.banner{background:var(--stop-l); border-bottom:2px solid var(--stop); color:var(--stop); font-size:14px; font-weight:700; padding:10px 0}
+/* ── 머리글 ── */
+.top{background:var(--card); border-bottom:1px solid var(--line)}
+.tbar{display:flex; align-items:center; gap:14px; min-height:54px; flex-wrap:wrap; padding-top:6px; padding-bottom:6px}
+.tbar h1{margin:0; font-size:18px; font-weight:700; letter-spacing:-.01em}
+.tbar h1 em{font-style:normal; background:var(--green-d); color:#fff; padding:2px 8px; border-radius:5px; margin-right:2px}
+.tbar .org{font-size:13px; color:var(--ink2)}
+.tbar .meta{margin-left:auto; font-size:13px; color:var(--ink2); display:flex; gap:7px; align-items:center}
+.tbar .meta b{color:var(--green-d)}
+.tbar .meta i{font-style:normal; color:var(--line)}
+.banner{background:var(--stop-l); border-bottom:1px solid var(--stop); color:var(--stop); font-size:13.5px; font-weight:700; padding:8px 0}
 
-/* ── 공통 ─────────────────────────────── */
-h2.sec{
-  font-size:19px; font-weight:700; color:#fff; background:var(--green-d);
-  margin:28px -14px 13px; padding:13px 14px; border-left:6px solid var(--gold-line);
-  display:flex; align-items:center;
-}
-h2.sec i{
-  font-style:normal; flex:none; width:28px; height:28px; margin-right:11px;
-  border-radius:50%; background:var(--gold-line); color:var(--green-d);
-  display:inline-flex; align-items:center; justify-content:center; font-size:15px; font-weight:700;
-}
-section>h2.sec:first-child{margin-top:14px}
-.hint{font-size:14.5px; color:var(--ink2); margin:8px 0 0; line-height:1.5}
-.card{background:var(--card); border:1px solid var(--line); border-radius:var(--r); margin:10px 0}
-.pill{display:inline-block; font-size:13px; font-weight:700; padding:2px 8px; border-radius:20px; white-space:nowrap}
+/* ── 구역 공통 ── */
+.zone{background:var(--card); border:1px solid var(--line); border-radius:var(--r)}
+.zlabel{font-size:12.5px; font-weight:700; letter-spacing:.14em; color:var(--green); text-transform:uppercase}
+.zhead{display:flex; align-items:center; gap:10px; padding:10px 14px; border-bottom:1px solid var(--line2)}
+.hint{font-size:13px; color:var(--ink2); margin:6px 0 0; line-height:1.45}
+.pill{display:inline-block; font-size:11.5px; font-weight:700; padding:1px 7px; border-radius:20px; white-space:nowrap; vertical-align:1px}
 .pill.g{background:var(--green-l); color:var(--green-d)}
 .pill.n{background:#F0F1EF; color:var(--ink2)}
 .pill.w{background:var(--gold-l); color:var(--gold)}
 .pill.s{background:var(--stop-l); color:var(--stop)}
+.pill.k{background:var(--green-d); color:#fff}
+.moa{display:inline-block; font-size:11.5px; font-weight:700; padding:1px 7px; border-radius:5px;
+  border:1px solid var(--line); color:var(--ink2); background:#fff; white-space:nowrap}
+.moa.dup{border-color:var(--gold-line); background:var(--amber-l); color:var(--amber)}
+.mini{padding:6px 12px; border:1px solid var(--green); border-radius:7px; background:#fff;
+  color:var(--green-d); font-weight:700; font-size:13px; white-space:nowrap}
+.mini:hover{background:var(--green-l)}
+.seal{display:inline-flex; flex-direction:column; align-items:center; justify-content:center;
+  border:1.5px solid var(--gold-line); color:var(--gold); background:var(--gold-l);
+  border-radius:6px; padding:2px 7px; min-width:56px; line-height:1.15; text-align:center; flex:none}
+.seal b{font-size:16px; font-weight:700}
+.seal span{font-size:9.5px; font-weight:700; letter-spacing:.05em}
+.card{background:var(--card); border:1px solid var(--line); border-radius:var(--r)}
+.empty{padding:26px 16px; text-align:center; color:var(--ink2); font-size:14.5px; line-height:1.7}
+.empty b{display:block; font-size:16px; color:var(--ink); margin-bottom:6px}
 
-/* 도장 — 이 앱의 핵심 표시: 가농 기준(잔류기간 x2) */
-.seal{
-  display:inline-flex; flex-direction:column; align-items:center; justify-content:center;
-  border:2px solid var(--gold-line); color:var(--gold); background:var(--gold-l);
-  border-radius:6px; padding:4px 7px; min-width:64px; line-height:1.15; text-align:center;
-}
-.seal b{font-size:20px; font-weight:700}
-.seal span{font-size:10.5px; font-weight:700; letter-spacing:.06em}
-
-/* ── 작물 고르기 ──────────────────────── */
-.crops{display:grid; grid-template-columns:repeat(auto-fit,minmax(96px,1fr)); gap:9px; margin-top:10px}
-.crop{
-  border:2px solid var(--line); background:var(--card); border-radius:var(--r);
-  padding:16px 6px; font-size:19px; font-weight:700; color:var(--ink); text-align:center; min-height:64px;
-}
-.crop[aria-pressed="true"]{border-color:var(--green); background:var(--green); color:#fff}
-
-/* ── 필터 ─────────────────────────────── */
-.searchbox{display:flex; gap:8px; margin-top:12px}
-.searchbox input{flex:1; min-width:0; padding:14px 13px; border:2px solid var(--line); border-radius:var(--r); background:#fff}
-.searchbox input:focus{border-color:var(--green)}
-.searchbox button{padding:0 15px; border:2px solid var(--line); border-radius:var(--r); background:#F3F5F2; font-weight:700; color:var(--ink2)}
-details.fil{margin-top:10px; border:1px solid var(--line); border-radius:var(--r); background:var(--card); overflow:hidden}
-details.fil>summary{
-  list-style:none; padding:15px 14px; font-weight:700; font-size:16px; display:flex;
-  justify-content:space-between; align-items:center; gap:10px; background:#F5F7F4;
-}
+/* ── 필터 구역 ── */
+.filters{margin-top:14px; padding:12px 14px}
+.frow1{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+.crops{display:flex; gap:7px; flex-wrap:wrap}
+.crop{border:1.5px solid var(--line); background:#fff; border-radius:8px;
+  padding:8px 18px; font-size:15.5px; font-weight:700; color:var(--ink)}
+.crop:hover{border-color:var(--green)}
+.crop[aria-pressed="true"]{border-color:var(--green-d); background:var(--green-d); color:#fff}
+.searchbox{display:flex; gap:6px; flex:1; min-width:230px; max-width:420px; margin-left:auto}
+.searchbox input{flex:1; min-width:0; padding:8px 11px; border:1.5px solid var(--line); border-radius:7px; background:#fff; font-size:14.5px}
+.searchbox input:focus{border-color:var(--green); outline:none}
+.searchbox button{padding:0 12px; border:1.5px solid var(--line); border-radius:7px; background:#F5F6F4; font-weight:700; font-size:13px; color:var(--ink2)}
+details.fil{margin-top:10px}
+details.fil>summary{list-style:none; display:flex; align-items:center; gap:10px; cursor:pointer;
+  font-size:13.5px; font-weight:700; color:var(--green-d); padding:4px 0}
 details.fil>summary::-webkit-details-marker{display:none}
-details.fil>summary::after{content:"▾ 펼치기"; font-size:14px; font-weight:700; color:var(--green); white-space:nowrap}
-details.fil[open]>summary::after{content:"▴ 접기"}
-details.fil>summary .sum{font-size:13.5px; font-weight:600; color:var(--ink2)}
-.filbody{padding:6px 14px 14px; border-top:1px solid var(--line)}
-.filgrp{margin-top:12px}
-.filgrp>h3{margin:0 0 7px; font-size:14.5px; font-weight:700; color:var(--green-d)}
+details.fil>summary::after{content:"▾"; font-size:12px}
+details.fil[open]>summary::after{content:"▴"}
+details.fil>summary .sum{font-weight:600; color:var(--ink2); font-size:12.5px}
+.filbody{display:grid; grid-template-columns:170px minmax(220px,1fr) 220px minmax(220px,1fr) auto;
+  gap:0 18px; padding-top:8px; border-top:1px solid var(--line2); margin-top:6px}
+.filgrp>h3{margin:6px 0 5px; font-size:12.5px; font-weight:700; color:var(--ink2)}
 .filgrp>h3 small{font-weight:600; color:var(--ink2)}
-.chk{
-  display:flex; align-items:center; gap:10px; min-height:50px; padding:6px 10px;
-  border:1.5px solid var(--line); border-radius:8px; background:#fff; margin:6px 0; font-size:16px;
-}
-.chk input{width:24px; height:24px; accent-color:var(--green); flex:none}
+.chk{display:flex; align-items:center; gap:7px; min-height:31px; padding:2px 8px;
+  border:1px solid var(--line); border-radius:6px; background:#fff; margin:4px 0; font-size:13.5px}
+.chk input{width:16px; height:16px; accent-color:var(--green); flex:none}
 .chk.on{border-color:var(--green); background:var(--green-l)}
 .chk.off{background:#F4F4F3; color:#9AA39D; border-style:dashed}
-.chk.off .why{margin-left:auto; font-size:12px; font-weight:700; color:var(--stop); background:var(--stop-l); padding:2px 7px; border-radius:20px}
-.chk .cnt{margin-left:auto; font-size:13px; color:var(--ink2)}
-.chk.grid2{margin:0}
-.g2{display:grid; grid-template-columns:1fr 1fr; gap:6px}
-.scroller{max-height:290px; overflow-y:auto; -webkit-overflow-scrolling:touch; padding-right:2px}
-.filfoot{display:flex; gap:8px; margin-top:14px}
-.filfoot button{flex:1; padding:13px; border-radius:9px; font-weight:700; border:2px solid var(--line); background:#fff}
-.filfoot .prim{background:var(--green); border-color:var(--green); color:#fff}
+.chk.off .why{margin-left:auto; font-size:10.5px; font-weight:700; color:var(--stop); background:var(--stop-l); padding:1px 6px; border-radius:20px}
+.chk .cnt{margin-left:auto; font-size:11.5px; color:var(--ink2)}
+.scroller{max-height:158px; overflow-y:auto; padding-right:3px}
+.filfoot{align-self:end; padding-bottom:4px}
+.filfoot button{padding:8px 13px; border-radius:7px; font-weight:700; font-size:13px; border:1.5px solid var(--line); background:#fff; color:var(--ink2)}
+.filfoot button:hover{border-color:var(--stop); color:var(--stop)}
 
-/* ── 결과 ─────────────────────────────── */
-.rescount{display:flex; align-items:baseline; gap:8px; margin:18px 0 4px; font-size:14px; color:var(--ink2)}
-.rescount b{font-size:20px; color:var(--green-d)}
-.item{width:100%; text-align:left; padding:14px; display:flex; gap:12px; align-items:flex-start}
-.item:active{background:#F6F8F5}
-.item .body{flex:1; min-width:0}
-.item .nm{font-size:19px; font-weight:700; margin:0 0 5px}
-.item .tgt{font-size:15px; color:var(--ink2); margin:6px 0 0; word-break:keep-all}
-.item .pills{display:flex; gap:5px; flex-wrap:wrap}
-.item .more{font-size:13px; color:var(--green); font-weight:700; margin-top:7px}
-.empty{padding:34px 18px; text-align:center; color:var(--ink2); font-size:16px; line-height:1.7}
-.empty b{display:block; font-size:19px; color:var(--ink); margin-bottom:8px}
+/* ── 본문 분할 ── */
+.split{display:grid; grid-template-columns:minmax(0,1.5fr) minmax(390px,1fr); gap:14px; margin:14px auto 40px; align-items:start}
+.rescount{display:flex; align-items:baseline; gap:5px; font-size:13px; color:var(--ink2)}
+.rescount b{font-size:18px; color:var(--green-d)}
 
-/* ── 시트 ─────────────────────────────── */
-.sheet{position:fixed; inset:0; z-index:60; display:none}
-.sheet.on{display:block}
-.sheet .veil{position:absolute; inset:0; background:rgba(10,20,14,.5)}
-.sheet .panel{
-  position:absolute; left:0; right:0; bottom:0; max-height:92vh; background:var(--paper);
-  border-radius:16px 16px 0 0; display:flex; flex-direction:column;
-  animation:up .18s ease-out;
-}
-@keyframes up{from{transform:translateY(14px); opacity:.7}to{transform:none; opacity:1}}
-@media (prefers-reduced-motion:reduce){.sheet .panel{animation:none}}
-.sheet .phead{
-  padding:15px 14px; border-bottom:2px solid var(--green); display:flex; gap:12px; align-items:flex-start;
-  background:var(--card); border-radius:16px 16px 0 0;
-}
-.sheet .phead h3{margin:0; font-size:21px; font-weight:700; flex:1}
-.sheet .phead .sub{font-size:14px; color:var(--ink2); margin:4px 0 0}
-.sheet .x{flex:none; width:46px; height:46px; border:2px solid var(--line); border-radius:9px; font-size:20px; font-weight:700; background:#fff}
-.sheet .pbody{overflow-y:auto; -webkit-overflow-scrolling:touch; padding:0 14px 26px}
-.prow{background:var(--card); border:1px solid var(--line); border-radius:var(--r); margin:11px 0; padding:13px}
-.prow .top{display:flex; gap:10px; align-items:flex-start}
-.prow .pnm{font-size:17px; font-weight:700; flex:1; margin:0}
-.prow dl{display:grid; grid-template-columns:auto 1fr; gap:5px 12px; margin:11px 0 0; font-size:15.5px}
-.prow dt{color:var(--ink2); font-weight:700; white-space:nowrap}
-.prow dd{margin:0; font-weight:600}
-.big{
-  display:block; width:100%; margin-top:12px; padding:16px; border-radius:10px;
-  background:var(--green); color:#fff; font-size:18px; font-weight:700; text-align:center;
-}
-.big.alt{background:#fff; color:var(--green-d); border:2px solid var(--green)}
-.big.warn{background:var(--stop)}
+/* ── 조회 결과 목록 ── */
+#results{padding:6px 10px 10px}
+.rrow{border:1px solid var(--line); border-radius:8px; margin:6px 0; background:#fff; overflow:hidden}
+.rrow.open{border-color:var(--green); box-shadow:0 1px 6px rgba(30,70,50,.08)}
+.rmain{display:grid; grid-template-columns:minmax(150px,215px) 1fr auto auto; gap:4px 12px;
+  align-items:center; width:100%; text-align:left; padding:8px 12px}
+.rmain:hover{background:#F7F9F6}
+.rname{font-size:15.5px; font-weight:700; word-break:keep-all}
+.rpills{display:flex; gap:4px; flex-wrap:wrap; grid-column:2; grid-row:1}
+.rtgt{grid-column:1/3; grid-row:2; font-size:12.5px; color:var(--ink2); word-break:keep-all}
+.rmain .seal{grid-column:3; grid-row:1/3}
+.caret{grid-column:4; grid-row:1/3; color:var(--ink2); font-size:12px}
+.plist{border-top:1px solid var(--line2); background:#FAFBF9; padding:4px 10px 8px}
+.prow2{display:grid; grid-template-columns:minmax(140px,1.2fr) minmax(90px,1fr) 92px minmax(110px,1fr) 108px auto;
+  gap:2px 10px; align-items:center; padding:7px 4px; border-bottom:1px dashed var(--line2); font-size:13px}
+.prow2:last-child{border-bottom:none}
+.prow2 .p1 b{display:block; font-size:13.5px}
+.prow2 .p1 span{color:var(--ink2); font-size:11.5px}
+.prow2 .p3 i{font-style:normal; color:var(--line); margin:0 3px}
+.prow2 .p4{color:var(--ink2); font-size:12px}
+.prow2 .p5{font-size:12.5px}
+.prow2 .p5 b{color:var(--gold)}
+.addbtn{padding:6px 14px; border-radius:6px; background:var(--green); color:#fff; font-weight:700; font-size:13px; justify-self:end}
+.addbtn:hover{background:var(--green-d)}
+.morebtn{display:block; width:100%; margin:8px 0 2px; padding:10px; border-radius:8px;
+  border:1.5px solid var(--green); color:var(--green-d); background:#fff; font-weight:700; font-size:14px}
 
-/* ── 방제력 ───────────────────────────── */
-.form{padding:4px 14px 14px}
-.fgrid{display:grid; grid-template-columns:1fr 1fr; gap:9px}
-.f{display:block; margin-top:11px}
-.f>span{display:block; font-size:13.5px; font-weight:700; color:var(--green-d); margin-bottom:5px}
-.f>input, .f>select, .inl{
-  width:100%; padding:13px 11px; border:1.5px solid var(--line); border-radius:8px; background:#fff;
-}
-.f>input:focus, .f>select:focus{border-color:var(--green); outline:none}
-.radios{display:flex; gap:8px}
-.radios label{flex:1; display:flex; align-items:center; justify-content:center; gap:7px; min-height:50px;
-  border:1.5px solid var(--line); border-radius:8px; background:#fff; font-weight:700}
-.radios input{width:22px; height:22px; accent-color:var(--green)}
+/* ── 방제력 패널 ── */
+.plan{position:sticky; top:12px; max-height:calc(100vh - 24px); overflow-y:auto}
+.pcount{font-size:12.5px; color:var(--ink2); font-weight:700}
+.hdrbox{margin:10px 12px 0; border:1px solid var(--line); border-radius:8px; background:#FAFBF9}
+.hdrbox>summary{list-style:none; cursor:pointer; padding:9px 12px; font-size:13.5px; font-weight:700; color:var(--green-d); display:flex; gap:8px}
+.hdrbox>summary::-webkit-details-marker{display:none}
+.hdrbox>summary::after{content:"▾"; margin-left:auto; font-size:11px; color:var(--ink2)}
+.hdrbox[open]>summary::after{content:"▴"}
+.hdrbox>summary .hsum{font-weight:600; color:var(--ink2); font-size:12.5px}
+.form{padding:2px 12px 12px}
+.fgrid{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+.f{display:block; margin-top:9px}
+.f>span{display:block; font-size:11.5px; font-weight:700; color:var(--green-d); margin-bottom:3px}
+.f>input,.f>select{width:100%; padding:8px 9px; border:1px solid var(--line); border-radius:6px; background:#fff; font-size:14px}
+.f>input:focus,.f>select:focus{border-color:var(--green); outline:none}
+.radios{display:flex; gap:6px}
+.radios label{flex:1; display:flex; align-items:center; justify-content:center; gap:5px; min-height:34px;
+  border:1px solid var(--line); border-radius:6px; background:#fff; font-weight:700; font-size:13px; cursor:pointer}
+.radios input{width:15px; height:15px; accent-color:var(--green)}
 .radios label.on{border-color:var(--green); background:var(--green-l); color:var(--green-d)}
-.basis{margin:12px 0 0; padding:12px 13px; border-left:5px solid var(--gold-line); background:var(--gold-l);
-  border-radius:0 8px 8px 0; font-size:15px; color:var(--gold); font-weight:700; line-height:1.5}
-.basis.off{border-left-color:var(--line); background:#F3F4F2; color:var(--ink2)}
+.basis{margin:10px 12px 0; padding:8px 11px; border-left:4px solid var(--gold-line); background:var(--gold-l);
+  border-radius:0 7px 7px 0; font-size:12.5px; color:var(--gold); font-weight:700; line-height:1.45}
+.basis.off{border-left-color:var(--line); background:#F4F5F3; color:var(--ink2); font-weight:600}
+#entries{padding:4px 12px}
+.pempty{margin:10px 0; padding:22px 14px; border:1.5px dashed var(--line); border-radius:8px;
+  text-align:center; color:var(--ink2); font-size:13.5px; line-height:1.7}
+.ent{border:1px solid var(--line); border-radius:8px; background:#fff; margin:8px 0; padding:9px 11px 10px}
+.ph{display:flex; align-items:center; gap:6px; flex-wrap:wrap}
+.pnm2{font-size:14.5px; flex:1; min-width:100px; word-break:keep-all}
+.xdel{flex:none; width:28px; height:28px; border-radius:6px; border:1px solid var(--line);
+  color:var(--stop); font-weight:700; font-size:13px; background:#fff}
+.xdel:hover{border-color:var(--stop); background:var(--stop-l)}
+.dupwarn{margin:6px 0 0; font-size:12px; font-weight:700; color:var(--amber);
+  background:var(--amber-l); border-radius:6px; padding:5px 9px; line-height:1.4}
+.pgrid{display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-top:7px}
+.pgrid label{display:block; font-size:11px; font-weight:700; color:var(--ink2)}
+.pgrid input{display:block; width:100%; margin-top:2px; padding:6px 8px; border:1px solid var(--line);
+  border-radius:6px; font-size:13.5px; background:#fff}
+.pgrid input:focus{border-color:var(--green); outline:none}
+.spraydate{margin-top:8px; padding:6px 9px; border:1px solid var(--gold-line); background:var(--gold-l);
+  border-radius:6px; font-size:12.5px; font-weight:700; color:var(--gold); display:flex; gap:7px; align-items:center; flex-wrap:wrap}
+.pmore{margin-top:7px}
+.pmore>summary{list-style:none; cursor:pointer; font-size:12px; font-weight:700; color:var(--green-d)}
+.pmore>summary::-webkit-details-marker{display:none}
+.pmore>summary::before{content:"▸ "}
+.pmore[open]>summary::before{content:"▾ "}
+.acts{display:grid; grid-template-columns:1fr 1fr; gap:7px; padding:10px 12px 4px}
+.big{display:block; width:100%; padding:10px; border-radius:7px;
+  background:var(--green); color:#fff; font-size:14px; font-weight:700; text-align:center}
+.big:hover{background:var(--green-d)}
+.big.alt{background:#fff; color:var(--green-d); border:1.5px solid var(--green)}
+.big.alt:hover{background:var(--green-l)}
+.big.warn{background:#fff; color:var(--stop); border:1.5px solid #E3C4C3}
+.big.warn:hover{background:var(--stop-l)}
+.footnote{margin:10px 12px 14px; padding:9px 11px; border:1px dashed var(--line); border-radius:7px;
+  font-size:11.5px; color:var(--ink2); line-height:1.55; background:#FAFBF9}
 
-.ent{border:1px solid var(--line); border-radius:var(--r); background:var(--card); margin:11px 0; overflow:hidden}
-.ent>.eh{display:flex; align-items:center; gap:8px; padding:10px 12px; background:#F5F7F4; border-bottom:1px solid var(--line)}
-.ent>.eh .no{font-size:13px; font-weight:700; color:var(--ink2)}
-.ent>.eb{padding:12px}
-.ent .eh .pill{flex:none}
-.ent .del{margin-left:auto; padding:9px 13px; border:1.5px solid #E0C6C6; border-radius:8px; background:#fff; color:var(--stop); font-weight:700; font-size:14px}
-.eb .line{display:flex; gap:9px; flex-wrap:wrap; align-items:flex-end; margin-top:10px}
-.eb .line>.f{margin-top:0; flex:1; min-width:120px}
-.spraydate{margin-top:11px; padding:10px 12px; border:2px solid var(--gold-line); background:var(--gold-l);
-  border-radius:8px; font-size:15.5px; font-weight:700; color:var(--gold); display:flex; gap:9px; align-items:center; flex-wrap:wrap}
-.acts{display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-top:18px}
-.acts .full{grid-column:1/-1}
-.footnote{margin:22px 0 8px; padding:13px; border:1px dashed var(--line); border-radius:9px;
-  font-size:13.5px; color:var(--ink2); line-height:1.6; background:#fff}
-.footnote b{color:var(--stop)}
-
-/* ── 아래 탭 ──────────────────────────── */
-.tabbar{
-  position:fixed; left:0; right:0; bottom:0; z-index:50; display:grid; grid-template-columns:1fr 1fr;
-  background:var(--green-d);
-  padding-bottom:env(safe-area-inset-bottom); box-shadow:0 -8px 22px rgba(10,30,18,.28);
-}
-.tabbar button{height:var(--tab-h); font-size:17px; font-weight:700; color:#9FC0AD; position:relative}
-.tabbar button+button{border-left:1px solid rgba(255,255,255,.16)}
-.tabbar button[aria-selected="true"]{color:#fff; background:var(--green); box-shadow:inset 0 5px 0 var(--gold-line)}
-.tabbar .bdg{
-  display:inline-block; min-width:24px; margin-left:6px; padding:1px 6px; border-radius:20px;
-  background:var(--stop); color:#fff; font-size:13px; font-weight:700; vertical-align:2px;
-}
-#toast{
-  position:fixed; left:14px; right:14px; bottom:calc(var(--tab-h) + 16px + env(safe-area-inset-bottom));
-  z-index:70; background:var(--green-d); color:#fff; padding:15px 16px; border-radius:10px;
-  font-weight:700; display:none; align-items:center; gap:12px; box-shadow:0 6px 20px rgba(0,0,0,.25);
-}
+/* ── 아래 탭(휴대전화) ── */
+.tabbar{display:none}
+#toast{position:fixed; right:18px; bottom:18px; z-index:70; max-width:380px;
+  background:var(--green-d); color:#fff; padding:12px 14px; border-radius:9px;
+  font-weight:700; font-size:13.5px; display:none; align-items:center; gap:11px; box-shadow:0 6px 20px rgba(0,0,0,.25)}
 #toast.on{display:flex}
-#toast button{margin-left:auto; flex:none; padding:9px 13px; border:2px solid rgba(255,255,255,.6); border-radius:8px; color:#fff; font-weight:700}
+#toast button{margin-left:auto; flex:none; padding:7px 11px; border:1.5px solid rgba(255,255,255,.6); border-radius:7px; color:#fff; font-weight:700; font-size:12.5px}
 
-/* ── 인쇄 / 이미지 저장용 ─────────────── */
+/* ── 휴대전화 ── */
+@media (max-width:999px){
+  body{font-size:15px; padding-bottom:calc(var(--tab-h) + env(safe-area-inset-bottom))}
+  .tbar h1{font-size:16px}
+  .tbar .meta{margin-left:0; width:100%}
+  .filbody{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr}
+  .plan{position:static; max-height:none}
+  .rmain{grid-template-columns:1fr auto auto}
+  .rname{grid-column:1}
+  .rpills{grid-column:1; grid-row:2}
+  .rtgt{grid-column:1; grid-row:3}
+  .rmain .seal{grid-column:2; grid-row:1/4}
+  .caret{grid-column:3; grid-row:1/4}
+  .prow2{grid-template-columns:1fr 1fr auto}
+  .prow2 .p4{display:none}
+  .chk{min-height:42px; font-size:14.5px}
+  .chk input{width:20px; height:20px}
+  .crop{padding:11px 18px; font-size:16px}
+  body[data-tab="plan"] .filters, body[data-tab="plan"] #zoneResults{display:none}
+  body[data-tab="search"] #zonePlan{display:none}
+  .tabbar{display:grid; position:fixed; left:0; right:0; bottom:0; z-index:50; grid-template-columns:1fr 1fr;
+    background:var(--green-d); padding-bottom:env(safe-area-inset-bottom); box-shadow:0 -6px 18px rgba(10,30,18,.25)}
+  .tabbar button{height:var(--tab-h); font-size:16px; font-weight:700; color:#9FC0AD}
+  .tabbar button+button{border-left:1px solid rgba(255,255,255,.16)}
+  .tabbar button[aria-selected="true"]{color:#fff; background:var(--green); box-shadow:inset 0 4px 0 var(--gold-line)}
+  .tabbar .bdg{display:inline-block; min-width:22px; margin-left:6px; padding:1px 6px; border-radius:20px;
+    background:var(--stop); color:#fff; font-size:12px; font-weight:700; vertical-align:2px}
+  #toast{left:14px; right:14px; max-width:none; bottom:calc(var(--tab-h) + 14px + env(safe-area-inset-bottom))}
+}
+
+/* ── 인쇄 / 이미지 저장용 ── */
 #printHost{position:absolute; left:-20000px; top:0; width:1123px}
 .sheetdoc{width:1123px; background:#fff; color:#000; padding:26px 30px;
   font-family:"Malgun Gothic","맑은 고딕","Apple SD Gothic Neo",sans-serif}
@@ -238,172 +249,84 @@ details.fil>summary .sum{font-size:13.5px; font-weight:600; color:var(--ink2)}
   #printHost{display:block !important; position:static !important; left:0 !important; width:auto !important}
   .sheetdoc{width:auto; padding:0}
 }
-@media (max-width:400px){ .fgrid{grid-template-columns:1fr} .g2{grid-template-columns:1fr} }
-
-/* ── 화면 전환 ─────────────────────────── */
-.viewbtn{border:1.5px solid rgba(255,255,255,.45); border-radius:7px; color:#fff;
-  padding:5px 12px; font-size:13px; font-weight:700; white-space:nowrap}
-.mini{margin-left:auto; padding:9px 14px; border:1.5px solid var(--green); border-radius:8px;
-  background:#fff; color:var(--green-d); font-weight:700; font-size:14px; white-space:nowrap}
-
-/* ── PC 화면 ───────────────────────────── */
-body[data-view="pc"]{display:flex; flex-direction:column; min-height:100vh; padding-bottom:44px}
-body[data-view="pc"] .app-head{order:1}
-body[data-view="pc"] .banner{order:2}
-body[data-view="pc"] .tabbar{order:3; position:static; display:flex; box-shadow:none; padding-bottom:0}
-body[data-view="pc"] main{order:4}
-body[data-view="pc"] .sheet,body[data-view="pc"] #toast,body[data-view="pc"] #printHost{order:9}
-body[data-view="pc"] .tabbar button{flex:0 0 auto; height:54px; padding:0 40px}
-body[data-view="pc"] .wrap{max-width:1220px; padding:0 24px}
-body[data-view="pc"] h2.sec{margin-left:-24px; margin-right:-24px; padding-left:24px}
-body[data-view="pc"] .app-head h1{font-size:25px}
-body[data-view="pc"] .crops{grid-template-columns:repeat(5,1fr)}
-body[data-view="pc"] #afterCrop{display:grid; grid-template-columns:360px 1fr; column-gap:26px; align-items:start}
-body[data-view="pc"] #afterCrop>h2.sec{grid-column:1/-1; grid-row:1}
-body[data-view="pc"] .searchbox{grid-column:1; grid-row:2; margin-top:0}
-body[data-view="pc"] #filBox{grid-column:1; grid-row:3; margin-top:12px; max-height:calc(100vh - 110px); overflow:auto}
-body[data-view="pc"] .rescount{grid-column:2; grid-row:2; margin:0; min-height:52px}
-body[data-view="pc"] #results{grid-column:2; grid-row:3; display:grid; align-content:start; gap:12px;
-  grid-template-columns:repeat(auto-fill,minmax(345px,1fr))}
-body[data-view="pc"] #results .card{margin:0}
-body[data-view="pc"] #results .card:has(.empty),body[data-view="pc"] #results .empty{grid-column:1/-1}
-body[data-view="pc"] .scroller{max-height:none}
-body[data-view="pc"] .fgrid{grid-template-columns:repeat(4,1fr)}
-body[data-view="pc"] .acts{grid-template-columns:repeat(4,1fr)}
-body[data-view="pc"] .acts .full{grid-column:auto}
-body[data-view="pc"] .sheet .panel{top:50%; bottom:auto; left:50%; right:auto; width:min(880px,92vw);
-  transform:translate(-50%,-50%); border-radius:14px; max-height:86vh; animation:none}
-body[data-view="pc"] .sheet .phead{border-radius:14px 14px 0 0}
-@media (hover:hover){
-  .item:hover{background:#F4F7F4}
-  .crop:hover{border-color:var(--green)}
-  .mini:hover,.big:hover{filter:brightness(.96)}
-}
 </style>
 </head>
-<body data-view="mobile">
-<script>try{document.body.dataset.view=localStorage.getItem("gano.view")||(innerWidth>=1024?"pc":"mobile")}catch(e){document.body.dataset.view=innerWidth>=1024?"pc":"mobile"}</script>
+<body data-tab="search">
 
-<header class="app-head">
-  <div class="wrap">
-    <h1><em>가농인증</em> 허용 농약 조회 및 방제력 작성</h1>
-    <p>가톨릭농민회 과수위원회</p>
-  </div>
-  <div class="datestrip"><div class="wrap">
-    <span>자료 기준일 <b id="asof" class="num">—</b></span>
-    <span id="dataStat">불러오는 중…</span>
-    <button type="button" class="viewbtn" id="viewToggle">PC 화면으로</button>
-  </div></div>
-</header>
-<div class="banner" id="sampleBanner" hidden><div class="wrap">
+<header class="top"><div class="wrap2 tbar">
+  <h1><em>가농인증</em> 허용 농약 조회·방제력 작성</h1>
+  <span class="org">가톨릭농민회 과수위원회</span>
+  <span class="meta">자료 기준일 <b id="asof" class="num">—</b><i>|</i><span id="dataStat">불러오는 중…</span></span>
+</div></header>
+<div class="banner" id="sampleBanner" hidden><div class="wrap2">
   샘플 데이터로 화면을 보고 있습니다. 실제 농약 등록정보가 아니므로 방제에 사용하지 마십시오.
 </div></div>
 
-<main>
-<!-- ══════════ 조회 ══════════ -->
-<section id="tabSearch" class="wrap">
-  <h2 class="sec"><i>1</i>작물 고르기</h2>
-  <div class="crops" id="crops"></div>
-  <p class="hint">감은 <b>단감</b>만 해당합니다. 대봉감·홍시용감은 무농약 재배 이상이어서 합성 농약을 쓸 수 없습니다.</p>
-
-  <div id="afterCrop" hidden>
-    <h2 class="sec"><i>2</i>찾기</h2>
+<div class="wrap2"><div class="zone filters">
+  <div class="frow1">
+    <div class="crops" id="crops"></div>
     <div class="searchbox">
       <input id="q" type="search" placeholder="약제 이름·성분으로 찾기" autocomplete="off" enterkeyhint="search">
       <button type="button" id="qClear">지우기</button>
     </div>
-
-    <details class="fil" id="filBox">
+  </div>
+  <p class="hint">감은 <b>단감</b>만 해당합니다. 대봉감·홍시용감은 무농약 재배 이상이어서 합성 농약을 쓸 수 없습니다.</p>
+  <div id="afterCrop" hidden>
+    <details class="fil" id="filBox" open>
       <summary>조건 좁히기 <span class="sum" id="filSum">조건 없음</span></summary>
       <div class="filbody">
-        <div class="filgrp">
-          <h3>약제 종류</h3>
-          <div id="fUse"></div>
-        </div>
-        <div class="filgrp">
-          <h3>적용 병해충 <small id="pestNote"></small></h3>
-          <div class="scroller" id="fPest"></div>
-        </div>
-        <div class="filgrp">
-          <h3>인축독성 <small>(사람·가축 독성)</small></h3>
-          <div class="g2" id="fTox"></div>
-          <p class="hint" id="toxNote" hidden>현재 자료에 독성 등급이 들어 있지 않습니다. 방제력에서 직접 적어 주십시오.</p>
-        </div>
-        <div class="filgrp">
-          <h3>어독성 <small>(물고기 독성)</small></h3>
-          <div class="g2" id="fFish"></div>
+        <div class="filgrp"><h3>약제 종류</h3><div id="fUse"></div></div>
+        <div class="filgrp"><h3>적용 병해충 <small id="pestNote"></small></h3>
+          <div class="scroller" id="fPest"></div></div>
+        <div class="filgrp"><h3>인축독성 <small>(사람·가축)</small></h3><div id="fTox"></div>
+          <p class="hint" id="toxNote" hidden></p>
+          <h3 style="margin-top:10px">어독성 <small>(물고기)</small></h3><div id="fFish"></div>
           <p class="hint" id="fishNote" hidden>현재 자료에 어독성 등급이 들어 있지 않습니다. 방제력에서 직접 적어 주십시오.</p>
-          <p class="hint" id="fishWarn" hidden>어독성이 높은 약제입니다. 논·저수지·하천에 가까운 과원에서는 살포에 특히 주의하십시오.</p>
-        </div>
-        <div class="filgrp">
-          <h3>사용 적기</h3>
-          <div class="scroller" id="fTime"></div>
-        </div>
-        <div class="filfoot">
-          <button type="button" id="filReset">조건 모두 지우기</button>
-          <button type="button" class="prim" id="filDone">결과 보기</button>
-        </div>
+          <p class="hint" id="fishWarn" hidden>어독성이 높은 약제입니다. 논·저수지·하천에 가까운 과원에서는 살포에 특히 주의하십시오.</p></div>
+        <div class="filgrp"><h3>사용 적기</h3><div class="scroller" id="fTime"></div></div>
+        <div class="filfoot"><button type="button" id="filReset">조건 모두 지우기</button></div>
       </div>
     </details>
-
-    <div class="rescount"><span>가농인증에서 쓸 수 있는 약제</span> <b id="resN" class="num">0</b><span>가지 성분</span>
-      <button type="button" class="mini" id="saveList">엑셀로 저장</button></div>
-    <div id="results"></div>
   </div>
-</section>
+</div></div>
 
-<!-- ══════════ 방제력 ══════════ -->
-<section id="tabPlan" class="wrap" hidden>
-  <h2 class="sec"><i>1</i>생산자 정보</h2>
-  <div class="card"><div class="form" id="hdrForm"></div></div>
-  <div id="basis" class="basis off">수확 예정시기를 넣으면 약제마다 마지막으로 뿌릴 수 있는 날을 계산해 보여줍니다.</div>
+<main class="wrap2 split">
+  <section class="zone" id="zoneResults">
+    <div class="zhead"><span class="zlabel">허용 농약</span>
+      <div class="rescount"><b id="resN" class="num">0</b><span>성분</span></div>
+      <span class="hint" style="margin:0">성분을 누르면 약제가 펼쳐집니다</span>
+      <button type="button" class="mini" id="saveList" style="margin-left:auto">엑셀로 저장</button>
+    </div>
+    <div id="results"><div class="empty"><b>작물을 먼저 고르십시오.</b>위에서 작물을 고르면 가농인증에서 쓸 수 있는 약제가 나옵니다.</div></div>
+  </section>
 
-  <h2 class="sec"><i>2</i>방제 계획</h2>
-  <div id="entries"></div>
-  <button type="button" class="big alt" id="addBlank">약제를 직접 입력해서 추가하기</button>
-
-  <div class="acts">
-    <button type="button" class="big" id="saveJpg">사진(JPG)으로 저장</button>
-    <button type="button" class="big" id="saveXlsx">엑셀로 저장</button>
-    <button type="button" class="big alt full" id="savePdf">인쇄 · PDF로 저장</button>
-    <button type="button" class="big warn full" id="clearAll">방제력 전체 지우기</button>
-  </div>
-
-  <div class="footnote">
-    이 방제력은 참고 자료입니다. 최종 확인은 <b>교구 과수위원회와 생명농업실천위원회</b>가 합니다.
-    방제 계획에 없는 새 약제를 쓰려면 교구 과수위원회와 먼저 상의하십시오.
-  </div>
-</section>
+  <aside class="zone plan" id="zonePlan">
+    <div class="zhead"><span class="zlabel">방제력</span><span class="pcount" id="planBdg2"></span>
+      <button type="button" class="mini" id="addBlank" style="margin-left:auto">직접 입력 추가</button>
+    </div>
+    <details class="hdrbox" id="hdrBox">
+      <summary>생산자 정보 <span class="hsum" id="hdrSum"></span></summary>
+      <div class="form" id="hdrForm"></div>
+    </details>
+    <div id="basis" class="basis off">수확 예정시기를 넣으면 약제마다 마지막으로 뿌릴 수 있는 날을 계산해 보여줍니다.</div>
+    <div id="entries"></div>
+    <div class="acts">
+      <button type="button" class="big" id="saveJpg">사진(JPG) 저장</button>
+      <button type="button" class="big" id="saveXlsx">엑셀 저장</button>
+      <button type="button" class="big alt" id="savePdf">인쇄 · PDF</button>
+      <button type="button" class="big warn" id="clearAll">전체 지우기</button>
+    </div>
+    <div class="footnote">
+      이 방제력은 참고 자료입니다. 최종 확인은 <b>교구 과수위원회와 생명농업실천위원회</b>가 합니다.
+      방제 계획에 없는 새 약제를 쓰려면 교구 과수위원회와 먼저 상의하십시오.
+    </div>
+  </aside>
 </main>
 
 <nav class="tabbar" role="tablist">
   <button type="button" id="btnSearch" role="tab" aria-selected="true">허용 농약 조회</button>
-  <button type="button" id="btnPlan" role="tab" aria-selected="false">방제력 만들기<span class="bdg" id="planBdg" hidden>0</span></button>
+  <button type="button" id="btnPlan" role="tab" aria-selected="false">방제력<span class="bdg" id="planBdg" hidden>0</span></button>
 </nav>
-
-<!-- 상세 -->
-<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="shTitle">
-  <div class="veil" data-close></div>
-  <div class="panel">
-    <div class="phead">
-      <div><h3 id="shTitle"></h3><p class="sub" id="shSub"></p></div>
-      <button type="button" class="x" data-close aria-label="닫기">✕</button>
-    </div>
-    <div class="pbody" id="shBody"></div>
-  </div>
-</div>
-
-<!-- 담기 -->
-<div class="sheet" id="addSheet" role="dialog" aria-modal="true" aria-labelledby="adTitle">
-  <div class="veil" data-close></div>
-  <div class="panel">
-    <div class="phead">
-      <div><h3 id="adTitle">방제력에 담기</h3><p class="sub" id="adSub"></p></div>
-      <button type="button" class="x" data-close aria-label="닫기">✕</button>
-    </div>
-    <div class="pbody" id="adBody"></div>
-  </div>
-</div>
 
 <div id="toast" role="status" aria-live="polite"><span id="toastMsg"></span></div>
 <div id="printHost"></div>
@@ -424,7 +347,7 @@ const FISH=["Ⅰ","Ⅱ","Ⅲ"];
 const WHENS=["발아전","개화전","낙화후 10일","낙화후 20일","봉지씌우기 전","장마 전","장마 후","수확 40일 전","수확 30일 전"];
 const SAMPLE={"apple":{"meta":{"작물":"사과","기준일":"2026-07-30","출처":"농촌진흥청 농약안전정보시스템(PSIS) 농약등록정보 검색서비스","샘플":true,"필터":"용도 살균·살충 / 인축독성 Ⅲ·Ⅳ급 / 등록취소 제외"},"성분":[{"성분명":"디티아논","용도":"살균제","작용기작":"다1","상품":[{"상품명":"샘플-사과살균 1호","제형":"액상수화제","대상":"점무늬낙엽병","희석배수":"1,000배","잔류기간":21,"사용횟수":4,"사용적기":"발생초기부터 10일 간격","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-사과살균 1호","제형":"액상수화제","대상":"탄저병","희석배수":"1,000배","잔류기간":21,"사용횟수":4,"사용적기":"발생초기부터 10일 간격","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-과수살균 A","제형":"수화제","대상":"겹무늬썩음병","희석배수":"1,200배","잔류기간":30,"사용횟수":3,"사용적기":"장마 전후","인축독성":"Ⅲ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"아세타미프리드","용도":"살충제","작용기작":"4a","상품":[{"상품명":"샘플-사과살충 2호","제형":"수화제","대상":"진딧물","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-사과살충 2호","제형":"수화제","대상":"복숭아순나방","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"만코제브","용도":"살균제","작용기작":"다M3","상품":[{"상품명":"샘플-과수살균 B","제형":"수화제","대상":"붉은별무늬병","희석배수":"500배","잔류기간":45,"사용횟수":4,"사용적기":"개화전","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-과수살균 B","제형":"수화제","대상":"점무늬낙엽병","희석배수":"500배","잔류기간":45,"사용횟수":4,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"에마멕틴벤조에이트","용도":"살충제","작용기작":"6","상품":[{"상품명":"샘플-사과살충 3호","제형":"유제","대상":"사과굴나방","희석배수":"3,000배","잔류기간":21,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅲ","어독성":"Ⅱ","회사":"예시화학"}]},{"성분명":"아족시스트로빈","용도":"살균제","작용기작":"다3","상품":[{"상품명":"샘플-과수살균 C","제형":"액상수화제","대상":"탄저병","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기부터 7일 간격","인축독성":"Ⅳ","어독성":"Ⅱ","회사":"예시화학"},{"상품명":"샘플-과수살균 C","제형":"액상수화제","대상":"흰가루병","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅱ","회사":"예시화학"}]},{"성분명":"스피네토람","용도":"살충제","작용기작":"5","상품":[{"상품명":"샘플-사과살충 4호","제형":"입상수화제","대상":"복숭아심식나방","희석배수":"4,000배","잔류기간":7,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-사과살충 4호","제형":"입상수화제","대상":"사과굴나방","희석배수":"4,000배","잔류기간":7,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"석회유황합제","용도":"살균제","작용기작":"-","상품":[{"상품명":"샘플-유황합제","제형":"액제","대상":"월동병해충","희석배수":"7배","잔류기간":0,"사용횟수":1,"사용적기":"발아전 휴면기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]}]},"pear":{"meta":{"작물":"배","기준일":"2026-07-30","출처":"농촌진흥청 농약안전정보시스템(PSIS) 농약등록정보 검색서비스","샘플":true,"필터":"용도 살균·살충 / 인축독성 Ⅲ·Ⅳ급 / 등록취소 제외"},"성분":[{"성분명":"테부코나졸","용도":"살균제","작용기작":"다1","상품":[{"상품명":"샘플-배살균 1호","제형":"유탁제","대상":"붉은별무늬병","희석배수":"2,000배","잔류기간":21,"사용횟수":3,"사용적기":"개화전~낙화후","인축독성":"Ⅲ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-배살균 1호","제형":"유탁제","대상":"검은별무늬병","희석배수":"2,000배","잔류기간":21,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅲ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"이미다클로프리드","용도":"살충제","작용기작":"4a","상품":[{"상품명":"샘플-배살충 2호","제형":"수화제","대상":"꼬마배나무이","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-배살충 2호","제형":"수화제","대상":"진딧물","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"피리메타닐","용도":"살균제","작용기작":"다1","상품":[{"상품명":"샘플-과수살균 D","제형":"액상수화제","대상":"검은별무늬병","희석배수":"1,000배","잔류기간":30,"사용횟수":4,"사용적기":"낙화후 10일","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"클로티아니딘","용도":"살충제","작용기작":"4a","상품":[{"상품명":"샘플-배살충 3호","제형":"입상수화제","대상":"가루깍지벌레","희석배수":"2,000배","잔류기간":21,"사용횟수":2,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"보스칼리드","용도":"살균제","작용기작":"다7","상품":[{"상품명":"샘플-과수살균 E","제형":"입상수화제","대상":"겹무늬병","희석배수":"1,500배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기부터 10일 간격","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"석회보르도액","용도":"살균제","작용기작":"-","상품":[{"상품명":"샘플-보르도액","제형":"분말","대상":"검은별무늬병","희석배수":"6-6식","잔류기간":0,"사용횟수":2,"사용적기":"발아전, 낙엽후","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]}]},"peach":{"meta":{"작물":"복숭아","기준일":"2026-07-30","출처":"농촌진흥청 농약안전정보시스템(PSIS) 농약등록정보 검색서비스","샘플":true,"필터":"용도 살균·살충 / 인축독성 Ⅲ·Ⅳ급 / 등록취소 제외"},"성분":[{"성분명":"페나리몰","용도":"살균제","작용기작":"다3","상품":[{"상품명":"샘플-복숭아살균 1호","제형":"유제","대상":"잿빛무늬병","희석배수":"3,000배","잔류기간":14,"사용횟수":3,"사용적기":"개화전~낙화후","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"스피노사드","용도":"살충제","작용기작":"5","상품":[{"상품명":"샘플-복숭아살충 2호","제형":"액상수화제","대상":"복숭아순나방","희석배수":"2,000배","잔류기간":7,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-복숭아살충 2호","제형":"액상수화제","대상":"순나방","희석배수":"2,000배","잔류기간":7,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"이프로디온","용도":"살균제","작용기작":"다2","상품":[{"상품명":"샘플-과수살균 F","제형":"수화제","대상":"잿빛무늬병","희석배수":"1,000배","잔류기간":21,"사용횟수":3,"사용적기":"수확 21일 전까지","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"아바멕틴","용도":"살충제","작용기작":"6","상품":[{"상품명":"샘플-복숭아살충 3호","제형":"유제","대상":"점박이응애","희석배수":"3,000배","잔류기간":7,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅲ","어독성":"Ⅱ","회사":"예시화학"}]},{"성분명":"트리플루미졸","용도":"살균제","작용기작":"다1","상품":[{"상품명":"샘플-과수살균 G","제형":"수화제","대상":"흰가루병","희석배수":"2,000배","잔류기간":30,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]}]},"plum":{"meta":{"작물":"자두","기준일":"2026-07-30","출처":"농촌진흥청 농약안전정보시스템(PSIS) 농약등록정보 검색서비스","샘플":true,"필터":"용도 살균·살충 / 인축독성 Ⅲ·Ⅳ급 / 등록취소 제외"},"성분":[{"성분명":"디페노코나졸","용도":"살균제","작용기작":"다1","상품":[{"상품명":"샘플-자두살균 1호","제형":"유탁제","대상":"주머니병","희석배수":"2,000배","잔류기간":21,"사용횟수":3,"사용적기":"개화직전","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-자두살균 1호","제형":"유탁제","대상":"검은점무늬병","희석배수":"2,000배","잔류기간":21,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"에토펜프록스","용도":"살충제","작용기작":"3a","상품":[{"상품명":"샘플-자두살충 2호","제형":"유제","대상":"복숭아순나방","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅱ","회사":"예시화학"}]},{"성분명":"크레속심메틸","용도":"살균제","작용기작":"다3","상품":[{"상품명":"샘플-과수살균 H","제형":"입상수화제","대상":"검은점무늬병","희석배수":"3,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기부터 10일 간격","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"비펜트린","용도":"살충제","작용기작":"3a","상품":[{"상품명":"샘플-자두살충 3호","제형":"수화제","대상":"깍지벌레","희석배수":"1,000배","잔류기간":21,"사용횟수":2,"사용적기":"발생초기","인축독성":"Ⅲ","어독성":"Ⅰ","회사":"예시화학"}]}]},"persimmon":{"meta":{"작물":"단감","기준일":"2026-07-30","출처":"농촌진흥청 농약안전정보시스템(PSIS) 농약등록정보 검색서비스","샘플":true,"필터":"용도 살균·살충 / 인축독성 Ⅲ·Ⅳ급 / 등록취소 제외"},"성분":[{"성분명":"메트코나졸","용도":"살균제","작용기작":"다1","상품":[{"상품명":"샘플-단감살균 1호","제형":"액상수화제","대상":"둥근무늬낙엽병","희석배수":"3,000배","잔류기간":30,"사용횟수":3,"사용적기":"6월 하순~7월 상순","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"클로르페나피르","용도":"살충제","작용기작":"13","상품":[{"상품명":"샘플-단감살충 2호","제형":"유탁제","대상":"감꼭지나방","희석배수":"2,000배","잔류기간":21,"사용횟수":2,"사용적기":"발생초기","인축독성":"Ⅲ","어독성":"Ⅱ","회사":"예시화학"}]},{"성분명":"만디프로파미드","용도":"살균제","작용기작":"다40","상품":[{"상품명":"샘플-과수살균 I","제형":"액상수화제","대상":"탄저병","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"설폭사플로르","용도":"살충제","작용기작":"4c","상품":[{"상품명":"샘플-단감살충 3호","제형":"입상수화제","대상":"가루깍지벌레","희석배수":"2,000배","잔류기간":14,"사용횟수":2,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"석회유황합제","용도":"살균제","작용기작":"-","상품":[{"상품명":"샘플-유황합제","제형":"액제","대상":"월동병해충","희석배수":"7배","잔류기간":0,"사용횟수":1,"사용적기":"발아전 휴면기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]}]}};
 
-const S={crop:null, data:{}, q:"", limit:50, f:{use:new Set(["살균제","살충제","살균·살충제"]),pest:new Set(),tox:new Set(),fish:new Set(),time:new Set()},
+const S={crop:null, data:{}, q:"", limit:50, open:null, f:{use:new Set(["살균제","살충제","살균·살충제"]),pest:new Set(),tox:new Set(),fish:new Set(),time:new Set()},
          plan:{hdr:{},ents:[]}, undo:null, seq:1};
 
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
@@ -653,7 +576,6 @@ async function pickCrop(slug){
   if(!S.data[slug]) S.data[slug]={meta:{작물:CROPS.find(c=>c[0]===slug)[1]},성분:[]};
   const sel=$("#hdrItem"); if(sel){sel.value=CROPS.find(c=>c[0]===slug)[1]; saveHdr(true);}
   drawFilters(); drawResults();
-  $("#afterCrop").scrollIntoView({behavior:"smooth",block:"start"});
 }
 
 /* ─── 필터 ─── */
@@ -701,102 +623,76 @@ function drawFilters(){
 }
 
 /* ─── 결과 ─── */
+function planMoaMap(){
+  const m=new Map();
+  S.plan.ents.forEach(e=>{const k=(e.작용기작||"").trim(); if(k&&k!=="-") m.set(k,(m.get(k)||0)+1)});
+  return m;
+}
 function drawResults(){
   const box=$("#results"), rows=allRows().filter(pass), ings=new Map();
   rows.forEach(r=>{ if(!ings.has(r.성분명)) ings.set(r.성분명,[]); ings.get(r.성분명).push(r) });
   $("#resN").textContent=ings.size;
   if(!ings.size){
-    box.innerHTML=`<div class="card empty"><b>조건에 맞는 약제가 없습니다.</b>
-      조건을 하나씩 풀어 보십시오. 아래 ‘조건 모두 지우기’를 누르면 처음으로 돌아갑니다.
-      <button type="button" class="big alt" id="emptyReset">조건 모두 지우기</button></div>`;
-    $("#emptyReset").onclick=resetFilters; return;
+    box.innerHTML=`<div class="empty"><b>조건에 맞는 약제가 없습니다.</b>
+      조건을 하나씩 풀어 보십시오.
+      <div style="margin-top:10px"><button type="button" class="mini" id="emptyReset">조건 모두 지우기</button></div></div>`;
+    const er=$("#emptyReset"); if(er)er.onclick=resetFilters; return;
   }
+  const pm=planMoaMap(), inPlan=new Set(S.plan.ents.map(e=>e.성분명).filter(Boolean));
   const all=[...ings], show=all.slice(0,S.limit);
   box.innerHTML=show.map(([nm,rs])=>{
-    const tgt=[...new Set(rs.map(r=>r.대상))], ds=[...new Set(rs.map(r=>r.잔류기간))].sort((a,b)=>a-b);
-    const hs=[...new Set(rs.map(r=>r.인축독성).filter(Boolean))].sort();
-    const fs=[...new Set(rs.map(r=>r.어독성).filter(Boolean))].sort();
-    const gap=rs.filter(r=>!r.인축독성&&!r.어독성).length;
-    const toxPills=(hs.length?`<span class="pill n">인축 ${esc(hs.join("·"))}급</span>`:"")
-      +(fs.length?`<span class="pill n">어독 ${esc(fs.join("·"))}급</span>`:"")
-      +(gap===rs.length?`<span class="pill s">독성정보 확인 필요</span>`
-        :gap?`<span class="pill s">일부 독성정보 확인 필요</span>`:"");
+    const r0=rs[0], tgt=[...new Set(rs.map(r=>r.대상))];
+    const ds=[...new Set(rs.map(r=>r.잔류기간))].sort((a,b)=>a-b);
     const seal=ds.length>1?`${ds[0]*2}~${ds[ds.length-1]*2}`:String(ds[0]*2);
-    return `<div class="card"><button type="button" class="item" data-ing="${esc(nm)}">
-      <div class="body">
-        <p class="nm">${esc(nm)}</p>
-        <div class="pills"><span class="pill g">${esc(rs[0].용도)}</span>
-          ${toxPills}
-          ${rs[0].작용기작&&rs[0].작용기작!=="-"?`<span class="pill w">작용기작 ${esc(rs[0].작용기작)}</span>`:""}</div>
-        <p class="tgt">${esc(tgt.slice(0,3).join(", "))}${tgt.length>3?` 외 ${tgt.length-3}종`:""}</p>
-        <p class="more">등록 약제 ${rs.length}개 · 눌러서 자세히 보기</p>
-      </div>
-      <span class="seal"><b class="num">${seal}</b><span>가농 일</span></span>
-    </button></div>`}).join("")
+    const hs=[...new Set(rs.map(r=>r.인축독성).filter(Boolean))].sort();
+    const fs2=[...new Set(rs.map(r=>r.어독성).filter(Boolean))].sort();
+    const gap=rs.filter(r=>!r.인축독성&&!r.어독성).length;
+    const moa=r0.작용기작&&r0.작용기작!=="-"?r0.작용기작:"";
+    const dup=moa&&pm.get(moa);
+    const open=S.open===nm;
+    return `<div class="rrow ${open?"open":""}">
+      <button type="button" class="rmain" data-tgl="${esc(nm)}">
+        <span class="rname">${esc(nm)}</span>
+        <span class="rpills">
+          <span class="pill g">${esc(r0.용도)}</span>
+          ${moa?`<span class="moa ${dup?"dup":""}">기작 ${esc(moa)}${dup?" · 담김":""}</span>`:""}
+          ${hs.length?`<span class="pill n">인축 ${esc(hs.join("·"))}</span>`:""}
+          ${fs2.length?`<span class="pill n">어독 ${esc(fs2.join("·"))}</span>`:""}
+          ${gap?`<span class="pill s">${gap===rs.length?"독성정보 확인 필요":"일부 독성정보 확인 필요"}</span>`:""}
+          ${inPlan.has(nm)?`<span class="pill k">담김</span>`:""}
+        </span>
+        <span class="rtgt">${esc(tgt.slice(0,4).join(", "))}${tgt.length>4?` 외 ${tgt.length-4}종`:""} · 약제 ${rs.length}개</span>
+        <span class="seal"><b class="num">${seal}</b><span>가농 일</span></span>
+        <span class="caret">${open?"▴":"▾"}</span>
+      </button>
+      ${open?`<div class="plist">`+rs.map((r,i)=>`
+        <div class="prow2">
+          <div class="p1"><b>${esc(r.상품명)}</b><span>${[r.제형,r.함량,r.회사].filter(Boolean).map(esc).join(" · ")}</span></div>
+          <div class="p2">${esc(r.대상)}</div>
+          <div class="p3">${esc(r.희석배수)}<i>·</i>${esc(r.사용횟수)}회</div>
+          <div class="p4">${esc(r.사용적기)}</div>
+          <div class="p5">${r.잔류기간?`${r.잔류기간}일→<b>${r.잔류기간*2}일</b>`:"제한 없음"}</div>
+          <button type="button" class="addbtn" data-add="${esc(nm)}::${i}">담기</button>
+        </div>`).join("")+`</div>`:""}
+    </div>`}).join("")
     + (all.length>show.length
-      ? `<button type="button" class="big alt" id="moreBtn">더 보기 — 남은 ${all.length-show.length}개</button>`
-      : "");
+      ? `<button type="button" class="morebtn" id="moreBtn">더 보기 — 남은 ${all.length-show.length}개</button>` : "");
   const mb=$("#moreBtn");
   if(mb) mb.onclick=()=>{ S.limit+=50; drawResults(); };
 }
 
-/* ─── 상세 ─── */
-function openIng(nm){
-  const rs=allRows().filter(r=>r.성분명===nm&&pass(r)); if(!rs.length)return;
-  $("#shTitle").textContent=nm;
-  $("#shSub").textContent=`${rs[0].용도}${rs[0].작용기작&&rs[0].작용기작!=="-"?" · 작용기작 "+rs[0].작용기작:""} · 조건에 맞는 약제 ${rs.length}개`;
-  $("#shBody").innerHTML=rs.map((r,i)=>`
-    <div class="prow">
-      <div class="top">
-        <p class="pnm">${esc(r.상품명)}</p>
-        <span class="seal"><b class="num">${r.잔류기간*2}</b><span>가농 일</span></span>
-      </div>
-      <dl>
-        <dt>대상</dt><dd>${esc(r.대상)}</dd>
-        <dt>제형·함량</dt><dd>${[r.제형,r.함량,r.회사].filter(Boolean).map(esc).join(" · ")||"-"}</dd>
-        <dt>희석배수</dt><dd>${esc(r.희석배수)}</dd>
-        <dt>사용 적기</dt><dd>${esc(r.사용적기)}</dd>
-        <dt>안전사용기준</dt><dd>수확 <b class="num">${r.잔류기간}</b>일 전까지 · <b class="num">${esc(r.사용횟수)}</b>회 이내</dd>
-        <dt>가농 기준</dt><dd style="color:var(--gold);font-weight:700">수확 <b class="num">${r.잔류기간*2}</b>일 전까지 (잔류기간 2배)</dd>
-        <dt>독성</dt><dd>${(r.인축독성||r.어독성)?`인축 ${esc(r.인축독성||"-")}급 · 어독 ${esc(r.어독성||"-")}급`
-          :`<b style="color:var(--stop)">독성정보 확인 필요</b> — 농약 포장지를 보고 방제력에 직접 적으십시오`}</dd>
-      </dl>
-      <button type="button" class="big" data-add="${i}">이 약제를 방제력에 담기</button>
-    </div>`).join("");
-  $("#shBody").dataset.ing=nm;
-  $("#sheet").classList.add("on"); document.body.style.overflow="hidden";
+function quickAdd(nm,i){
+  const rs=allRows().filter(r=>r.성분명===nm&&pass(r)), r=rs[i]; if(!r)return;
+  S.plan.ents.push({id:S.seq++, 시기:"", 구분:r.용도==="살충제"?"해충":"병해",
+    대상:r.대상, 약제명:r.상품명, 성분명:r.성분명,
+    작용기작:(r.작용기작&&r.작용기작!=="-")?r.작용기작:"",
+    희석배수:r.희석배수, 사용횟수:String(r.사용횟수??""),
+    인축독성:r.인축독성, 어독성:r.어독성, 잔류기간:String(r.잔류기간),
+    자재:"등록", 직접:false});
+  savePlan(); drawPlan(); badge(); drawResults();
+  toast(`${r.상품명} — 담았습니다. 오른쪽에서 시기를 적어 주십시오.`,
+    matchMedia("(max-width:999px)").matches?"방제력 보기":null, ()=>go("plan"));
 }
-
-/* ─── 담기 ─── */
-function openAdd(r){
-  const 구분=r.용도==="살충제"?"해충":"병해";
-  $("#adSub").textContent=`${r.상품명} (${r.성분명})`;
-  $("#adBody").innerHTML=`
-    <label class="f"><span>시기 — 언제 뿌릴 계획입니까</span>
-      <input id="adWhen" placeholder="예: 낙화후 10일" value="" enterkeyhint="done"></label>
-    <div class="line" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:9px">
-      ${WHENS.map(w=>`<button type="button" class="pill n" data-when="${esc(w)}" style="padding:9px 12px;font-size:14px;border:1.5px solid var(--line)">${esc(w)}</button>`).join("")}
-    </div>
-    <div class="f"><span>병해와 해충 가운데 어디에 넣습니까</span>
-      <div class="radios" id="adKind">
-        <label class="${구분==="병해"?"on":""}"><input type="radio" name="adk" value="병해" ${구분==="병해"?"checked":""}>병해</label>
-        <label class="${구분==="해충"?"on":""}"><input type="radio" name="adk" value="해충" ${구분==="해충"?"checked":""}>해충</label>
-      </div></div>
-    <label class="f"><span>대상</span><input id="adTgt" value="${esc(r.대상)}"></label>
-    <button type="button" class="big" id="adOk">방제력에 담기</button>`;
-  $("#adBody").querySelectorAll("[data-when]").forEach(b=>b.onclick=()=>{$("#adWhen").value=b.dataset.when});
-  $("#adKind").onchange=e=>{$$("#adKind label").forEach(l=>l.classList.toggle("on",l.contains(e.target)))};
-  $("#adOk").onclick=()=>{
-    S.plan.ents.push({id:S.seq++, 시기:$("#adWhen").value.trim(), 구분:$("#adKind [name=adk]:checked").value,
-      대상:$("#adTgt").value.trim(), 약제명:r.상품명, 성분명:r.성분명, 희석배수:r.희석배수,
-      사용횟수:String(r.사용횟수??""), 인축독성:r.인축독성, 어독성:r.어독성, 잔류기간:String(r.잔류기간),
-      자재:"등록", 직접:false});
-    savePlan(); closeSheets(); drawPlan(); badge();
-    toast("방제력에 담았습니다.","방제력 보기",()=>go("plan"));
-  };
-  $("#addSheet").classList.add("on"); document.body.style.overflow="hidden";
-}
-function closeSheets(){$$(".sheet").forEach(s=>s.classList.remove("on")); document.body.style.overflow=""}
 
 /* ─── 방제력 머리글 ─── */
 const HDR=[["교구","select",DIOCESE],["분회","text"],["생산자명","text"],["연락처","tel"],
@@ -833,6 +729,9 @@ function saveHdr(redrawPlan){
   $$("#hdrForm [data-hk]").forEach(el=>{S.plan.hdr[el.dataset.hk]=el.value});
   const k=$("#hdrKind [name=hk]:checked"); if(k)S.plan.hdr.작성구분=k.value;
   savePlan(); drawBasis(); if(redrawPlan) drawPlan();
+  const hs=$("#hdrSum");
+  if(hs) hs.textContent=[S.plan.hdr.생산자명,S.plan.hdr.인증품목,
+    S.plan.hdr.수확월?S.plan.hdr.수확월+"월 "+(S.plan.hdr.수확순||""):""].filter(Boolean).join(" · ");
 }
 function harvestDate(){
   const m=Number(S.plan.hdr.수확월), t=S.plan.hdr.수확순;
@@ -850,70 +749,74 @@ function drawBasis(){
 }
 
 /* ─── 방제력 목록 ─── */
-const EF=[["시기","시기"],["대상","대상"],["약제명","약제명"],["희석배수","희석배수"],["사용횟수","사용횟수"],
- ["잔류기간(수확 며칠 전)","잔류기간"],["인축독성","인축독성"],["어독성","어독성"]];
-function drawPlan(){
-  const box=$("#entries");
-  if(!S.plan.ents.length){
-    box.innerHTML=`<div class="card empty"><b>담은 약제가 없습니다.</b>
-      ‘허용 농약 조회’에서 약제를 찾아 담거나, 아래 버튼으로 직접 입력하십시오.</div>`; return;
-  }
-  box.innerHTML=S.plan.ents.map((e,i)=>`
-    <div class="ent" data-id="${e.id}">
-      <div class="eh">
-        <span class="pill n">${e.구분}</span>
-        ${matPill(e)}
-        <span class="no">${i+1}번</span>
-        <button type="button" class="del" data-del="${e.id}">지우기</button>
-      </div>
-      <div class="eb">
-        <div class="fgrid">
-          <label class="f"><span>시기</span><input data-ef="시기" value="${esc(e.시기)}" placeholder="예: 낙화후 10일"></label>
-          <label class="f"><span>대상 ${e.구분}</span><input data-ef="대상" value="${esc(e.대상)}"></label>
-        </div>
-        <label class="f"><span>약제명${e.성분명?` <small style="font-weight:600;color:var(--ink2)">성분 ${esc(e.성분명)}</small>`:""}</span>
-          <input data-ef="약제명" value="${esc(e.약제명)}"></label>
-        <div class="fgrid">
-          <label class="f"><span>희석배수</span><input data-ef="희석배수" value="${esc(e.희석배수)}"></label>
-          <label class="f"><span>사용횟수</span><input data-ef="사용횟수" value="${esc(e.사용횟수)}"></label>
-        </div>
-        <div class="fgrid">
-          <label class="f"><span>잔류기간 (수확 며칠 전)</span><input data-ef="잔류기간" inputmode="numeric" value="${esc(e.잔류기간)}"></label>
-          <div class="f"><span>구분 바꾸기</span>
-            <div class="radios" data-kind>
-              <label class="${e.구분==="병해"?"on":""}"><input type="radio" name="k${e.id}" value="병해" ${e.구분==="병해"?"checked":""}>병해</label>
-              <label class="${e.구분==="해충"?"on":""}"><input type="radio" name="k${e.id}" value="해충" ${e.구분==="해충"?"checked":""}>해충</label>
-            </div></div>
-        </div>
-        <div class="fgrid">
-          <label class="f"><span>인축독성</span><input data-ef="인축독성" value="${esc(e.인축독성)}" placeholder="직접 입력"></label>
-          <label class="f"><span>어독성</span><input data-ef="어독성" value="${esc(e.어독성)}" placeholder="직접 입력"></label>
-        </div>
-        ${e.직접?`<div class="f"><span>자재 구분 — 방제력에 그대로 표시됩니다</span>
-          <div class="radios">
-            <label class="${e.자재==="등록"?"on":""}"><input type="radio" name="m${e.id}" value="등록" ${e.자재==="등록"?"checked":""}>농약 등록 제품</label>
-            <label class="${e.자재==="자가"?"on":""}"><input type="radio" name="m${e.id}" value="자가" ${e.자재==="자가"?"checked":""}>자가제조·기타</label>
-          </div>${e.자재?"":`<p class="hint" style="color:var(--stop);font-weight:700">구분을 골라 주십시오. 자가제조 자재는 잔류기간이 적용되지 않습니다.</p>`}</div>`:""}
-        <div data-spray>${sprayLine(e)}</div>
-      </div>
-    </div>`).join("");
-}
 function sprayLine(e){
   if(e.자재==="자가"||!harvestDate()) return "";
   const d=Number(e.잔류기간)||0, ls=lastSpray(d);
   return `<div class="spraydate">라벨 <b class="num">${d}</b>일 → 가농 <b class="num">${d*2}</b>일
     <span style="margin-left:auto">${d?`<b class="num">${fmt(ls)}</b>까지 살포`:"기간 제한 없음"}</span></div>`;
 }
-function matPill(e){
-  return e.자재==="등록" ? `<span class="pill g">농약 등록 제품</span>`
-       : e.자재==="자가" ? `<span class="pill w">자가제조·기타</span>`
-       : `<span class="pill s">자재 구분 미선택</span>`;
+function matPillMini(e){
+  return e.자재==="자가" ? `<span class="pill w">자가제조</span>`
+       : e.자재 ? "" : `<span class="pill s">자재 미선택</span>`;
 }
-function badge(){const n=S.plan.ents.length,b=$("#planBdg"); b.hidden=!n; b.textContent=n}
+function drawPlan(){
+  const box=$("#entries");
+  if(!S.plan.ents.length){
+    box.innerHTML=`<div class="pempty">왼쪽 목록에서 <b>담기</b>를 누르면 여기에 쌓입니다.<br>
+      담았다 뺐다 하며 자유롭게 짜 보십시오.<br>저장하기 전까지는 몇 번을 고쳐도 됩니다.</div>`; return;
+  }
+  const pm=planMoaMap();
+  box.innerHTML=S.plan.ents.map((e,i)=>{
+    const moa=(e.작용기작||"").trim();
+    const dup=moa&&moa!=="-"&&pm.get(moa)>1;
+    return `<div class="ent" data-id="${e.id}">
+      <div class="ph">
+        <span class="pill ${e.구분==="병해"?"g":"n"}">${e.구분}</span>
+        ${moa?`<span class="moa ${dup?"dup":""}">기작 ${esc(moa)}</span>`:""}
+        ${matPillMini(e)}
+        <b class="pnm2">${esc(e.약제명||"(약제명을 적으십시오)")}</b>
+        <button type="button" class="xdel" data-del="${e.id}" aria-label="지우기">✕</button>
+      </div>
+      ${dup?`<p class="dupwarn">같은 작용기작(${esc(moa)}) 약제가 ${pm.get(moa)}개 담겨 있습니다. 저항성이 생기지 않게 다른 작용기작과 섞어 쓰십시오.</p>`:""}
+      <div class="pgrid">
+        <label>시기<input data-ef="시기" value="${esc(e.시기)}" placeholder="예: 낙화후 10일"></label>
+        <label>대상 ${e.구분}<input data-ef="대상" value="${esc(e.대상)}"></label>
+      </div>
+      <div data-spray>${sprayLine(e)}</div>
+      ${e.직접&&!e.자재?`<div class="pgrid" style="grid-template-columns:1fr"><label>자재 구분 — 방제력에 그대로 표시됩니다
+        <div class="radios" style="margin-top:3px">
+          <label class=""><input type="radio" name="m${e.id}" value="등록">농약 등록 제품</label>
+          <label class=""><input type="radio" name="m${e.id}" value="자가">자가제조·기타</label>
+        </div></label></div>`:""}
+      <details class="pmore"><summary>자세히 고치기</summary>
+        <div class="pgrid">
+          <label>약제명<input data-ef="약제명" value="${esc(e.약제명)}"></label>
+          <label>희석배수<input data-ef="희석배수" value="${esc(e.희석배수)}"></label>
+          <label>사용횟수<input data-ef="사용횟수" value="${esc(e.사용횟수)}"></label>
+          <label>잔류기간(수확 며칠 전)<input data-ef="잔류기간" inputmode="numeric" value="${esc(e.잔류기간)}"></label>
+          <label>인축독성<input data-ef="인축독성" value="${esc(e.인축독성)}" placeholder="직접 입력"></label>
+          <label>어독성<input data-ef="어독성" value="${esc(e.어독성)}" placeholder="직접 입력"></label>
+          <label>작용기작<input data-ef="작용기작" value="${esc(e.작용기작||"")}"></label>
+        </div>
+        <div class="pgrid" style="margin-top:8px">
+          <label>구분 바꾸기<div class="radios" data-kind style="margin-top:3px">
+            <label class="${e.구분==="병해"?"on":""}"><input type="radio" name="k${e.id}" value="병해" ${e.구분==="병해"?"checked":""}>병해</label>
+            <label class="${e.구분==="해충"?"on":""}"><input type="radio" name="k${e.id}" value="해충" ${e.구분==="해충"?"checked":""}>해충</label>
+          </div></label>
+          ${e.직접&&e.자재?`<label>자재 구분<div class="radios" style="margin-top:3px">
+            <label class="${e.자재==="등록"?"on":""}"><input type="radio" name="m${e.id}" value="등록" ${e.자재==="등록"?"checked":""}>등록 제품</label>
+            <label class="${e.자재==="자가"?"on":""}"><input type="radio" name="m${e.id}" value="자가" ${e.자재==="자가"?"checked":""}>자가제조</label>
+          </div></label>`:""}
+        </div>
+      </details>
+    </div>`}).join("");
+}
+function badge(){const n=S.plan.ents.length,b=$("#planBdg"); b.hidden=!n; b.textContent=n;
+  const b2=$("#planBdg2"); if(b2)b2.textContent=n?`담긴 약제 ${n}개`:""}
 function savePlan(){try{store.set("gano.plan",JSON.stringify(S.plan))}catch(e){}}
 function loadPlan(){try{const j=JSON.parse(store.get("gano.plan")||"null");
   if(j&&j.ents){j.ents.forEach(e=>{if(e.자재===undefined)e.자재=e.성분명?"등록":"";
-    if(e.직접===undefined)e.직접=!e.성분명});
+    if(e.직접===undefined)e.직접=!e.성분명; if(e.작용기작===undefined)e.작용기작=""});
     S.plan=j; S.seq=Math.max(1,...j.ents.map(e=>e.id||0))+1}}catch(e){}}
 
 /* ─── 출력 문서 ─── */
@@ -1104,20 +1007,14 @@ async function exportPlan(){
   }catch(e){ csvSave(flat,name); toast("엑셀을 만들지 못해 CSV로 저장했습니다."); }
 }
 
-/* ─── 화면 전환 ─── */
-function setView(v){
-  document.body.dataset.view=v; store.set("gano.view",v);
-  $("#viewToggle").textContent = v==="pc"?"휴대전화 화면으로":"PC 화면으로";
-  if(v==="pc") $("#filBox").open=true;
-  window.scrollTo({top:0});
-}
+
 
 /* ─── 탭 ─── */
 function go(which){
   const s=which==="search";
-  $("#tabSearch").hidden=!s; $("#tabPlan").hidden=s;
+  document.body.dataset.tab=which;
   $("#btnSearch").setAttribute("aria-selected",s); $("#btnPlan").setAttribute("aria-selected",!s);
-  window.scrollTo({top:0}); if(!s){drawBasis(); drawPlan()}
+  window.scrollTo({top:0});
 }
 function resetFilters(){
   S.f.use=new Set(["살균제","살충제","살균·살충제"]); S.f.pest.clear(); S.f.tox.clear(); S.f.fish.clear(); S.f.time.clear();
@@ -1137,12 +1034,12 @@ $("#filBox").addEventListener("change",e=>{
   S.limit=50; drawFilters(); drawResults();
 });
 $("#filReset").onclick=resetFilters;
-$("#filDone").onclick=()=>{$("#filBox").open=false; $(".rescount").scrollIntoView({behavior:"smooth",block:"center"})};
-$("#results").onclick=e=>{const b=e.target.closest("[data-ing]"); if(b)openIng(b.dataset.ing)};
-$("#shBody").onclick=e=>{const b=e.target.closest("[data-add]"); if(!b)return;
-  const rs=allRows().filter(r=>r.성분명===$("#shBody").dataset.ing&&pass(r)); openAdd(rs[+b.dataset.add])};
-$$("[data-close]").forEach(el=>el.onclick=closeSheets);
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeSheets()});
+$("#results").onclick=e=>{
+  const a=e.target.closest("[data-add]");
+  if(a){ const [nm,i]=a.dataset.add.split("::"); quickAdd(nm,+i); return }
+  const t=e.target.closest("[data-tgl]");
+  if(t){ S.open=S.open===t.dataset.tgl?null:t.dataset.tgl; drawResults() }
+};
 $("#hdrForm").addEventListener("input",()=>saveHdr(false));
 $("#hdrForm").addEventListener("change",e=>{
   const hk=e.target.dataset.hk;
@@ -1161,31 +1058,30 @@ $("#entries").addEventListener("change",e=>{
   if(e.target.name.startsWith("k")) o.구분=e.target.value;
   else if(e.target.name.startsWith("m")) o.자재=e.target.value;
   else return;
-  savePlan(); drawPlan();
+  savePlan(); drawPlan(); drawResults();
 });
 $("#entries").addEventListener("click",e=>{
   const b=e.target.closest("[data-del]"); if(!b)return;
   const i=S.plan.ents.findIndex(x=>x.id==b.dataset.del); if(i<0)return;
-  S.undo=[i,S.plan.ents[i]]; S.plan.ents.splice(i,1); savePlan(); drawPlan(); badge();
-  toast("1개를 지웠습니다.","되돌리기",()=>{S.plan.ents.splice(S.undo[0],0,S.undo[1]); savePlan(); drawPlan(); badge()});
+  S.undo=[i,S.plan.ents[i]]; S.plan.ents.splice(i,1); savePlan(); drawPlan(); badge(); drawResults();
+  toast("1개를 지웠습니다.","되돌리기",()=>{S.plan.ents.splice(S.undo[0],0,S.undo[1]); savePlan(); drawPlan(); badge(); drawResults()});
 });
 $("#addBlank").onclick=()=>{
-  S.plan.ents.push({id:S.seq++,시기:"",구분:"병해",대상:"",약제명:"",성분명:"",희석배수:"",사용횟수:"",
+  S.plan.ents.push({id:S.seq++,시기:"",구분:"병해",대상:"",약제명:"",성분명:"",작용기작:"",희석배수:"",사용횟수:"",
     인축독성:"",어독성:"",잔류기간:"0",자재:"",직접:true});
   savePlan(); drawPlan(); badge();
+  if(matchMedia("(max-width:999px)").matches) go("plan");
   const last=$("#entries").lastElementChild; last&&last.scrollIntoView({behavior:"smooth",block:"center"});
 };
 $("#clearAll").onclick=()=>{
   if(!S.plan.ents.length)return toast("지울 내용이 없습니다.");
   const keep=S.plan.ents.slice();
   if(confirm("방제력에 담은 약제를 모두 지웁니다. 계속하시겠습니까?\n(생산자 정보는 그대로 둡니다)")){
-    S.plan.ents=[]; savePlan(); drawPlan(); badge();
-    toast("모두 지웠습니다.","되돌리기",()=>{S.plan.ents=keep; savePlan(); drawPlan(); badge()});
+    S.plan.ents=[]; savePlan(); drawPlan(); badge(); drawResults();
+    toast("모두 지웠습니다.","되돌리기",()=>{S.plan.ents=keep; savePlan(); drawPlan(); badge(); drawResults()});
   }};
 $("#saveJpg").onclick=saveJpg; $("#savePdf").onclick=savePdf;
 $("#saveXlsx").onclick=exportPlan; $("#saveList").onclick=exportList;
-$("#viewToggle").onclick=()=>setView(document.body.dataset.view==="pc"?"mobile":"pc");
-setView(store.get("gano.view")||(window.innerWidth>=1024?"pc":"mobile"));
 </script>
 </body>
 </html>
