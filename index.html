@@ -99,6 +99,16 @@ details.fil>summary .sum{font-weight:600; color:var(--ink2); font-size:12.5px}
 .filfoot button{padding:8px 13px; border-radius:7px; font-weight:700; font-size:13px; border:1.5px solid var(--line); background:#fff; color:var(--ink2)}
 .filfoot button:hover{border-color:var(--stop); color:var(--stop)}
 
+/* ── 제외 성분 안내 ── */
+.exclbox{margin-top:10px; padding:9px 12px; border:1px solid var(--line);
+  border-left:4px solid var(--stop); border-radius:0 7px 7px 0; background:#FCFAF9}
+.exclbox h4{margin:0 0 5px; font-size:12px; font-weight:700; color:var(--stop)}
+.exclbox dl{display:grid; grid-template-columns:auto 1fr; gap:3px 10px; margin:0; font-size:12px}
+.exclbox dt{font-weight:700; color:var(--ink2); white-space:nowrap}
+.exclbox dd{margin:0; color:var(--ink); word-break:keep-all; line-height:1.5}
+.exclbox dd em{font-style:normal; color:var(--ink2)}
+.exclbox .why2{margin:6px 0 0; font-size:11px; color:var(--ink2); line-height:1.5}
+
 /* ── 본문 분할 ── */
 .split{display:grid; grid-template-columns:minmax(0,1.5fr) minmax(390px,1fr); gap:14px; margin:14px auto 40px; align-items:start}
 .rescount{display:flex; align-items:baseline; gap:5px; font-size:13px; color:var(--ink2)}
@@ -302,11 +312,13 @@ details.fil>summary .sum{font-weight:600; color:var(--ink2); font-size:12.5px}
           <p class="hint" id="toxNote" hidden></p>
           <h3 style="margin-top:10px">어독성 <small>(물고기)</small></h3><div id="fFish"></div>
           <p class="hint" id="fishNote" hidden>현재 자료에 어독성 등급이 들어 있지 않습니다. 방제력에서 직접 적어 주십시오.</p>
+          <p class="hint" id="fishS" hidden>Ⅱs급은 잉어 기준으로는 Ⅲ급이나 미꾸리에 대한 독성이 Ⅰ급인 약제입니다. 논이나 물길에 가까운 과원에서는 특히 주의하십시오.</p>
           <p class="hint" id="fishWarn" hidden>어독성이 높은 약제입니다. 논·저수지·하천에 가까운 과원에서는 살포에 특히 주의하십시오.</p></div>
         <div class="filgrp"><h3>사용 적기</h3><div class="scroller" id="fTime"></div></div>
         <div class="filfoot"><button type="button" id="filReset">조건 모두 지우기</button></div>
       </div>
     </details>
+    <div class="exclbox" id="exclBox" hidden></div>
   </div>
 </div></div>
 
@@ -377,7 +389,7 @@ const CROPS=[["apple","사과"],["pear","배"],["peach","복숭아"],["plum","�
 const DIOCESE=["광주","마산","대구","대전","부산","서울","수원","안동","인천","의정부","원주","전주","제주","청주","춘천"];
 const USES=[["살균제",1],["살충제",1],["살균·살충제",1],["제초제",0],["항생제",0],["호르몬제",0]];
 const TOX=[["Ⅰ",0],["Ⅱ",0],["Ⅲ",1],["Ⅳ",1]];
-const FISH=["Ⅰ","Ⅱ","Ⅲ"];
+
 const WHENS=["발아전","개화전","낙화후 10일","낙화후 20일","봉지씌우기 전","장마 전","장마 후","수확 40일 전","수확 30일 전"];
 const SAMPLE={"apple":{"meta":{"작물":"사과","기준일":"2026-07-30","출처":"농촌진흥청 농약안전정보시스템(PSIS) 농약등록정보 검색서비스","샘플":true,"필터":"용도 살균·살충 / 인축독성 Ⅲ·Ⅳ급 / 등록취소 제외"},"성분":[{"성분명":"디티아논","용도":"살균제","작용기작":"다1","상품":[{"상품명":"샘플-사과살균 1호","제형":"액상수화제","대상":"점무늬낙엽병","희석배수":"1,000배","잔류기간":21,"사용횟수":4,"사용적기":"발생초기부터 10일 간격","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-사과살균 1호","제형":"액상수화제","대상":"탄저병","희석배수":"1,000배","잔류기간":21,"사용횟수":4,"사용적기":"발생초기부터 10일 간격","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-과수살균 A","제형":"수화제","대상":"겹무늬썩음병","희석배수":"1,200배","잔류기간":30,"사용횟수":3,"사용적기":"장마 전후","인축독성":"Ⅲ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"아세타미프리드","용도":"살충제","작용기작":"4a","상품":[{"상품명":"샘플-사과살충 2호","제형":"수화제","대상":"진딧물","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-사과살충 2호","제형":"수화제","대상":"복숭아순나방","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"만코제브","용도":"살균제","작용기작":"다M3","상품":[{"상품명":"샘플-과수살균 B","제형":"수화제","대상":"붉은별무늬병","희석배수":"500배","잔류기간":45,"사용횟수":4,"사용적기":"개화전","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-과수살균 B","제형":"수화제","대상":"점무늬낙엽병","희석배수":"500배","잔류기간":45,"사용횟수":4,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"에마멕틴벤조에이트","용도":"살충제","작용기작":"6","상품":[{"상품명":"샘플-사과살충 3호","제형":"유제","대상":"사과굴나방","희석배수":"3,000배","잔류기간":21,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅲ","어독성":"Ⅱ","회사":"예시화학"}]},{"성분명":"아족시스트로빈","용도":"살균제","작용기작":"다3","상품":[{"상품명":"샘플-과수살균 C","제형":"액상수화제","대상":"탄저병","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기부터 7일 간격","인축독성":"Ⅳ","어독성":"Ⅱ","회사":"예시화학"},{"상품명":"샘플-과수살균 C","제형":"액상수화제","대상":"흰가루병","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅱ","회사":"예시화학"}]},{"성분명":"스피네토람","용도":"살충제","작용기작":"5","상품":[{"상품명":"샘플-사과살충 4호","제형":"입상수화제","대상":"복숭아심식나방","희석배수":"4,000배","잔류기간":7,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-사과살충 4호","제형":"입상수화제","대상":"사과굴나방","희석배수":"4,000배","잔류기간":7,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"석회유황합제","용도":"살균제","작용기작":"-","상품":[{"상품명":"샘플-유황합제","제형":"액제","대상":"월동병해충","희석배수":"7배","잔류기간":0,"사용횟수":1,"사용적기":"발아전 휴면기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]}]},"pear":{"meta":{"작물":"배","기준일":"2026-07-30","출처":"농촌진흥청 농약안전정보시스템(PSIS) 농약등록정보 검색서비스","샘플":true,"필터":"용도 살균·살충 / 인축독성 Ⅲ·Ⅳ급 / 등록취소 제외"},"성분":[{"성분명":"테부코나졸","용도":"살균제","작용기작":"다1","상품":[{"상품명":"샘플-배살균 1호","제형":"유탁제","대상":"붉은별무늬병","희석배수":"2,000배","잔류기간":21,"사용횟수":3,"사용적기":"개화전~낙화후","인축독성":"Ⅲ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-배살균 1호","제형":"유탁제","대상":"검은별무늬병","희석배수":"2,000배","잔류기간":21,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅲ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"이미다클로프리드","용도":"살충제","작용기작":"4a","상품":[{"상품명":"샘플-배살충 2호","제형":"수화제","대상":"꼬마배나무이","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-배살충 2호","제형":"수화제","대상":"진딧물","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"피리메타닐","용도":"살균제","작용기작":"다1","상품":[{"상품명":"샘플-과수살균 D","제형":"액상수화제","대상":"검은별무늬병","희석배수":"1,000배","잔류기간":30,"사용횟수":4,"사용적기":"낙화후 10일","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"클로티아니딘","용도":"살충제","작용기작":"4a","상품":[{"상품명":"샘플-배살충 3호","제형":"입상수화제","대상":"가루깍지벌레","희석배수":"2,000배","잔류기간":21,"사용횟수":2,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"보스칼리드","용도":"살균제","작용기작":"다7","상품":[{"상품명":"샘플-과수살균 E","제형":"입상수화제","대상":"겹무늬병","희석배수":"1,500배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기부터 10일 간격","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"석회보르도액","용도":"살균제","작용기작":"-","상품":[{"상품명":"샘플-보르도액","제형":"분말","대상":"검은별무늬병","희석배수":"6-6식","잔류기간":0,"사용횟수":2,"사용적기":"발아전, 낙엽후","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]}]},"peach":{"meta":{"작물":"복숭아","기준일":"2026-07-30","출처":"농촌진흥청 농약안전정보시스템(PSIS) 농약등록정보 검색서비스","샘플":true,"필터":"용도 살균·살충 / 인축독성 Ⅲ·Ⅳ급 / 등록취소 제외"},"성분":[{"성분명":"페나리몰","용도":"살균제","작용기작":"다3","상품":[{"상품명":"샘플-복숭아살균 1호","제형":"유제","대상":"잿빛무늬병","희석배수":"3,000배","잔류기간":14,"사용횟수":3,"사용적기":"개화전~낙화후","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"스피노사드","용도":"살충제","작용기작":"5","상품":[{"상품명":"샘플-복숭아살충 2호","제형":"액상수화제","대상":"복숭아순나방","희석배수":"2,000배","잔류기간":7,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-복숭아살충 2호","제형":"액상수화제","대상":"순나방","희석배수":"2,000배","잔류기간":7,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"이프로디온","용도":"살균제","작용기작":"다2","상품":[{"상품명":"샘플-과수살균 F","제형":"수화제","대상":"잿빛무늬병","희석배수":"1,000배","잔류기간":21,"사용횟수":3,"사용적기":"수확 21일 전까지","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"아바멕틴","용도":"살충제","작용기작":"6","상품":[{"상품명":"샘플-복숭아살충 3호","제형":"유제","대상":"점박이응애","희석배수":"3,000배","잔류기간":7,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅲ","어독성":"Ⅱ","회사":"예시화학"}]},{"성분명":"트리플루미졸","용도":"살균제","작용기작":"다1","상품":[{"상품명":"샘플-과수살균 G","제형":"수화제","대상":"흰가루병","희석배수":"2,000배","잔류기간":30,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]}]},"plum":{"meta":{"작물":"자두","기준일":"2026-07-30","출처":"농촌진흥청 농약안전정보시스템(PSIS) 농약등록정보 검색서비스","샘플":true,"필터":"용도 살균·살충 / 인축독성 Ⅲ·Ⅳ급 / 등록취소 제외"},"성분":[{"성분명":"디페노코나졸","용도":"살균제","작용기작":"다1","상품":[{"상품명":"샘플-자두살균 1호","제형":"유탁제","대상":"주머니병","희석배수":"2,000배","잔류기간":21,"사용횟수":3,"사용적기":"개화직전","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-자두살균 1호","제형":"유탁제","대상":"검은점무늬병","희석배수":"2,000배","잔류기간":21,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"에토펜프록스","용도":"살충제","작용기작":"3a","상품":[{"상품명":"샘플-자두살충 2호","제형":"유제","대상":"복숭아순나방","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅱ","회사":"예시화학"}]},{"성분명":"크레속심메틸","용도":"살균제","작용기작":"다3","상품":[{"상품명":"샘플-과수살균 H","제형":"입상수화제","대상":"검은점무늬병","희석배수":"3,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기부터 10일 간격","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"비펜트린","용도":"살충제","작용기작":"3a","상품":[{"상품명":"샘플-자두살충 3호","제형":"수화제","대상":"깍지벌레","희석배수":"1,000배","잔류기간":21,"사용횟수":2,"사용적기":"발생초기","인축독성":"Ⅲ","어독성":"Ⅰ","회사":"예시화학"}]}]},"persimmon":{"meta":{"작물":"단감","기준일":"2026-07-30","출처":"농촌진흥청 농약안전정보시스템(PSIS) 농약등록정보 검색서비스","샘플":true,"필터":"용도 살균·살충 / 인축독성 Ⅲ·Ⅳ급 / 등록취소 제외"},"성분":[{"성분명":"메트코나졸","용도":"살균제","작용기작":"다1","상품":[{"상품명":"샘플-단감살균 1호","제형":"액상수화제","대상":"둥근무늬낙엽병","희석배수":"3,000배","잔류기간":30,"사용횟수":3,"사용적기":"6월 하순~7월 상순","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"클로르페나피르","용도":"살충제","작용기작":"13","상품":[{"상품명":"샘플-단감살충 2호","제형":"유탁제","대상":"감꼭지나방","희석배수":"2,000배","잔류기간":21,"사용횟수":2,"사용적기":"발생초기","인축독성":"Ⅲ","어독성":"Ⅱ","회사":"예시화학"}]},{"성분명":"만디프로파미드","용도":"살균제","작용기작":"다40","상품":[{"상품명":"샘플-과수살균 I","제형":"액상수화제","대상":"탄저병","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"설폭사플로르","용도":"살충제","작용기작":"4c","상품":[{"상품명":"샘플-단감살충 3호","제형":"입상수화제","대상":"가루깍지벌레","희석배수":"2,000배","잔류기간":14,"사용횟수":2,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"석회유황합제","용도":"살균제","작용기작":"-","상품":[{"상품명":"샘플-유황합제","제형":"액제","대상":"월동병해충","희석배수":"7배","잔류기간":0,"사용횟수":1,"사용적기":"발아전 휴면기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]}]}};
 
@@ -398,9 +410,10 @@ const SHEET_URL = "https://docs.google.com/spreadsheets/d/1WLYDQn0Tni_Kabk4euk0V
    탭을 나눌 필요도, 수식을 넣을 필요도 없습니다.
    앱이 구글에 ‘5개 작물의 살균·살충 약제만 달라’고 요청해서 받아 옵니다. */
 
-/* 구글에 보내는 요청문 — 엑셀 열 위치 그대로 (A 등록번호 … U 회사명) */
+/* 구글에 보내는 요청문 — 엑셀 열 위치 그대로 (A 등록번호 … U 회사명)
+   생조(생장조정제)도 함께 받습니다. 목록에서는 빼되 ‘제외된 성분’ 안내에 이름을 적기 위해서입니다. */
 const TQ = "select C,D,E,H,F,G,T,U,K,I,J,M,N,P,R,S"
-  + " where C matches '사과|배|복숭아|자두|단감|감' and K matches '살균|살충|균충'"
+  + " where C matches '사과|배|복숭아|자두|단감|감' and K matches '살균|살충|균충|생조'"
   + " label C '작물명', D '적용병해충', E '품목명', H '상표명', F '일반명', G '주성분함량',"
   + " T '제형', U '회사명', K '용도', I '인축독성', J '어독성', M '작용기작',"
   + " N '희석배수', P '사용적기', R '안전사용시기', S '안전사용횟수'";
@@ -441,6 +454,27 @@ function parseCSV(t){
 }
 
 const roman=v=>{const m=String(v||"").match(/[ⅠⅡⅢⅣ]/); return m?m[0]:""};
+/* 어독성은 Ⅰ·Ⅱs·Ⅱ·Ⅲ 네 단계입니다.
+   Ⅱs급 — 잉어 기준으로는 Ⅲ급이나 미꾸리에 대한 반수치사농도가 0.1㎎/ℓ 이하인 것.
+   미꾸리를 보호해야 하는 국내 환경을 고려해 Ⅰ급 다음에 끼워 넣은 등급입니다.
+   원자료가 ‘Ⅱs급’으로 오든 ‘Ⅱ s’로 오든 s를 살려 읽습니다. */
+const fishGrade=v=>{
+  const t=String(v||"").replace(/\s/g,"");
+  const m=t.match(/([ⅠⅡⅢⅣ]|IV|III|II|I)\s*(s|S|에스)?/);
+  if(!m) return "";
+  const base={"IV":"Ⅳ","III":"Ⅲ","II":"Ⅱ","I":"Ⅰ"}[m[1]]||m[1];
+  return base+(m[2]?"s":"");
+};
+const FISHORDER=["Ⅰ","Ⅱs","Ⅱ","Ⅲ","Ⅳ"];
+const TOXORDER=["Ⅰ","Ⅱ","Ⅲ","Ⅳ"];
+/* 같은 제품인데 등급이 엇갈리게 기록된 경우 더 독한 쪽을 씁니다.
+   덜 독한 값을 보여주는 잘못은 생태계와 사람에게 되돌릴 수 없으므로 안전한 쪽으로 기웁니다. */
+function worst(a,b,order){
+  if(!a) return b||""; if(!b) return a;
+  const ia=order.indexOf(a), ib=order.indexOf(b);
+  if(ia<0) return b; if(ib<0) return a;
+  return ia<=ib?a:b;
+}
 const digits=v=>{const m=String(v||"").match(/\d+/); return m?+m[0]:0};
 function useNorm(v){
   const t=String(v||"").replace(/[\s·\/]/g,"");
@@ -452,6 +486,31 @@ function useNorm(v){
   return t||"기타";
 }
 const CROPMAP={사과:"apple", 배:"pear", 복숭아:"peach", 자두:"plum", 단감:"persimmon", 감:"persimmon"};
+
+/* 항생물질계 성분 — 가농 생산규정 「항생제 사용금지」에 따라 목록에서 제외합니다.
+   근거: 농촌진흥청 농약안전정보시스템 작용기작 분류
+     라3 헥소피라노실계 항생물질 … 가스가마이신
+     라4 글루코피라노실계 항생물질 … 스트렙토마이신
+     라5 테트라사이클린계 항생물질 … 옥시테트라사이클린
+   여기에 퀴놀론계 옥솔린산(가4), 미생물 유래 항생물질인 폴리옥신(아4)·발리다마이신을 더함.
+   혼합제도 성분 이름에 아래 낱말이 들어 있으면 함께 제외됩니다.
+   ※ 아바멕틴·에마멕틴은 미생물 유래이나 현재 화학 합성으로 생산되어 항생물질로 보지 않음(살충제). */
+const ANTIBIO=[
+  ["가스가마이신","Kasugamycin"],["스트렙토마이신","Streptomycin"],
+  ["옥시테트라사이클린","Oxytetracycline"],["옥솔린산","Oxolinic acid"],
+  ["폴리옥신","Polyoxin"],["발리다마이신","Validamycin"],
+];
+/* 작용기작이 ‘항생물질’로 정의된 분류 — 새 성분이 등록돼도 자동으로 걸립니다.
+     라3 헥소피라노실계 항생물질 · 라4 글루코피라노실계 항생물질 · 라5 테트라사이클린계 항생물질 */
+const ANTIMOA=/(^|\+)\s*(라3|라4|라5)(\b|\+|$)/;
+/* 아래는 ‘표적(작용점)’ 기준 분류라 항생물질만 있다는 보장이 없습니다.
+   현재 등록된 것은 전부 옥솔린산·폴리옥신 계열이라 이름으로 이미 걸러지지만,
+   이름에 안 걸리는 새 성분이 들어오면 자동 제외하지 않고 ‘확인 필요’로 알립니다.
+     가4 DNA 토포이소메라제(type Ⅱ) 저해 · 아4 키틴 생합성 저해 */
+const MOAWATCH=/(^|\+)\s*(가4|아4)(\b|\+|$)/;
+/* 이름이 항생물질처럼 보이는 것 — 제외하지 않고 알리기만 합니다 */
+const ANTILOOK=/mycin|cycline|micin/i;
+const antiHit=n=>ANTIBIO.filter(a=>String(n||"").includes(a[0]));
 
 /* 걸러 받은 결과의 열 차례 (TQ 의 select 순서와 같음) */
 const ORDER=["작물명","적용병해충","품목명","상표명","일반명","주성분함량","제형","회사명",
@@ -481,31 +540,59 @@ function buildAll(rows){
   if(C.작물<0||C.품목<0) throw new Error("필요한 열을 찾지 못했습니다");
   const g=(r,k)=>C[k]>=0?String(r[C[k]]||"").trim():"";
 
-  const docs={}, seen={};
+  const docs={}, seen={}, excl={};
+  const note=(slug,kind,name)=>{
+    const e=excl[slug]||(excl[slug]={항생제:new Map(),호르몬제:new Map(),확인필요:new Map()});
+    e[kind].set(name,(e[kind].get(name)||0)+1);
+  };
   for(let i=hi+1;i<rows.length;i++){
     const r=rows[i]; if(!r||r.length<3) continue;
     const crop=g(r,"작물"), slug=CROPMAP[crop]; if(!slug) continue;
     const use=useNorm(g(r,"용도"));
-    if(!["살균제","살충제","살균·살충제"].includes(use)) continue;
     const 품목=g(r,"품목"), 제형=g(r,"제형");
     if(!품목) continue;
     const 성분=제형&&품목.endsWith(제형)?품목.slice(0,-제형.length).trim():품목;
+    if(use==="생장조정제"){ note(slug,"호르몬제",성분); continue }
+    if(!["살균제","살충제","살균·살충제"].includes(use)) continue;
+    const hits=antiHit(성분);
+    if(hits.length){ hits.forEach(a=>note(slug,"항생제",a[0])); continue }
+    if(ANTIMOA.test(g(r,"기작"))){ note(slug,"항생제",성분); continue }
+    if(MOAWATCH.test(g(r,"기작"))||ANTILOOK.test(g(r,"일반"))) note(slug,"확인필요",성분);
     const item={상품명:g(r,"상표")||품목, 제형, 함량:g(r,"함량"), 일반명:g(r,"일반"),
       회사:g(r,"회사"), 대상:g(r,"대상"), 희석배수:g(r,"희석"),
-      잔류기간:digits(g(r,"시기")), 사용횟수:digits(g(r,"횟수")),
-      사용적기:g(r,"적기"), 인축독성:roman(g(r,"인축")), 어독성:roman(g(r,"어독"))};
+      잔류기간:digits(g(r,"시기")), 잔류원문:g(r,"시기"),
+      사용횟수:digits(g(r,"횟수")), 횟수원문:g(r,"횟수"),
+      사용적기:g(r,"적기"), 인축독성:roman(g(r,"인축")), 어독성:fishGrade(g(r,"어독"))};
     const d=docs[slug]||(docs[slug]={meta:{작물:crop==="감"?"단감":crop, 기준일:asof,
       출처:"농촌진흥청 농약안전정보시스템 농약제품목록", 샘플:false,
-      필터:"용도 살균·살충만 / 가농인증 품목 5종"}, 성분:[]});
+      필터:"용도 살균·살충만 / 항생제·호르몬제 제외 / 가농인증 품목 5종"}, 성분:[]});
     const key=slug+"|"+성분;
     let grp=seen[key];
-    if(!grp){ grp=seen[key]={성분명:성분, 용도:use, 작용기작:g(r,"기작")||"-", 상품:[], _k:new Set()};
+    if(!grp){ grp=seen[key]={성분명:성분, 용도:use, 작용기작:g(r,"기작")||"-", 상품:[], _k:new Map()};
       d.성분.push(grp) }
-    const sig=[item.상품명,item.대상,item.희석배수,item.잔류기간,item.사용횟수].join("|");
-    if(!grp._k.has(sig)){ grp._k.add(sig); grp.상품.push(item) }
+    /* 같은 제품인지 가르는 기준 — 제형과 함량이 다르면 다른 제품입니다.
+       판매회사만 다른 것은 같은 제품이므로 회사 이름만 합칩니다. */
+    const sig=[item.상품명,item.제형,item.함량,item.대상,item.희석배수,item.잔류기간,item.사용횟수].join("|");
+    const prev=grp._k.get(sig);
+    if(!prev){ item.회사목록=item.회사?[item.회사]:[]; grp._k.set(sig,item); grp.상품.push(item) }
+    else {
+      if(item.회사&&!prev.회사목록.includes(item.회사)) prev.회사목록.push(item.회사);
+      const h=worst(prev.인축독성,item.인축독성,TOXORDER), f=worst(prev.어독성,item.어독성,FISHORDER);
+      if(h!==prev.인축독성||f!==prev.어독성) prev.등급엇갈림=true;
+      prev.인축독성=h; prev.어독성=f;
+      if(!prev.사용적기) prev.사용적기=item.사용적기;
+    }
   }
-  Object.values(docs).forEach(d=>{ d.성분.forEach(x=>delete x._k);
+  Object.values(docs).forEach(d=>{ d.성분.forEach(x=>{ delete x._k;
+    x.상품.forEach(p=>{ if(p.회사목록&&p.회사목록.length>1) p.회사=p.회사목록[0]+` 외 ${p.회사목록.length-1}사`;
+      delete p.회사목록; }); });
     d.성분.sort((a,b)=>a.성분명.localeCompare(b.성분명,"ko")) });
+  Object.keys(docs).forEach(k=>{
+    const e=excl[k]||{항생제:new Map(),호르몬제:new Map(),확인필요:new Map()};
+    docs[k].제외={항생제:[...e.항생제].sort((a,b)=>b[1]-a[1]),
+                  호르몬제:[...e.호르몬제].sort((a,b)=>b[1]-a[1]),
+                  확인필요:[...e.확인필요].sort((a,b)=>b[1]-a[1])};
+  });
   return docs;
 }
 const countAll=d=>Object.values(d).reduce((a,x)=>a+x.성분.reduce((y,g)=>y+g.상품.length,0),0);
@@ -513,7 +600,7 @@ const countAll=d=>Object.values(d).reduce((a,x)=>a+x.성분.reduce((y,g)=>y+g.�
 function useSample(msg){
   Object.keys(SAMPLE).forEach(k=>S.data[k]=SAMPLE[k]);
   $("#sampleBanner").hidden=false;
-  $("#sampleBanner").querySelector(".wrap").textContent=
+  $("#sampleBanner").firstElementChild.textContent=
     msg||"샘플 데이터로 화면을 보고 있습니다. 실제 농약 등록정보가 아니므로 방제에 사용하지 마십시오.";
   $("#asof").textContent="샘플";
 }
@@ -561,7 +648,7 @@ function ensureData(){
       if(cachedN && n < cachedN*0.5){        // 안전장치 — 갑자기 반 이하로 줄면 새 자료를 버림
         showStat("새 자료가 이상해 저장해 둔 자료를 씁니다");
         $("#sampleBanner").hidden=false;
-        $("#sampleBanner").querySelector(".wrap").textContent=
+        $("#sampleBanner").firstElementChild.textContent=
           `새로 받은 자료가 ${n}건뿐이어서(이전 ${cachedN}건) 쓰지 않았습니다. 시트를 확인해 주십시오.`;
         return;
       }
@@ -586,7 +673,8 @@ function rowsOf(doc){
   (doc.성분||[]).forEach(ing=>(ing.상품||[]).forEach(p=>out.push({
     성분명:ing.성분명, 용도:ing.용도, 작용기작:ing.작용기작,
     상품명:p.상품명, 제형:p.제형, 함량:p.함량, 회사:p.회사, 대상:p.대상, 희석배수:p.희석배수,
-    잔류기간:Number(p.잔류기간)||0, 사용횟수:p.사용횟수, 사용적기:p.사용적기,
+    잔류기간:Number(p.잔류기간)||0, 잔류원문:p.잔류원문||"", 사용횟수:p.사용횟수, 횟수원문:p.횟수원문||"",
+    사용적기:p.사용적기,
     인축독성:p.인축독성, 어독성:p.어독성
   })));
   return out;
@@ -609,7 +697,7 @@ async function pickCrop(slug){
   await ensureData();
   if(!S.data[slug]) S.data[slug]={meta:{작물:CROPS.find(c=>c[0]===slug)[1]},성분:[]};
   const sel=$("#hdrItem"); if(sel){sel.value=CROPS.find(c=>c[0]===slug)[1]; saveHdr(true);}
-  drawFilters(); drawResults();
+  drawFilters(); drawExcl(); drawResults();
 }
 
 /* ─── 필터 ─── */
@@ -623,6 +711,31 @@ function chk(id,label,on,dis,extra){
     <input type="checkbox" ${on?"checked":""} ${dis?"disabled":""} data-fk="${id}">
     <span>${esc(label)}</span>${extra||""}</label>`;
 }
+function drawExcl(){
+  const box=$("#exclBox"), d=S.data[S.crop];
+  if(!d||!d.제외){ box.hidden=true; return }
+  const eng={}; ANTIBIO.forEach(a=>eng[a[0]]=` (${a[1]})`);
+  const line=(arr,withEng)=>arr.length
+    ? arr.map(([n,c])=>`${esc(n)}<em>${withEng&&eng[n]?eng[n]:""} ${c}건</em>`).join(" · ")
+    : "해당 없음";
+  box.hidden=false;
+  const chk=d.제외.확인필요||[];
+  box.innerHTML=`<h4>이 작물에서 제외된 성분 — 가농인증 생산규정 「제초제·항생제·호르몬제 사용금지」</h4>
+    <dl>
+      <dt>항생제</dt><dd>${line(d.제외.항생제,true)}</dd>
+      <dt>호르몬제</dt><dd>${line(d.제외.호르몬제,false)}</dd>
+      ${chk.length?`<dt style="color:var(--stop)">확인 필요</dt><dd>${line(chk,false)}
+        <em>— 항생물질일 수 있으나 판정 기준에 걸리지 않아 목록에 남겼습니다. 과수위원회 확인이 필요합니다.</em></dd>`:""}
+    </dl>
+    <p class="why2">항생제 판정 기준 — ① 성분 이름(가스가마이신 · 스트렙토마이신 · 옥시테트라사이클린 · 옥솔린산 · 폴리옥신 · 발리다마이신)과 그 혼합제,
+    ② 농촌진흥청 작용기작 분류에서 ‘항생물질’로 정의된 라3 헥소피라노실계 · 라4 글루코피라노실계 · 라5 테트라사이클린계.
+    새 성분이 등록돼도 이 기준으로 자동 반영됩니다.
+    작용점 기준 분류인 가4(DNA 토포이소메라제 저해) · 아4(키틴 생합성 저해)는 항생물질만 들어간다는 보장이 없어,
+    이름에 걸리지 않는 성분은 자동으로 빼지 않고 ‘확인 필요’로 알립니다.
+    호르몬제는 원자료의 용도가 ‘생조’인 것 전부이며 새로 등록되면 그대로 반영됩니다.
+    제초제는 성분 수가 많아 따로 적지 않았습니다.</p>`;
+}
+
 function drawFilters(){
   $("#fUse").innerHTML=USES.map(([n,live])=>chk("use|"+n,n,S.f.use.has(n),!live,
     live?"":`<span class="why">가농 금지</span>`)).join("");
@@ -641,9 +754,13 @@ function drawFilters(){
   $("#toxNote").innerHTML=noTox
     ? "현재 자료에 독성 등급이 들어 있지 않습니다. 방제력에서 직접 적어 주십시오."
     : `독성정보가 없는 약제가 <b>${gapN}개</b> 있습니다. 등급을 고르면 그 약제는 목록에서 빠집니다.`;
-  $("#fFish").innerHTML=FISH.map(g=>chk("fish|"+g,g+"급",S.f.fish.has(g),noFish,
+  const fgs=[...new Set(rowsAll.map(r=>r.어독성).filter(Boolean))]
+    .sort((a,b)=>(FISHORDER.indexOf(a)+99)%99-(FISHORDER.indexOf(b)+99)%99);
+  [...S.f.fish].forEach(v=>{ if(!fgs.includes(v)) S.f.fish.delete(v) });
+  $("#fFish").innerHTML=(fgs.length?fgs:["Ⅰ","Ⅱ","Ⅲ"]).map(g=>chk("fish|"+g,g+"급",S.f.fish.has(g),noFish,
     g==="Ⅲ"?`<span class="rec">권장</span>`:"")).join("");
   $("#fishNote").hidden=!noFish;
+  $("#fishS").hidden=!fgs.includes("Ⅱs");
   const times=countBy("사용적기");
   $("#fTime").innerHTML=times.map(([n,c])=>chk("time|"+n,n,S.f.time.has(n),false,
     `<span class="cnt num">${c}</span>`)).join("")||`<p class="hint">해당 없음</p>`;
@@ -658,6 +775,18 @@ function drawFilters(){
 }
 
 /* ─── 결과 ─── */
+/* 안전사용시기가 ‘월동기’·‘개화전’처럼 날짜가 아닌 방식으로 정해진 것이 있습니다.
+   이런 것을 ‘제한 없음’으로 보여주면 아무 때나 써도 되는 것으로 잘못 읽힙니다.
+   원문을 그대로 보여주고, ×2 계산은 하지 않습니다. */
+const hasDays=r=>Number(r.잔류기간)>0;
+const phiText=r=>hasDays(r)?`수확 ${r.잔류기간*2}일 전`
+  :(r.잔류원문&&r.잔류원문!=="-"?esc(r.잔류원문):"기준 표기 없음");
+const phiFull=r=>hasDays(r)
+  ?`수확 <b>${r.잔류기간*2}</b>일 전 <span style="color:var(--ink2)">(라벨 ${r.잔류기간}일)</span>`
+  :(r.잔류원문&&r.잔류원문!=="-"?`<b>${esc(r.잔류원문)}</b> <span style="color:var(--ink2)">(일수 기준 아님)</span>`
+    :`<span style="color:var(--stop)">기준 표기 없음</span>`);
+const cntText=r=>{const n=Number(r.사용횟수)||0;
+  return n?`${n}회`:(r.횟수원문&&r.횟수원문!=="-"?esc(r.횟수원문):"—")};
 function planMoaMap(){
   const m=new Map();
   S.plan.ents.forEach(e=>{const k=(e.작용기작||"").trim(); if(k&&k!=="-") m.set(k,(m.get(k)||0)+1)});
@@ -677,8 +806,11 @@ function drawResults(){
   const all=[...ings], show=all.slice(0,S.limit);
   box.innerHTML=show.map(([nm,rs])=>{
     const r0=rs[0], tgt=[...new Set(rs.map(r=>r.대상))];
-    const ds=[...new Set(rs.map(r=>r.잔류기간))].sort((a,b)=>a-b);
-    const seal=ds.length>1?`${ds[0]*2}~${ds[ds.length-1]*2}`:String(ds[0]*2);
+    const dnum=[...new Set(rs.filter(hasDays).map(r=>r.잔류기간))].sort((a,b)=>a-b);
+    const nodays=rs.some(r=>!hasDays(r));
+    const seal=dnum.length
+      ? `수확 <b class="num">${dnum.length>1?`${dnum[0]*2}~${dnum[dnum.length-1]*2}`:dnum[0]*2}</b>일 전${nodays?" 외":""}`
+      : `일수 기준 아님`;
     const hs=[...new Set(rs.map(r=>r.인축독성).filter(Boolean))].sort();
     const fs2=[...new Set(rs.map(r=>r.어독성).filter(Boolean))].sort();
     const gap=rs.filter(r=>!r.인축독성&&!r.어독성).length;
@@ -697,16 +829,16 @@ function drawResults(){
           ${inPlan.has(nm)?`<span class="pill k">담김</span>`:""}
         </span>
         <span class="rtgt">${esc(tgt.slice(0,4).join(", "))}${tgt.length>4?` 외 ${tgt.length-4}종`:""} · 약제 ${rs.length}개</span>
-        <span class="seal">수확 <b class="num">${seal}</b>일 전</span>
+        <span class="seal">${seal}</span>
         <span class="caret">${open?"▴":"▾"}</span>
       </button>
       ${open?`<div class="plist">`+rs.map((r,i)=>`
         <div class="prow2">
           <div class="p1"><b>${esc(r.상품명)}</b><span>${[r.제형,r.함량,r.회사].filter(Boolean).map(esc).join(" · ")}</span></div>
           <div class="p2">${esc(r.대상)}</div>
-          <div class="p3">${esc(r.희석배수)}<i>·</i>${esc(r.사용횟수)}회</div>
+          <div class="p3">${esc(r.희석배수)}<i>·</i>${cntText(r)}</div>
           <div class="p4">${esc(r.사용적기)}</div>
-          <div class="p5">${r.잔류기간?`수확 <b>${r.잔류기간*2}</b>일 전 <span style="color:var(--ink2)">(라벨 ${r.잔류기간}일)</span>`:"제한 없음"}</div>
+          <div class="p5">${phiFull(r)}</div>
           <button type="button" class="addbtn" data-add="${esc(nm)}::${i}">담기</button>
         </div>`).join("")+`</div>`:""}
     </div>`}).join("")
@@ -722,8 +854,8 @@ function quickAdd(nm,i){
     구분:r.용도==="살충제"?"해충":r.용도==="살균제"?"병해":"병해·해충",
     대상:r.대상, 약제명:r.상품명, 성분명:r.성분명,
     작용기작:(r.작용기작&&r.작용기작!=="-")?r.작용기작:"",
-    희석배수:r.희석배수, 사용횟수:String(r.사용횟수??""),
-    인축독성:r.인축독성, 어독성:r.어독성, 잔류기간:String(r.잔류기간),
+    희석배수:r.희석배수, 사용횟수:String(r.사용횟수??""), 횟수원문:r.횟수원문||"",
+    인축독성:r.인축독성, 어독성:r.어독성, 잔류기간:String(r.잔류기간), 잔류원문:r.잔류원문||"",
     자재:"등록", 직접:false});
   savePlan(); drawPlan(); badge(); drawResults();
   toast(`${r.상품명} — 담았습니다. 오른쪽에서 시기를 적어 주십시오.`,
@@ -810,7 +942,7 @@ function drawPlan(){
         ${moa?`<span class="moa ${dup?"dup":""}">기작 ${esc(moa)}</span>`:""}
         ${matPillMini(e)}
         <b class="pnm2">${esc(e.약제명||"(약제명을 적으십시오)")}</b>
-        <span class="seal">${noReg(e)?"기간 해당 없음":`수확 <b class="num">${d*2}</b>일 전`}</span>
+        <span class="seal">${noReg(e)?"기간 해당 없음":phiText(e)}</span>
         <button type="button" class="xdel" data-del="${e.id}" aria-label="지우기">✕</button>
       </div>
       ${dup?`<p class="dupwarn">같은 작용기작(${esc(moa)}) 약제가 ${pm.get(moa)}개 담겨 있습니다. 저항성이 생기지 않게 다른 작용기작과 섞어 쓰십시오.</p>`:""}
@@ -824,7 +956,9 @@ function drawPlan(){
         <div class="pgrid">
           ${fld("약제명","약제명")}${fld("성분명","성분명")}
           ${fld("희석배수","희석배수")}${fld("사용횟수","사용횟수")}
-          ${ro?`<div class="rof"><span>잔류기간</span><b>라벨 ${d}일 → 가농 ${d*2}일</b></div>`:fld("잔류기간(수확 며칠 전)","잔류기간")}
+          ${ro?`<div class="rof"><span>잔류기간</span><b>${d?`라벨 ${d}일 → 가농 ${d*2}일`
+              :(e.잔류원문&&e.잔류원문!=="-"?esc(e.잔류원문)+" (일수 기준 아님)":"기준 표기 없음")}</b></div>`
+            :fld("잔류기간(수확 며칠 전)","잔류기간")}
           ${ro?`<div class="rof"><span>독성</span><b>${(e.인축독성||e.어독성)?`인축 ${esc(e.인축독성||"-")}급 · 어독 ${esc(e.어독성||"-")}급`:"확인 필요"}</b></div>`
              :fld("인축독성","인축독성")}
           ${ro?`<div class="rof"><span>작용기작</span><b>${esc(e.작용기작||"-")}</b></div>`:fld("어독성","어독성")}
@@ -861,7 +995,8 @@ function buildDoc(){
     const nr=noReg(e);
     const mark=nr?`<span class="kv">${matName(e.자재)}</span>`:(e.자재?"":`<span class="kv">자재 구분 미기재</span>`);
     const d=Number(e.잔류기간)||0;
-    const dur=nr?"해당 없음":`${d}일 → <b>가농 ${d*2}일</b>`;
+    const dur=nr?"해당 없음":(d?`${d}일 → <b>가농 ${d*2}일</b>`
+      :(e.잔류원문&&e.잔류원문!=="-"?esc(e.잔류원문):"기준 표기 없음"));
     return `<td>${esc(e.대상)}</td><td>${esc(e.약제명)}${mark}</td><td>${esc(e.희석배수)}</td><td>${esc(e.사용횟수)}</td>
       <td>${esc(e.인축독성)}</td><td>${esc(e.어독성)}</td><td>${dur}</td>`};
   const body=groups.length?groups.map(g=>{
@@ -896,7 +1031,7 @@ function buildDoc(){
   <p class="src">잔류기간은 ‘라벨 기준 → 가농 기준(2배)’으로 적었습니다.<br>
   ‘자가제조’ 또는 ‘기타’로 적힌 것은 농약으로 등록된 제품이 아니어서 안전사용기준과 잔류기간이 적용되지 않습니다.<br>
   자료 기준일 ${esc(src.기준일||"")} · 출처 ${esc(src.출처||"농촌진흥청 농약안전정보시스템")}${src.샘플?" · 샘플 데이터(실제 등록정보 아님)":""}<br>
-  이 방제력은 참고 자료이며 최종 확인은 교구 과수위원회·생명농업실천위원회가 합니다. 발암성 여부는 농약 등록정보에 없어 자동으로 걸러지지 않습니다.</p>
+  이 방제력은 참고 자료이며 최종 확인은 교구 과수위원회·생명농업실천위원회가 합니다.</p>
   </div>`;
 }
 function renderDoc(){$("#printHost").innerHTML=buildDoc()}
@@ -956,7 +1091,9 @@ async function exportList(){
   const head=["작물명","용도","성분명","약제명(품목명)","제형","회사","적용 병해충","희석배수","사용 적기",
     "안전사용기준(수확 전 일수)","안전사용기준(사용횟수)","가농 기준(잔류기간 2배, 일)","인축독성","어독성","작용기작"];
   const aoa=[head,...rows.map(r=>[crop,r.용도,r.성분명,r.상품명,r.제형,r.회사,r.대상,r.희석배수,r.사용적기,
-    r.잔류기간,r.사용횟수,r.잔류기간*2,r.인축독성||"확인 필요",r.어독성||"확인 필요",r.작용기작])];
+    r.잔류기간||r.잔류원문||"",r.사용횟수||r.횟수원문||"",
+    r.잔류기간?r.잔류기간*2:(r.잔류원문||"일수 기준 아님"),
+    r.인축독성||"확인 필요",r.어독성||"확인 필요",r.작용기작])];
   const info=[["항목","내용"],
     ["자료 기준일",m.기준일||""],["출처",m.출처||""],["수집 기준",m.필터||""],
     ["데이터 종류",m.샘플?"샘플 — 실제 등록정보 아님":"실제 등록정보"],
@@ -964,7 +1101,7 @@ async function exportList(){
     ["적용 병해충",[...S.f.pest].join(", ")||"전체"],["인축독성",[...S.f.tox].join(", ")||"전체(Ⅲ·Ⅳ급)"],
     ["어독성",[...S.f.fish].join(", ")||"전체"],["사용 적기",[...S.f.time].join(", ")||"전체"],
     ["이름 검색",S.q||"-"],["내려받은 건수",rows.length],["내려받은 때",new Date().toLocaleString("ko-KR")],
-    ["안내","가농 기준은 라벨의 안전사용기준(수확 전 일수)을 2배 한 값입니다. 발암성 여부는 원 데이터에 없어 걸러지지 않았습니다."]];
+    ["안내","가농 기준은 라벨의 안전사용기준(수확 전 일수)을 2배 한 값입니다."]];
   const name=`가농허용농약_${crop}_${stamp()}.xlsx`;
   if(!window.XLSX) toast("엑셀 파일을 만드는 중입니다. 잠시만 기다리십시오.");
   try{
@@ -1006,7 +1143,7 @@ async function exportPlan(){
     const nr=noReg(e), d=Number(e.잔류기간)||0;
     const nm=(e.약제명||"")+(nr?` (${matName(e.자재)})`:(e.자재?"":" (자재 구분 미기재)"));
     return [e.대상||"",nm,e.희석배수||"",e.사용횟수||"",e.인축독성||"",e.어독성||"",
-            nr?"해당 없음":`${d}일 → 가농 ${d*2}일`]};
+            nr?"해당 없음":(d?`${d}일 → 가농 ${d*2}일`:(e.잔류원문||"기준 표기 없음"))]};
   let r=7;
   groups.forEach(g=>{ const n=Math.max(g.병해.length,g.해충.length,1);
     for(let i=0;i<n;i++) A.push([i?"":g.when,...c7(g.병해[i]),...c7(g.해충[i])]);
@@ -1023,7 +1160,7 @@ async function exportPlan(){
     ...S.plan.ents.map(e=>{const nr=noReg(e), d=Number(e.잔류기간)||0;
       return [e.시기||"",e.구분,e.자재?matName(e.자재):"미기재",e.대상||"",e.약제명||"",
         e.성분명||"",e.작용기작||"",e.희석배수||"",e.사용횟수||"",e.인축독성||"",e.어독성||"",
-        nr?"":d, nr?"":d*2]})];
+        nr?"":(d||e.잔류원문||""), nr?"":(d?d*2:(e.잔류원문?"일수 기준 아님":""))]})];
   const name="2026_방제력_"+[h.교구,h.분회,h.생산자명,h.인증품목].filter(Boolean).join("_")+".xlsx";
   if(!window.XLSX) toast("엑셀 파일을 만드는 중입니다. 잠시만 기다리십시오.");
   try{
@@ -1082,7 +1219,8 @@ $("#entries").addEventListener("input",e=>{
   const ent=e.target.closest(".ent"), f=e.target.dataset.ef; if(!ent||!f)return;
   const o=S.plan.ents.find(x=>x.id==ent.dataset.id); if(!o)return;
   o[f]=e.target.value; savePlan();
-  if(f==="잔류기간"){const b=ent.querySelector(".ph .seal b"); if(b)b.textContent=(Number(o.잔류기간)||0)*2}
+  if(f==="잔류기간"){const sl=ent.querySelector(".ph .seal");
+    if(sl)sl.innerHTML=noReg(o)?"기간 해당 없음":phiText(o)}
 });
 $("#entries").addEventListener("change",e=>{
   const ent=e.target.closest(".ent"); if(!ent)return;
