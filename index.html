@@ -75,10 +75,18 @@ button{cursor:pointer; border:none; background:none}
   padding:8px 18px; font-size:15.5px; font-weight:700; color:var(--ink)}
 .crop:hover{border-color:var(--green)}
 .crop[aria-pressed="true"]{border-color:var(--green-d); background:var(--green-d); color:#fff}
-.searchbox{display:flex; gap:6px; flex:1; min-width:230px; max-width:420px; margin-left:auto}
-.searchbox input{flex:1; min-width:0; padding:8px 11px; border:1.5px solid var(--line); border-radius:7px; background:#fff; font-size:14.5px}
-.searchbox input:focus{border-color:var(--green); outline:none}
-.searchbox button{padding:0 12px; border:1.5px solid var(--line); border-radius:7px; background:#F5F6F4; font-weight:700; font-size:13px; color:var(--ink2)}
+.bigsearch{margin-top:13px; padding-top:12px; border-top:1px solid var(--line2)}
+.bigsearch>label{display:block; font-size:17px; font-weight:700; color:var(--green-d);
+  padding-left:11px; border-left:5px solid var(--green); line-height:1.2; margin-bottom:8px}
+.sbox{display:flex; align-items:center; gap:0; border:2.5px solid var(--green); border-radius:10px;
+  background:#fff; overflow:hidden; box-shadow:0 1px 5px rgba(30,80,50,.08)}
+.sbox:focus-within{border-color:var(--gold-line); box-shadow:0 0 0 3px var(--gold-l)}
+.sbox .sicon{padding:0 4px 0 13px; font-size:18px; opacity:.55}
+.sbox input{flex:1; min-width:0; padding:13px 11px; border:none; outline:none; font-size:17px; background:transparent}
+.sbox button{padding:0 17px; align-self:stretch; border-left:1px solid var(--line);
+  background:#F5F6F4; font-weight:700; font-size:14px; color:var(--ink2)}
+.sbox button:hover{background:var(--green-l); color:var(--green-d)}
+#qHint{margin-top:5px}
 details.fil{margin-top:12px; border-top:1px solid var(--line2); padding-top:10px}
 details.fil>summary{list-style:none; display:flex; align-items:center; gap:11px; cursor:pointer;
   font-size:17px; font-weight:700; color:var(--green-d); padding:2px 0 6px;
@@ -89,8 +97,20 @@ details.fil>summary::after{content:"▾ 펼치기"; font-size:13px; font-weight:
   color:var(--green); white-space:nowrap; margin-left:auto}
 details.fil[open]>summary::after{content:"▴ 접기"}
 details.fil>summary .sum{font-weight:600; color:var(--ink2); font-size:13px}
-.filbody{display:grid; grid-template-columns:170px minmax(220px,1fr) 220px minmax(220px,1fr) auto;
+.filbody{display:grid; grid-template-columns:150px 1fr 210px auto;
   gap:0 18px; padding-top:8px; border-top:1px solid var(--line2); margin-top:6px}
+.filgrp.wide{min-width:0}
+.pgroup{margin:0 0 7px}
+.pgroup h4{margin:0 0 4px; font-size:12px; font-weight:700; color:var(--green-d)}
+.pgroup h4 em{font-style:normal; font-weight:600; color:var(--ink2)}
+.ptags{display:flex; flex-wrap:wrap; gap:4px}
+.ptag{display:inline-flex; align-items:center; gap:5px; padding:4px 9px; border:1px solid var(--line);
+  border-radius:20px; background:#fff; font-size:13px; cursor:pointer; white-space:nowrap; line-height:1.3}
+.ptag:hover{border-color:var(--green); background:var(--green-l)}
+.ptag input{width:14px; height:14px; accent-color:var(--green); margin:0}
+.ptag b{font-weight:600; color:var(--ink2); font-size:11px}
+.ptag.on{border-color:var(--green); background:var(--green); color:#fff}
+.ptag.on b{color:rgba(255,255,255,.8)}
 .filgrp>h3{margin:6px 0 5px; font-size:12.5px; font-weight:700; color:var(--ink2)}
 .filgrp>h3 small{font-weight:600; color:var(--ink2)}
 .chk{display:flex; align-items:center; gap:7px; min-height:31px; padding:2px 8px;
@@ -134,7 +154,7 @@ details.fil>summary .sum{font-weight:600; color:var(--ink2); font-size:13px}
 .rmain .seal{grid-column:3; grid-row:1/3}
 .caret{grid-column:4; grid-row:1/3; color:var(--ink2); font-size:12px}
 .plist{border-top:1px solid var(--line2); background:#FAFBF9; padding:4px 10px 8px}
-.prow2{display:grid; grid-template-columns:minmax(140px,1.2fr) minmax(90px,1fr) 92px minmax(110px,1fr) 108px auto;
+.prow2{display:grid; grid-template-columns:minmax(150px,1.3fr) 130px minmax(120px,1fr) 118px auto;
   gap:2px 10px; align-items:center; padding:7px 4px; border-bottom:1px dashed var(--line2); font-size:13px}
 .prow2:last-child{border-bottom:none}
 .prow2 .p1 b{display:block; font-size:13.5px}
@@ -172,37 +192,56 @@ details.fil>summary .sum{font-weight:600; color:var(--ink2); font-size:13px}
 #entries{padding:4px 12px}
 .pempty{margin:10px 0; padding:22px 14px; border:1.5px dashed var(--line); border-radius:8px;
   text-align:center; color:var(--ink2); font-size:13.5px; line-height:1.7}
-.ent{border:1px solid var(--line); border-radius:8px; background:#fff; margin:8px 0; padding:9px 11px 10px}
-.ph{display:flex; align-items:center; gap:6px; flex-wrap:wrap}
-.pnm2{font-size:14.5px; flex:1; min-width:100px; word-break:keep-all}
-.xdel{flex:none; width:28px; height:28px; border-radius:6px; border:1px solid var(--line);
+.ent{border:1.5px solid var(--line); border-radius:9px; background:#fff; margin:0 0 11px; overflow:hidden}
+.ent:hover{border-color:#C3CEC6}
+.ehead{display:flex; align-items:flex-start; gap:9px; padding:9px 11px;
+  background:linear-gradient(#F6F9F5,#EFF4EF); border-bottom:1.5px solid var(--line)}
+.eno{flex:none; width:25px; height:25px; border-radius:50%; background:var(--green-d); color:#fff;
+  font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; margin-top:1px}
+.einfo{flex:1; min-width:0}
+.eline1{display:flex; align-items:center; gap:6px; flex-wrap:wrap}
+.ename{font-size:15.5px; font-weight:700; word-break:keep-all}
+.eline2{display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-top:3px; font-size:12.5px; color:var(--ink2)}
+.eline2 .sep{color:var(--line)}
+.eline2 .dim{font-style:normal; color:#A8B2AC}
+.xdel{flex:none; width:27px; height:27px; border-radius:6px; border:1px solid var(--line);
   color:var(--stop); font-weight:700; font-size:13px; background:#fff}
 .xdel:hover{border-color:var(--stop); background:var(--stop-l)}
-.dupwarn{margin:6px 0 0; font-size:12px; font-weight:700; color:var(--amber);
-  background:var(--amber-l); border-radius:6px; padding:5px 9px; line-height:1.4}
-.pgrid{display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-top:7px}
-.pgrid label{display:block; font-size:11px; font-weight:700; color:var(--ink2)}
+.ebody{padding:10px 11px 11px}
+.whenrow{display:flex; align-items:center; gap:6px; flex-wrap:wrap}
+.whenrow .wlab{font-size:12px; font-weight:700; color:var(--green-d); min-width:56px}
+.whenrow select{padding:7px 9px; border:1.5px solid var(--line); border-radius:7px; background:#fff; font-size:14px}
+.whenrow select:focus{border-color:var(--green); outline:none}
+.whenrow .wneed{font-size:11.5px; color:var(--amber)}
+.tgt{display:block; margin-top:9px; font-size:12px; font-weight:700; color:var(--ink2)}
+.tgt input{display:block; width:100%; margin-top:3px; padding:7px 9px; border:1px solid var(--line);
+  border-radius:6px; font-size:13.5px; background:#fff}
+.tgt input:focus{border-color:var(--green); outline:none}
+.matpick{margin-top:9px}
+.matpick>span{display:block; font-size:12px; font-weight:700; color:var(--ink2); margin-bottom:3px}
+.dupwarn{margin:0; padding:6px 11px; font-size:12px; font-weight:700; color:var(--amber);
+  background:var(--amber-l); border-bottom:1px solid var(--gold-line); line-height:1.4}
+.pgrid{display:grid; grid-template-columns:1fr 1fr; gap:7px}
+.pgrid label,.pgrid .flab{display:block; font-size:11px; font-weight:700; color:var(--ink2)}
 .pgrid input:not([type=radio]){display:block; width:100%; margin-top:2px; padding:6px 8px;
   border:1px solid var(--line); border-radius:6px; font-size:13.5px; background:#fff}
 .pgrid input:not([type=radio]):focus{border-color:var(--green); outline:none}
 .pgrid .radios{margin-top:3px}
-.spraydate{margin-top:8px; padding:6px 9px; border:1px solid var(--gold-line); background:var(--gold-l);
-  border-radius:6px; font-size:12.5px; font-weight:700; color:var(--gold); display:flex; gap:7px; align-items:center; flex-wrap:wrap}
 .rof{font-size:12px; color:var(--ink2); padding:4px 2px; border-bottom:1px dashed var(--line2)}
-.rof span{display:inline-block; min-width:64px; font-weight:700}
+.rof span{display:inline-block; min-width:60px; font-weight:700}
 .rof b{color:var(--ink); font-weight:600}
-.ent .seal{margin-left:auto; font-size:11px; padding:2px 7px}
-.ent .seal b{font-size:13px}
-.regbox{margin:10px 12px 14px; border:1px solid var(--gold-line); border-radius:8px; background:var(--gold-l); padding:11px 13px}
-.regbox h4{margin:0 0 7px; font-size:13px; color:var(--gold)}
-.regbox p{margin:5px 0 0; font-size:12px; line-height:1.6; color:var(--ink)}
-.regbox p b{color:var(--stop)}
-.regbox .src2{margin-top:8px; font-size:10.5px; color:var(--ink2)}
-.pmore{margin-top:7px}
-.pmore>summary{list-style:none; cursor:pointer; font-size:12px; font-weight:700; color:var(--green-d)}
+.ehead .seal{margin-left:auto; font-size:11px; padding:2px 7px; align-self:center}
+.ehead .seal b{font-size:13px}
+.orglink{margin:10px 0 0; padding:8px 10px; background:var(--green-l); border-radius:7px; font-size:12.5px}
+.orglink a{color:var(--green-d); font-weight:700; text-decoration:none}
+.orglink a:hover{text-decoration:underline}
+.orglink small{display:block; margin-top:2px; color:var(--ink2); font-size:11px; font-weight:600}
+.pmore{margin-top:10px; border-top:1px dashed var(--line); padding-top:8px}
+.pmore>summary{list-style:none; cursor:pointer; font-size:12.5px; font-weight:700; color:var(--green-d)}
 .pmore>summary::-webkit-details-marker{display:none}
 .pmore>summary::before{content:"▸ "}
 .pmore[open]>summary::before{content:"▾ "}
+.pmore>div{margin-top:8px}
 .acts{display:grid; grid-template-columns:1fr 1fr; gap:7px; padding:10px 12px 4px}
 .big{display:block; width:100%; padding:10px; border-radius:7px;
   background:var(--green); color:#fff; font-size:14px; font-weight:700; text-align:center}
@@ -246,6 +285,9 @@ details.fil>summary .sum{font-weight:600; color:var(--ink2); font-size:13px}
   details.fil>summary{font-size:16px}
   .frow1 .zlabel{width:100%}
   .filbody{grid-template-columns:1fr}
+  .ptag{padding:7px 11px; font-size:14px}
+  .ptag input{width:17px; height:17px}
+  .sbox input{font-size:16px; padding:12px 9px}
   .split{grid-template-columns:1fr}
   .plan{position:static; max-height:none}
   .rmain{grid-template-columns:1fr auto auto}
@@ -254,8 +296,8 @@ details.fil>summary .sum{font-weight:600; color:var(--ink2); font-size:13px}
   .rtgt{grid-column:1; grid-row:3}
   .rmain .seal{grid-column:2; grid-row:1/4}
   .caret{grid-column:3; grid-row:1/4}
-  .prow2{grid-template-columns:1fr 1fr auto}
-  .prow2 .p4{display:none}
+  .prow2{grid-template-columns:1fr auto}
+  .prow2 .p3{display:none}
   .chk{min-height:42px; font-size:14.5px}
   .chk input{width:20px; height:20px}
   .crop{padding:11px 18px; font-size:16px}
@@ -310,10 +352,15 @@ details.fil>summary .sum{font-weight:600; color:var(--ink2); font-size:13px}
   <div class="frow1">
     <span class="zlabel">작물 고르기</span>
     <div class="crops" id="crops"></div>
-    <div class="searchbox">
-      <input id="q" type="search" placeholder="약제 이름·성분으로 찾기" autocomplete="off" enterkeyhint="search">
+  </div>
+  <div class="bigsearch">
+    <label for="q">통합 검색</label>
+    <div class="sbox">
+      <span class="sicon">🔍</span>
+      <input id="q" type="search" placeholder="약제명 · 성분명 · 방제 대상 · 회사명 아무거나 입력" autocomplete="off" enterkeyhint="search">
       <button type="button" id="qClear">지우기</button>
     </div>
+    <p class="hint" id="qHint">예) 델란 · 만코제브 · 탄저병 · 응애 · 경농</p>
   </div>
   <p class="hint">감은 <b>단감</b>만 해당합니다. 대봉감·홍시용감은 무농약 재배 이상이어서 합성 농약을 쓸 수 없습니다.</p>
   <div id="afterCrop" hidden>
@@ -321,15 +368,14 @@ details.fil>summary .sum{font-weight:600; color:var(--ink2); font-size:13px}
       <summary>조건 좁히기 <span class="sum" id="filSum">조건 없음</span></summary>
       <div class="filbody">
         <div class="filgrp"><h3>약제 종류</h3><div id="fUse"></div></div>
-        <div class="filgrp"><h3>적용 병해충 <small id="pestNote"></small></h3>
-          <div class="scroller" id="fPest"></div></div>
+        <div class="filgrp wide"><h3>적용 병해충 <small id="pestNote"></small></h3>
+          <div id="fPest"></div></div>
         <div class="filgrp"><h3>인축독성 <small>(사람·가축)</small></h3><div id="fTox"></div>
           <p class="hint" id="toxNote" hidden></p>
           <h3 style="margin-top:10px">어독성 <small>(물고기)</small></h3><div id="fFish"></div>
           <p class="hint" id="fishNote" hidden>현재 자료에 어독성 등급이 들어 있지 않습니다. 방제력에서 직접 적어 주십시오.</p>
           <p class="hint" id="fishS" hidden>Ⅱs급은 잉어 기준으로는 Ⅲ급이나 미꾸리에 대한 독성이 Ⅰ급인 약제입니다. 논이나 물길에 가까운 과원에서는 특히 주의하십시오.</p>
           <p class="hint" id="fishWarn" hidden>어독성이 높은 약제입니다. 논·저수지·하천에 가까운 과원에서는 살포에 특히 주의하십시오.</p></div>
-        <div class="filgrp"><h3>사용 적기</h3><div class="scroller" id="fTime"></div></div>
         <div class="filfoot"><button type="button" id="filReset">조건 모두 지우기</button></div>
       </div>
     </details>
@@ -349,7 +395,7 @@ details.fil>summary .sum{font-weight:600; color:var(--ink2); font-size:13px}
 
   <aside class="zone plan" id="zonePlan">
     <div class="zhead"><span class="zlabel">방제력</span><span class="pcount" id="planBdg2"></span>
-      <button type="button" class="mini" id="addBlank" style="margin-left:auto">직접 입력 추가</button>
+      <button type="button" class="mini" id="addBlank" style="margin-left:auto">PLS 외 약제 직접 추가</button>
     </div>
     <details class="hdrbox" id="hdrBox">
       <summary>생산자 정보 <span class="hsum" id="hdrSum"></span></summary>
@@ -405,10 +451,9 @@ const DIOCESE=["광주","마산","대구","대전","부산","서울","수원","�
 const USES=[["살균제",1],["살충제",1],["살균·살충제",1],["제초제",0],["항생제",0],["호르몬제",0]];
 const TOX=[["Ⅰ",0],["Ⅱ",0],["Ⅲ",1],["Ⅳ",1]];
 
-const WHENS=["발아전","개화전","낙화후 10일","낙화후 20일","봉지씌우기 전","장마 전","장마 후","수확 40일 전","수확 30일 전"];
 const SAMPLE={"apple":{"meta":{"작물":"사과","기준일":"2026-07-30","출처":"농촌진흥청 농약안전정보시스템(PSIS) 농약등록정보 검색서비스","샘플":true,"필터":"용도 살균·살충 / 인축독성 Ⅲ·Ⅳ급 / 등록취소 제외"},"성분":[{"성분명":"디티아논","용도":"살균제","작용기작":"다1","상품":[{"상품명":"샘플-사과살균 1호","제형":"액상수화제","대상":"점무늬낙엽병","희석배수":"1,000배","잔류기간":21,"사용횟수":4,"사용적기":"발생초기부터 10일 간격","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-사과살균 1호","제형":"액상수화제","대상":"탄저병","희석배수":"1,000배","잔류기간":21,"사용횟수":4,"사용적기":"발생초기부터 10일 간격","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-과수살균 A","제형":"수화제","대상":"겹무늬썩음병","희석배수":"1,200배","잔류기간":30,"사용횟수":3,"사용적기":"장마 전후","인축독성":"Ⅲ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"아세타미프리드","용도":"살충제","작용기작":"4a","상품":[{"상품명":"샘플-사과살충 2호","제형":"수화제","대상":"진딧물","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-사과살충 2호","제형":"수화제","대상":"복숭아순나방","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"만코제브","용도":"살균제","작용기작":"다M3","상품":[{"상품명":"샘플-과수살균 B","제형":"수화제","대상":"붉은별무늬병","희석배수":"500배","잔류기간":45,"사용횟수":4,"사용적기":"개화전","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-과수살균 B","제형":"수화제","대상":"점무늬낙엽병","희석배수":"500배","잔류기간":45,"사용횟수":4,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"에마멕틴벤조에이트","용도":"살충제","작용기작":"6","상품":[{"상품명":"샘플-사과살충 3호","제형":"유제","대상":"사과굴나방","희석배수":"3,000배","잔류기간":21,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅲ","어독성":"Ⅱ","회사":"예시화학"}]},{"성분명":"아족시스트로빈","용도":"살균제","작용기작":"다3","상품":[{"상품명":"샘플-과수살균 C","제형":"액상수화제","대상":"탄저병","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기부터 7일 간격","인축독성":"Ⅳ","어독성":"Ⅱ","회사":"예시화학"},{"상품명":"샘플-과수살균 C","제형":"액상수화제","대상":"흰가루병","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅱ","회사":"예시화학"}]},{"성분명":"스피네토람","용도":"살충제","작용기작":"5","상품":[{"상품명":"샘플-사과살충 4호","제형":"입상수화제","대상":"복숭아심식나방","희석배수":"4,000배","잔류기간":7,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-사과살충 4호","제형":"입상수화제","대상":"사과굴나방","희석배수":"4,000배","잔류기간":7,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"석회유황합제","용도":"살균제","작용기작":"-","상품":[{"상품명":"샘플-유황합제","제형":"액제","대상":"월동병해충","희석배수":"7배","잔류기간":0,"사용횟수":1,"사용적기":"발아전 휴면기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]}]},"pear":{"meta":{"작물":"배","기준일":"2026-07-30","출처":"농촌진흥청 농약안전정보시스템(PSIS) 농약등록정보 검색서비스","샘플":true,"필터":"용도 살균·살충 / 인축독성 Ⅲ·Ⅳ급 / 등록취소 제외"},"성분":[{"성분명":"테부코나졸","용도":"살균제","작용기작":"다1","상품":[{"상품명":"샘플-배살균 1호","제형":"유탁제","대상":"붉은별무늬병","희석배수":"2,000배","잔류기간":21,"사용횟수":3,"사용적기":"개화전~낙화후","인축독성":"Ⅲ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-배살균 1호","제형":"유탁제","대상":"검은별무늬병","희석배수":"2,000배","잔류기간":21,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅲ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"이미다클로프리드","용도":"살충제","작용기작":"4a","상품":[{"상품명":"샘플-배살충 2호","제형":"수화제","대상":"꼬마배나무이","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-배살충 2호","제형":"수화제","대상":"진딧물","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"피리메타닐","용도":"살균제","작용기작":"다1","상품":[{"상품명":"샘플-과수살균 D","제형":"액상수화제","대상":"검은별무늬병","희석배수":"1,000배","잔류기간":30,"사용횟수":4,"사용적기":"낙화후 10일","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"클로티아니딘","용도":"살충제","작용기작":"4a","상품":[{"상품명":"샘플-배살충 3호","제형":"입상수화제","대상":"가루깍지벌레","희석배수":"2,000배","잔류기간":21,"사용횟수":2,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"보스칼리드","용도":"살균제","작용기작":"다7","상품":[{"상품명":"샘플-과수살균 E","제형":"입상수화제","대상":"겹무늬병","희석배수":"1,500배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기부터 10일 간격","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"석회보르도액","용도":"살균제","작용기작":"-","상품":[{"상품명":"샘플-보르도액","제형":"분말","대상":"검은별무늬병","희석배수":"6-6식","잔류기간":0,"사용횟수":2,"사용적기":"발아전, 낙엽후","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]}]},"peach":{"meta":{"작물":"복숭아","기준일":"2026-07-30","출처":"농촌진흥청 농약안전정보시스템(PSIS) 농약등록정보 검색서비스","샘플":true,"필터":"용도 살균·살충 / 인축독성 Ⅲ·Ⅳ급 / 등록취소 제외"},"성분":[{"성분명":"페나리몰","용도":"살균제","작용기작":"다3","상품":[{"상품명":"샘플-복숭아살균 1호","제형":"유제","대상":"잿빛무늬병","희석배수":"3,000배","잔류기간":14,"사용횟수":3,"사용적기":"개화전~낙화후","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"스피노사드","용도":"살충제","작용기작":"5","상품":[{"상품명":"샘플-복숭아살충 2호","제형":"액상수화제","대상":"복숭아순나방","희석배수":"2,000배","잔류기간":7,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-복숭아살충 2호","제형":"액상수화제","대상":"순나방","희석배수":"2,000배","잔류기간":7,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"이프로디온","용도":"살균제","작용기작":"다2","상품":[{"상품명":"샘플-과수살균 F","제형":"수화제","대상":"잿빛무늬병","희석배수":"1,000배","잔류기간":21,"사용횟수":3,"사용적기":"수확 21일 전까지","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"아바멕틴","용도":"살충제","작용기작":"6","상품":[{"상품명":"샘플-복숭아살충 3호","제형":"유제","대상":"점박이응애","희석배수":"3,000배","잔류기간":7,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅲ","어독성":"Ⅱ","회사":"예시화학"}]},{"성분명":"트리플루미졸","용도":"살균제","작용기작":"다1","상품":[{"상품명":"샘플-과수살균 G","제형":"수화제","대상":"흰가루병","희석배수":"2,000배","잔류기간":30,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]}]},"plum":{"meta":{"작물":"자두","기준일":"2026-07-30","출처":"농촌진흥청 농약안전정보시스템(PSIS) 농약등록정보 검색서비스","샘플":true,"필터":"용도 살균·살충 / 인축독성 Ⅲ·Ⅳ급 / 등록취소 제외"},"성분":[{"성분명":"디페노코나졸","용도":"살균제","작용기작":"다1","상품":[{"상품명":"샘플-자두살균 1호","제형":"유탁제","대상":"주머니병","희석배수":"2,000배","잔류기간":21,"사용횟수":3,"사용적기":"개화직전","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"},{"상품명":"샘플-자두살균 1호","제형":"유탁제","대상":"검은점무늬병","희석배수":"2,000배","잔류기간":21,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"에토펜프록스","용도":"살충제","작용기작":"3a","상품":[{"상품명":"샘플-자두살충 2호","제형":"유제","대상":"복숭아순나방","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅱ","회사":"예시화학"}]},{"성분명":"크레속심메틸","용도":"살균제","작용기작":"다3","상품":[{"상품명":"샘플-과수살균 H","제형":"입상수화제","대상":"검은점무늬병","희석배수":"3,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기부터 10일 간격","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"비펜트린","용도":"살충제","작용기작":"3a","상품":[{"상품명":"샘플-자두살충 3호","제형":"수화제","대상":"깍지벌레","희석배수":"1,000배","잔류기간":21,"사용횟수":2,"사용적기":"발생초기","인축독성":"Ⅲ","어독성":"Ⅰ","회사":"예시화학"}]}]},"persimmon":{"meta":{"작물":"단감","기준일":"2026-07-30","출처":"농촌진흥청 농약안전정보시스템(PSIS) 농약등록정보 검색서비스","샘플":true,"필터":"용도 살균·살충 / 인축독성 Ⅲ·Ⅳ급 / 등록취소 제외"},"성분":[{"성분명":"메트코나졸","용도":"살균제","작용기작":"다1","상품":[{"상품명":"샘플-단감살균 1호","제형":"액상수화제","대상":"둥근무늬낙엽병","희석배수":"3,000배","잔류기간":30,"사용횟수":3,"사용적기":"6월 하순~7월 상순","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"클로르페나피르","용도":"살충제","작용기작":"13","상품":[{"상품명":"샘플-단감살충 2호","제형":"유탁제","대상":"감꼭지나방","희석배수":"2,000배","잔류기간":21,"사용횟수":2,"사용적기":"발생초기","인축독성":"Ⅲ","어독성":"Ⅱ","회사":"예시화학"}]},{"성분명":"만디프로파미드","용도":"살균제","작용기작":"다40","상품":[{"상품명":"샘플-과수살균 I","제형":"액상수화제","대상":"탄저병","희석배수":"2,000배","잔류기간":14,"사용횟수":3,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"설폭사플로르","용도":"살충제","작용기작":"4c","상품":[{"상품명":"샘플-단감살충 3호","제형":"입상수화제","대상":"가루깍지벌레","희석배수":"2,000배","잔류기간":14,"사용횟수":2,"사용적기":"발생초기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]},{"성분명":"석회유황합제","용도":"살균제","작용기작":"-","상품":[{"상품명":"샘플-유황합제","제형":"액제","대상":"월동병해충","희석배수":"7배","잔류기간":0,"사용횟수":1,"사용적기":"발아전 휴면기","인축독성":"Ⅳ","어독성":"Ⅲ","회사":"예시화학"}]}]}};
 
-const S={crop:null, data:{}, q:"", limit:50, open:null, f:{use:new Set(),pest:new Set(),tox:new Set(),fish:new Set(),time:new Set()},
+const S={crop:null, data:{}, q:"", limit:50, open:null, f:{use:new Set(),pest:new Set(),tox:new Set(),fish:new Set()},
          plan:{hdr:{},ents:[]}, undo:null, seq:1};
 
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
@@ -697,8 +742,8 @@ function rowsOf(doc){
 const allRows=()=>S.crop?rowsOf(S.data[S.crop]||{성분:[]}):[];
 const pass=r=>(!S.f.use.size||S.f.use.has(r.용도))&&(!S.f.pest.size||S.f.pest.has(r.대상))
   &&(!S.f.tox.size||S.f.tox.has(r.인축독성))&&(!S.f.fish.size||S.f.fish.has(r.어독성))
-  &&(!S.f.time.size||S.f.time.has(r.사용적기))
-  &&(!S.q||(r.상품명+" "+r.성분명+" "+r.대상).toLowerCase().includes(S.q.toLowerCase()));
+  &&(!S.q||(r.상품명+" "+r.성분명+" "+r.대상+" "+(r.회사||"")+" "+(r.일반명||"")+" "+(r.제형||"")+" "+(r.작용기작||""))
+      .toLowerCase().includes(S.q.toLowerCase()));
 
 /* ─── 작물 ─── */
 function drawCrops(){
@@ -706,7 +751,7 @@ function drawCrops(){
     `<button type="button" class="crop" data-crop="${s}" aria-pressed="${S.crop===s}">${n}</button>`).join("");
 }
 async function pickCrop(slug){
-  S.crop=slug; S.f.pest.clear(); S.f.time.clear(); S.q=""; $("#q").value=""; S.limit=50;
+  S.crop=slug; S.f.pest.clear(); S.q=""; $("#q").value=""; S.limit=50;
   drawCrops(); $("#afterCrop").hidden=false;
   $("#results").innerHTML=`<div class="card empty">자료를 준비하는 중입니다…</div>`;
   await ensureData();
@@ -749,13 +794,56 @@ function drawExcl(){
     이름에 걸리지 않는 성분은 자동으로 빼지 않고 ‘확인 필요’로 알립니다.</p>`;
 }
 
+/* 해충은 이름이 길고 종류가 많아 가나다순으로는 찾기 어렵습니다.
+   비슷한 무리끼리 묶어 보여줍니다. 앞에 있는 것부터 맞춰 봅니다. */
+const PESTGRP=[
+  ["응애","응애"],["진딧물","진딧물·면충"],["면충","진딧물·면충"],
+  ["나방","나방"],["심식","나방"],["잎말이","나방"],["굴나방","나방"],
+  ["깍지벌레","깍지벌레·가루이"],["가루이","깍지벌레·가루이"],["주머니깍지","깍지벌레·가루이"],
+  ["노린재","노린재"],["장님","노린재"],
+  ["매미충","매미충·선녀벌레"],["꽃매미","매미충·선녀벌레"],["선녀벌레","매미충·선녀벌레"],["배나무이","매미충·선녀벌레"],
+  ["총채벌레","총채벌레"],
+  ["나무좀","나무좀·풍뎅이"],["풍뎅이","나무좀·풍뎅이"],["꽃무지","나무좀·풍뎅이"],
+];
+const GRPORDER=["응애","진딧물·면충","나방","깍지벌레·가루이","매미충·선녀벌레","총채벌레","노린재","나무좀·풍뎅이","그 밖의 해충"];
+function pestGroup(n){
+  for(const [key,g] of PESTGRP) if(n.includes(key)) return g;
+  return "그 밖의 해충";
+}
+function drawPests(){
+  const rows=allRows().filter(r=>!S.f.use.size||S.f.use.has(r.용도));
+  const cnt=new Map(), kind=new Map();
+  rows.forEach(r=>{
+    cnt.set(r.대상,(cnt.get(r.대상)||0)+1);
+    const k=r.용도==="살균제"?"병":r.용도==="살충제"?"충":"양쪽";
+    const prev=kind.get(r.대상);
+    kind.set(r.대상, !prev||prev===k ? k : "양쪽");
+  });
+  if(!cnt.size){ $("#fPest").innerHTML=`<p class="hint">해당 없음</p>`; $("#pestNote").textContent=""; return }
+  const 병=[...cnt].filter(([n])=>kind.get(n)!=="충").map(([n,c])=>[n,c])
+    .sort((a,b)=>a[0].localeCompare(b[0],"ko"));
+  const 충=[...cnt].filter(([n])=>kind.get(n)==="충"||kind.get(n)==="양쪽");
+  const bucket=new Map();
+  충.forEach(([n,c])=>{ const g=pestGroup(n); if(!bucket.has(g))bucket.set(g,[]); bucket.get(g).push([n,c]) });
+  [...bucket.values()].forEach(a=>a.sort((x,y)=>x[0].localeCompare(y[0],"ko")));
+  const tag=(n,c)=>`<label class="ptag ${S.f.pest.has(n)?"on":""}">
+    <input type="checkbox" ${S.f.pest.has(n)?"checked":""} data-fk="pest|${esc(n)}">
+    <span>${esc(n)}</span><b class="num">${c}</b></label>`;
+  let html=`<div class="pgroup"><h4>병해 <em>${병.length}</em></h4><div class="ptags">`
+    + 병.map(([n,c])=>tag(n,c)).join("") + `</div></div>`;
+  GRPORDER.forEach(g=>{
+    const a=bucket.get(g); if(!a||!a.length) return;
+    html+=`<div class="pgroup"><h4>${esc(g)} <em>${a.length}</em></h4><div class="ptags">`
+      + a.map(([n,c])=>tag(n,c)).join("") + `</div></div>`;
+  });
+  $("#fPest").innerHTML=html;
+  $("#pestNote").textContent=`(병해 ${병.length} · 해충 ${충.length})`;
+}
+
 function drawFilters(){
   $("#fUse").innerHTML=USES.map(([n,live])=>chk("use|"+n,n,S.f.use.has(n),!live,
     live?"":`<span class="why">가농 금지</span>`)).join("");
-  const pests=countBy("대상");
-  $("#pestNote").textContent=`(${pests.length}가지 · 등록 많은 순)`;
-  $("#fPest").innerHTML=pests.map(([n,c])=>chk("pest|"+n,n,S.f.pest.has(n),false,
-    `<span class="cnt num">${c}</span>`)).join("")||`<p class="hint">해당 없음</p>`;
+  drawPests();
   const rowsAll=allRows();
   const noTox=!rowsAll.some(r=>r.인축독성), noFish=!rowsAll.some(r=>r.어독성);
   const gapN=rowsAll.filter(r=>!r.인축독성&&!r.어독성).length;
@@ -774,16 +862,15 @@ function drawFilters(){
     g==="Ⅲ"?`<span class="rec">권장</span>`:"")).join("");
   $("#fishNote").hidden=!noFish;
   $("#fishS").hidden=!fgs.includes("Ⅱs");
-  const times=countBy("사용적기");
-  $("#fTime").innerHTML=times.map(([n,c])=>chk("time|"+n,n,S.f.time.has(n),false,
-    `<span class="cnt num">${c}</span>`)).join("")||`<p class="hint">해당 없음</p>`;
   $("#fishWarn").hidden=!(S.f.fish.has("Ⅰ")||S.f.fish.has("Ⅱ"));
+  updSum();
+}
+function updSum(){
   const bits=[];
   if(S.f.use.size) bits.push([...S.f.use].join("·"));
   if(S.f.pest.size) bits.push("병해충 "+S.f.pest.size);
   if(S.f.tox.size) bits.push("인축독성 "+[...S.f.tox].join("·"));
   if(S.f.fish.size) bits.push("어독성 "+[...S.f.fish].join("·"));
-  if(S.f.time.size) bits.push("적기 "+S.f.time.size);
   $("#filSum").textContent=bits.length?bits.join(" / "):"조건 없음";
 }
 
@@ -848,9 +935,8 @@ function drawResults(){
       ${open?`<div class="plist">`+rs.map((r,i)=>`
         <div class="prow2">
           <div class="p1"><b>${esc(r.상품명)}</b><span>${[r.제형,r.함량,r.회사].filter(Boolean).map(esc).join(" · ")}</span></div>
-          <div class="p2">${esc(r.대상)}</div>
-          <div class="p3">${esc(r.희석배수)}<i>·</i>${cntText(r)}</div>
-          <div class="p4">${esc(r.사용적기)}</div>
+          <div class="p2">${esc(r.희석배수)}<i>·</i>${cntText(r)}</div>
+          <div class="p3">${esc(r.사용적기)}</div>
           <div class="p5">${phiFull(r)}</div>
           <button type="button" class="addbtn" data-add="${esc(nm)}::${i}">담기</button>
         </div>`).join("")+`</div>`:""}
@@ -863,9 +949,13 @@ function drawResults(){
 
 function quickAdd(nm,i){
   const rs=allRows().filter(r=>r.성분명===nm&&pass(r)), r=rs[i]; if(!r)return;
-  S.plan.ents.push({id:S.seq++, 시기:"",
+  /* 약제마다 적힌 대상은 하나씩이지만 성분이 같으면 여러 병해충을 포괄합니다.
+     조건에 걸리지 않은 것까지 포함해 성분 전체의 대상을 방제력에 담습니다. */
+  const 전체=[...new Set(allRows().filter(x=>x.성분명===nm).map(x=>x.대상).filter(Boolean))]
+    .sort((a,b)=>a.localeCompare(b,"ko"));
+  S.plan.ents.push({id:S.seq++, 시기월:"", 시기순:"",
     구분:r.용도==="살충제"?"해충":r.용도==="살균제"?"병해":"병해·해충",
-    대상:r.대상, 약제명:r.상품명, 성분명:r.성분명,
+    대상:전체.join(", "), 약제명:r.상품명, 성분명:r.성분명,
     작용기작:(r.작용기작&&r.작용기작!=="-")?r.작용기작:"",
     희석배수:r.희석배수, 사용횟수:String(r.사용횟수??""), 횟수원문:r.횟수원문||"",
     인축독성:r.인축독성, 어독성:r.어독성, 잔류기간:String(r.잔류기간), 잔류원문:r.잔류원문||"",
@@ -922,69 +1012,97 @@ function saveHdr(redrawPlan){
 }
 
 /* ─── 방제력 목록 ─── */
-const MAT=[["등록","등록제품"],["자가","자가제조"],["기타","기타"]];
-const matName=v=>(MAT.find(m=>m[0]===v)||[,""])[1];
-const noReg=e=>e.자재==="자가"||e.자재==="기타";     // 등록 농약이 아니면 안전사용기준 없음
+const MAT=[["친환경","친환경 약제"],["자가","자가제조"],["기타","기타"]];
+const matName=v=>v==="등록"?"등록제품":(MAT.find(m=>m[0]===v)||[,""])[1];
+const noReg=e=>!!e.자재&&e.자재!=="등록";   // PLS 등록 농약이 아니면 안전사용기준 없음
 function matPillMini(e){
   return noReg(e) ? `<span class="pill w">${matName(e.자재)}</span>`
-       : e.자재 ? "" : `<span class="pill s">자재 미선택</span>`;
+       : e.자재 ? "" : `<span class="pill s">자재 구분 미선택</span>`;
 }
 function matRadios(e){
   return `<div class="radios">${MAT.map(([v,n])=>
     `<label class="${e.자재===v?"on":""}"><input type="radio" name="m${e.id}" value="${v}" ${e.자재===v?"checked":""}>${n}</label>`
   ).join("")}</div>`;
 }
+function planKey(e){                       // 시기 순 정렬용 — 이른 것부터, 없으면 맨 뒤
+  const m=Number(e.시기월)||0, t={"상순":0,"중순":1,"하순":2}[e.시기순];
+  return m ? m*3+(t===undefined?1:t) : 9999;
+}
+const whenText=e=>e.시기월?`${e.시기월}월 ${e.시기순||""}`.trim():"";
+function sortPlan(){ S.plan.ents.sort((a,b)=>planKey(a)-planKey(b)||a.id-b.id) }
+
 function drawPlan(){
   const box=$("#entries");
   if(!S.plan.ents.length){
     box.innerHTML=`<div class="pempty">왼쪽 목록에서 <b>담기</b>를 누르면 여기에 쌓입니다.<br>
-      담았다 뺐다 하며 자유롭게 짜 보십시오.<br>저장하기 전까지는 몇 번을 고쳐도 됩니다.</div>`; return;
+      담았다 뺐다 하며 자유롭게 짜 보십시오.<br>저장하기 전까지는 몇 번을 고쳐도 됩니다.<br><br>
+      친환경 약제나 자가제조 자재는 <b>PLS 외 약제 직접 추가</b>로 넣으십시오.</div>`; return;
   }
+  sortPlan();
   const pm=planMoaMap();
+  const open=new Set([...box.querySelectorAll(".ent details[open]")].map(d=>d.closest(".ent").dataset.id));
   box.innerHTML=S.plan.ents.map((e,i)=>{
     const moa=(e.작용기작||"").trim();
     const dup=moa&&moa!=="-"&&pm.get(moa)>1;
     const d=Number(e.잔류기간)||0;
-    const ro=!e.직접;   // 조회에서 담은 항목은 읽기 전용
-    const fld=(lab,key)=>ro
-      ? `<div class="rof"><span>${lab}</span><b>${esc(e[key]||"-")}</b></div>`
-      : `<label>${lab}<input data-ef="${key}" value="${esc(e[key]||"")}" ${key==="잔류기간"?'inputmode="numeric"':""} ${(key==="인축독성"||key==="어독성")?'placeholder="직접 입력"':""}></label>`;
+    const ro=!e.직접;
     return `<div class="ent" data-id="${e.id}">
-      <div class="ph">
-        <span class="pill ${e.구분==="해충"?"n":"g"}">${e.구분}</span>
-        ${moa?`<span class="moa ${dup?"dup":""}">기작 ${esc(moa)}</span>`:""}
-        ${matPillMini(e)}
-        <b class="pnm2">${esc(e.약제명||"(약제명을 적으십시오)")}</b>
-        <span class="seal">${noReg(e)?"기간 해당 없음":phiText(e)}</span>
+      <div class="ehead">
+        <span class="eno num">${i+1}</span>
+        <div class="einfo">
+          <div class="eline1">
+            <span class="pill ${e.구분==="해충"?"n":"g"}">${e.구분}</span>
+            <b class="ename" data-fill="약제명">${esc(e.약제명||"(약제명 없음)")}</b>
+          </div>
+          <div class="eline2">
+            <span data-fill="성분명">${e.성분명?esc(e.성분명):'<i class="dim">성분명 없음</i>'}</span>
+            <span class="sep">·</span>
+            <span data-fill="작용기작">${moa&&moa!=="-"?`<span class="moa ${dup?"dup":""}">기작 ${esc(moa)}</span>`:'<i class="dim">기작 없음</i>'}</span>
+            ${matPillMini(e)}
+          </div>
+        </div>
+        <span class="seal" data-fill="잔류">${noReg(e)?"기간 해당 없음":phiText(e)}</span>
         <button type="button" class="xdel" data-del="${e.id}" aria-label="지우기">✕</button>
       </div>
       ${dup?`<p class="dupwarn">같은 작용기작(${esc(moa)}) 약제가 ${pm.get(moa)}개 담겨 있습니다. 저항성이 생기지 않게 다른 작용기작과 섞어 쓰십시오.</p>`:""}
-      <div class="pgrid">
-        <label>시기<input data-ef="시기" value="${esc(e.시기)}" placeholder="예: 낙화후 10일 (혹은 대략적인 날짜)"></label>
-        <label>대상 ${e.구분==="병해·해충"?"병해충":e.구분}<input data-ef="대상" value="${esc(e.대상)}"></label>
+      <div class="ebody">
+        <div class="whenrow">
+          <span class="wlab">사용 시기</span>
+          <select data-when="월"><option value="">달</option>${
+            [...Array(12)].map((_,k)=>`<option value="${k+1}" ${String(e.시기월)===String(k+1)?"selected":""}>${k+1}월</option>`).join("")}</select>
+          <select data-when="순"><option value="">때</option>${
+            ["상순","중순","하순"].map(t=>`<option ${e.시기순===t?"selected":""}>${t}</option>`).join("")}</select>
+          ${e.시기월?"":`<span class="wneed">시기를 넣으면 순서가 정리됩니다</span>`}
+        </div>
+        <label class="tgt">대상 ${e.구분==="병해·해충"?"병해충":e.구분}
+          <input data-ef="대상" value="${esc(e.대상)}"></label>
+        ${e.직접&&!e.자재?`<div class="matpick"><span>자재 구분 — 방제력에 그대로 표시됩니다</span>${matRadios(e)}</div>`:""}
+        <details class="pmore" ${open.has(String(e.id))?"open":""}><summary>${ro?"자세히 보기":"자세히 입력하기"}</summary>
+          <div class="pgrid">
+            ${ro?`<div class="rof"><span>약제명</span><b>${esc(e.약제명||"-")}</b></div>
+                 <div class="rof"><span>성분명</span><b>${esc(e.성분명||"-")}</b></div>
+                 <div class="rof"><span>작용기작</span><b>${esc(e.작용기작||"-")}</b></div>
+                 <div class="rof"><span>잔류기간</span><b>${d?`라벨 ${d}일 → 가농 ${d*2}일`
+                    :(e.잔류원문&&e.잔류원문!=="-"?esc(e.잔류원문)+" (일수 기준 아님)":"기준 표기 없음")}</b></div>
+                 <div class="rof"><span>독성</span><b>${(e.인축독성||e.어독성)?`인축 ${esc(e.인축독성||"-")}급 · 어독 ${esc(e.어독성||"-")}급`:"확인 필요"}</b></div>`
+              :`<label>약제명<input data-ef="약제명" value="${esc(e.약제명)}" placeholder="예: 난황유"></label>
+                <label>성분명<input data-ef="성분명" value="${esc(e.성분명||"")}" placeholder="예: 유채유·계란노른자"></label>
+                <label>작용기작<input data-ef="작용기작" value="${esc(e.작용기작||"")}" placeholder="모르면 비워 두십시오"></label>
+                <label>잔류기간(수확 며칠 전)<input data-ef="잔류기간" inputmode="numeric" value="${esc(e.잔류기간)}"></label>
+                <label>인축독성<input data-ef="인축독성" value="${esc(e.인축독성)}" placeholder="직접 입력"></label>
+                <label>어독성<input data-ef="어독성" value="${esc(e.어독성)}" placeholder="직접 입력"></label>`}
+          </div>
+          ${e.직접?`<div class="pgrid" style="margin-top:9px">
+            <div><span class="flab">병해 · 해충 구분</span><div class="radios" data-kind>
+              <label class="${e.구분==="병해"?"on":""}"><input type="radio" name="k${e.id}" value="병해" ${e.구분==="병해"?"checked":""}>병해</label>
+              <label class="${e.구분==="해충"?"on":""}"><input type="radio" name="k${e.id}" value="해충" ${e.구분==="해충"?"checked":""}>해충</label>
+            </div></div>
+            ${e.자재?`<div><span class="flab">자재 구분</span>${matRadios(e)}</div>`:""}
+          </div>
+          <p class="orglink"><a href="https://www.naqs.go.kr/hp/contents/contentsTab.do?menuId=MN50068" target="_blank" rel="noopener">
+            유기농업자재 공시현황 조회 ↗</a> <small>국립농산물품질관리원 · 새 창에서 열립니다</small></p>`:""}
+        </details>
       </div>
-      ${e.직접&&!e.자재?`<div class="pgrid" style="grid-template-columns:1fr">
-        <label>자재 구분 — 방제력에 그대로 표시됩니다${matRadios(e)}</label></div>`:""}
-      <details class="pmore"><summary>${ro?"자세히 보기":"자세히 입력하기"}</summary>
-        <div class="pgrid">
-          ${fld("약제명","약제명")}${fld("성분명","성분명")}
-          ${fld("희석배수","희석배수")}${fld("사용횟수","사용횟수")}
-          ${ro?`<div class="rof"><span>잔류기간</span><b>${d?`라벨 ${d}일 → 가농 ${d*2}일`
-              :(e.잔류원문&&e.잔류원문!=="-"?esc(e.잔류원문)+" (일수 기준 아님)":"기준 표기 없음")}</b></div>`
-            :fld("잔류기간(수확 며칠 전)","잔류기간")}
-          ${ro?`<div class="rof"><span>독성</span><b>${(e.인축독성||e.어독성)?`인축 ${esc(e.인축독성||"-")}급 · 어독 ${esc(e.어독성||"-")}급`:"확인 필요"}</b></div>`
-             :fld("인축독성","인축독성")}
-          ${ro?`<div class="rof"><span>작용기작</span><b>${esc(e.작용기작||"-")}</b></div>`:fld("어독성","어독성")}
-          ${ro?"":fld("작용기작","작용기작")}
-        </div>
-        <div class="pgrid" style="margin-top:8px">
-          ${e.직접?`<label>병해 · 해충 구분<div class="radios" data-kind style="margin-top:3px">
-            <label class="${e.구분==="병해"?"on":""}"><input type="radio" name="k${e.id}" value="병해" ${e.구분==="병해"?"checked":""}>병해</label>
-            <label class="${e.구분==="해충"?"on":""}"><input type="radio" name="k${e.id}" value="해충" ${e.구분==="해충"?"checked":""}>해충</label>
-          </div></label>`:""}
-          ${e.직접&&e.자재?`<label>자재 구분${matRadios(e)}</label>`:""}
-        </div>
-      </details>
     </div>`}).join("");
 }
 function badge(){const n=S.plan.ents.length,b=$("#planBdg"); b.hidden=!n; b.textContent=n;
@@ -992,14 +1110,18 @@ function badge(){const n=S.plan.ents.length,b=$("#planBdg"); b.hidden=!n; b.text
 function savePlan(){try{store.set("gano.plan",JSON.stringify(S.plan))}catch(e){}}
 function loadPlan(){try{const j=JSON.parse(store.get("gano.plan")||"null");
   if(j&&j.ents){j.ents.forEach(e=>{if(e.자재===undefined)e.자재=e.성분명?"등록":"";
-    if(e.직접===undefined)e.직접=!e.성분명; if(e.작용기작===undefined)e.작용기작=""});
+    if(e.직접===undefined)e.직접=!e.성분명; if(e.작용기작===undefined)e.작용기작="";
+    if(e.시기월===undefined){                       // 옛 자유입력 시기에서 달을 뽑아 옮김
+      const m=String(e.시기||"").match(/(\d{1,2})\s*월/);
+      e.시기월=m?m[1]:""; e.시기순=(String(e.시기||"").match(/상순|중순|하순/)||[""])[0];
+    }});
     S.plan=j; S.seq=Math.max(1,...j.ents.map(e=>e.id||0))+1}}catch(e){}}
 
 /* ─── 출력 문서 ─── */
 function buildDoc(){
   const h=S.plan.hdr;
   const groups=[]; const idx=new Map();
-  S.plan.ents.forEach(e=>{const k=e.시기||"(시기 미기재)";
+  S.plan.ents.forEach(e=>{const k=whenText(e)||"(시기 미기재)";
     if(!idx.has(k)){idx.set(k,{when:k,병해:[],해충:[]}); groups.push(idx.get(k))}
     const g=idx.get(k);
     if(String(e.구분||"").includes("병해")) g.병해.push(e);
@@ -1112,7 +1234,7 @@ async function exportList(){
     ["데이터 종류",m.샘플?"샘플 — 실제 등록정보 아님":"실제 등록정보"],
     ["작물",crop],["약제 종류",[...S.f.use].join(", ")||"전체"],
     ["적용 병해충",[...S.f.pest].join(", ")||"전체"],["인축독성",[...S.f.tox].join(", ")||"전체(Ⅲ·Ⅳ급)"],
-    ["어독성",[...S.f.fish].join(", ")||"전체"],["사용 적기",[...S.f.time].join(", ")||"전체"],
+    ["어독성",[...S.f.fish].join(", ")||"전체"],
     ["이름 검색",S.q||"-"],["내려받은 건수",rows.length],["내려받은 때",new Date().toLocaleString("ko-KR")],
     ["안내","가농 기준은 라벨의 안전사용기준(수확 전 일수)을 2배 한 값입니다."]];
   const name=`가농허용농약_${crop}_${stamp()}.xlsx`;
@@ -1147,7 +1269,7 @@ async function exportPlan(){
   A.push(["","대상 병해","약제명","희석배수","사용횟수","인축독성","어독성","잔류기간",
               "대상 해충","약제명","희석배수","사용횟수","인축독성","어독성","잔류기간"]);
   const groups=[], idx=new Map();
-  S.plan.ents.forEach(e=>{const k=e.시기||"(시기 미기재)";
+  S.plan.ents.forEach(e=>{const k=whenText(e)||"(시기 미기재)";
     if(!idx.has(k)){idx.set(k,{when:k,병해:[],해충:[]}); groups.push(idx.get(k))}
     const g=idx.get(k);
     if(String(e.구분||"").includes("병해")) g.병해.push(e);
@@ -1171,7 +1293,7 @@ async function exportPlan(){
   const flat=[["시기","구분","자재 구분","대상","약제명","성분명","작용기작","희석배수","사용횟수","인축독성","어독성",
       "잔류기간(라벨, 일)","가농 기준(2배, 일)"],
     ...S.plan.ents.map(e=>{const nr=noReg(e), d=Number(e.잔류기간)||0;
-      return [e.시기||"",e.구분,e.자재?matName(e.자재):"미기재",e.대상||"",e.약제명||"",
+      return [whenText(e),e.구분,e.자재?matName(e.자재):"미기재",e.대상||"",e.약제명||"",
         e.성분명||"",e.작용기작||"",e.희석배수||"",e.사용횟수||"",e.인축독성||"",e.어독성||"",
         nr?"":(d||e.잔류원문||""), nr?"":(d?d*2:(e.잔류원문?"일수 기준 아님":""))]})];
   const name="2026_방제력_"+[h.교구,h.분회,h.생산자명,h.인증품목].filter(Boolean).join("_")+".xlsx";
@@ -1199,7 +1321,7 @@ function go(which){
   window.scrollTo({top:0});
 }
 function resetFilters(){
-  S.f.use=new Set(); S.f.pest.clear(); S.f.tox.clear(); S.f.fish.clear(); S.f.time.clear();
+  S.f.use=new Set(); S.f.pest.clear(); S.f.tox.clear(); S.f.fish.clear();
   S.q=""; $("#q").value=""; S.limit=50; drawFilters(); drawResults();
 }
 
@@ -1211,9 +1333,11 @@ $("#q").oninput=e=>{S.q=e.target.value; S.limit=50; drawResults()};
 $("#qClear").onclick=()=>{S.q=""; $("#q").value=""; S.limit=50; drawResults()};
 $("#filBox").addEventListener("change",e=>{
   const cb=e.target.closest("[data-fk]"); if(!cb)return;
-  const [k,v]=cb.dataset.fk.split("|"); const map={use:"use",pest:"pest",tox:"tox",fish:"fish",time:"time"}[k];
+  const [k,v]=cb.dataset.fk.split("|"); const map={use:"use",pest:"pest",tox:"tox",fish:"fish"}[k];
   cb.checked?S.f[map].add(v):S.f[map].delete(v);
-  S.limit=50; drawFilters(); drawResults();
+  S.limit=50;
+  if(k==="pest"){ drawPests(); updSum(); } else drawFilters();
+  drawResults();
 });
 $("#filReset").onclick=resetFilters;
 $("#results").onclick=e=>{
@@ -1228,20 +1352,49 @@ $("#hdrForm").addEventListener("change",e=>{
   saveHdr(hk==="수확월"||hk==="수확순");
   const r=e.target.closest(".radios"); if(r)[...r.querySelectorAll("label")].forEach(l=>l.classList.toggle("on",l.contains(e.target)));
 });
+/* 자세히 입력하기에서 고친 값을 위쪽 기본 보기에 곧바로 비춰 줍니다.
+   전체를 다시 그리면 펼쳐 둔 칸이 닫히므로 필요한 곳만 바꿉니다. */
+function refreshHead(ent,o){
+  const set=(k,html)=>{const el=ent.querySelector(`[data-fill="${k}"]`); if(el)el.innerHTML=html};
+  set("약제명", esc(o.약제명||"(약제명 없음)"));
+  set("성분명", o.성분명?esc(o.성분명):'<i class="dim">성분명 없음</i>');
+  const moa=(o.작용기작||"").trim();
+  set("작용기작", moa&&moa!=="-"?`<span class="moa">기작 ${esc(moa)}</span>`:'<i class="dim">기작 없음</i>');
+  set("잔류", noReg(o)?"기간 해당 없음":phiText(o));
+}
 $("#entries").addEventListener("input",e=>{
   const ent=e.target.closest(".ent"), f=e.target.dataset.ef; if(!ent||!f)return;
   const o=S.plan.ents.find(x=>x.id==ent.dataset.id); if(!o)return;
-  o[f]=e.target.value; savePlan();
-  if(f==="잔류기간"){const sl=ent.querySelector(".ph .seal");
-    if(sl)sl.innerHTML=noReg(o)?"기간 해당 없음":phiText(o)}
+  o[f]=e.target.value; savePlan(); refreshHead(ent,o);
 });
 $("#entries").addEventListener("change",e=>{
   const ent=e.target.closest(".ent"); if(!ent)return;
-  const o=S.plan.ents.find(x=>x.id==ent.dataset.id); if(!o||!e.target.name)return;
-  if(e.target.name.startsWith("k")) o.구분=e.target.value;
-  else if(e.target.name.startsWith("m")) o.자재=e.target.value;
-  else return;
-  savePlan(); drawPlan(); drawResults();
+  const o=S.plan.ents.find(x=>x.id==ent.dataset.id); if(!o)return;
+  // 사용 시기 — 고르면 이른 순으로 다시 늘어서고 번호가 매겨집니다
+  const w=e.target.dataset.when;
+  if(w){ o["시기"+w]=e.target.value; savePlan(); drawPlan(); return }
+  if(!e.target.name) return;
+  if(e.target.name.startsWith("k")){
+    o.구분=e.target.value;
+    // 버튼만 바꾸고 다시 그리지 않습니다 — 펼쳐 둔 칸이 닫히지 않게
+    [...e.target.closest(".radios").querySelectorAll("label")]
+      .forEach(l=>l.classList.toggle("on",l.contains(e.target)));
+    const p=ent.querySelector(".eline1 .pill");
+    if(p){ p.textContent=o.구분; p.className="pill "+(o.구분==="해충"?"n":"g") }
+    const t=ent.querySelector(".tgt");
+    if(t) t.childNodes[0].nodeValue=`대상 ${o.구분==="병해·해충"?"병해충":o.구분}`;
+  } else if(e.target.name.startsWith("m")){
+    const first=!o.자재;
+    o.자재=e.target.value;
+    [...e.target.closest(".radios").querySelectorAll("label")]
+      .forEach(l=>l.classList.toggle("on",l.contains(e.target)));
+    if(first) { savePlan(); drawPlan(); drawResults(); return }   // 처음 고를 때만 자리 정리
+    const b=ent.querySelector('[data-fill="잔류"]');
+    if(b) b.innerHTML=noReg(o)?"기간 해당 없음":phiText(o);
+    const mp=ent.querySelector(".eline2 .pill");
+    if(mp) mp.outerHTML=matPillMini(o)||"<span></span>";
+  } else return;
+  savePlan(); drawResults();
 });
 $("#entries").addEventListener("click",e=>{
   const b=e.target.closest("[data-del]"); if(!b)return;
@@ -1250,11 +1403,13 @@ $("#entries").addEventListener("click",e=>{
   toast("1개를 지웠습니다.","되돌리기",()=>{S.plan.ents.splice(S.undo[0],0,S.undo[1]); savePlan(); drawPlan(); badge(); drawResults()});
 });
 $("#addBlank").onclick=()=>{
-  S.plan.ents.push({id:S.seq++,시기:"",구분:"병해",대상:"",약제명:"",성분명:"",작용기작:"",희석배수:"",사용횟수:"",
-    인축독성:"",어독성:"",잔류기간:"0",자재:"",직접:true});
+  S.plan.ents.push({id:S.seq++,시기월:"",시기순:"",구분:"병해",대상:"",약제명:"",성분명:"",작용기작:"",
+    희석배수:"",사용횟수:"",인축독성:"",어독성:"",잔류기간:"0",자재:"",직접:true});
   savePlan(); drawPlan(); badge();
   if(matchMedia("(max-width:999px)").matches) go("plan");
-  const last=$("#entries").lastElementChild; last&&last.scrollIntoView({behavior:"smooth",block:"center"});
+  const box=$("#entries"), tgt=[...box.querySelectorAll(".ent")].find(x=>x.dataset.id==S.seq-1);
+  if(tgt){ const dt=tgt.querySelector("details"); if(dt)dt.open=true;
+    tgt.scrollIntoView({behavior:"smooth",block:"center"}); }
 };
 $("#clearAll").onclick=()=>{
   if(!S.plan.ents.length)return toast("지울 내용이 없습니다.");
